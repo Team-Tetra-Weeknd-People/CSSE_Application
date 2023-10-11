@@ -5,6 +5,6 @@ const router = express.Router()
 
 router.get("/:id", OrderItem.getOrderItemsByOrderID);
 router.post("/", OrderItem.createOrderItem);
-router.put("/:id", OrderItem.updateOrderItem);
+router.delete("/:id", OrderItem.deleteOrderItem);
 
 export default router;

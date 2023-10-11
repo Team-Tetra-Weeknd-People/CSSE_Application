@@ -13,7 +13,7 @@ export const getOrderItemsByOrderID = async (req, res) => {
 }
 
 //create OrderItems
-export const createOrderItems = async (req, res) => {
+export const createOrderItem = async (req, res) => {
     const orderItems = req.body;
     const newOrderItems = new OrderItems(orderItems);
     try {
@@ -26,7 +26,7 @@ export const createOrderItems = async (req, res) => {
 }
 
 //delete OrderItems
-export const deleteOrderItems = async (req, res) => {
+export const deleteOrderItem = async (req, res) => {
     const id = req.params.id;
     try {
         await OrderItems.findByIdAndDelete(id);
@@ -39,7 +39,7 @@ export const deleteOrderItems = async (req, res) => {
 
 export default {
     getOrderItemsByOrderID,
-    createOrderItems,
-    deleteOrderItems
+    createOrderItem,
+    deleteOrderItem
 }
 

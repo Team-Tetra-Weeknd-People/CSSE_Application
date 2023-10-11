@@ -10,16 +10,16 @@ import siteManagerRouter from './router/SiteManager.js';
 import supplierRouter from './router/Supplier.js';
 
 function routers(app) {
-    // app.use('/api/admin', adminRouter);
-    // app.use('/api/catelouge', catelougeRouter);
-    // app.use('/api/item', itemRouter);
-    // app.use('/api/manager', managerRouter);
-    // app.use('/api/order', orderRouter);
-    // app.use('/api/orderItems', orderItemsRouter);
-    // app.use('/api/procumentStaff', procumentStaffRouter);
-    // app.use('/api/site', siteRouter);
-    // app.use('/api/siteManager', siteManagerRouter);
-    // app.use('/api/supplier', supplierRouter);
+    app.use('/api/admin', adminRouter);
+    app.use('/api/catelouge', catelougeRouter);
+    app.use('/api/item', itemRouter);
+    app.use('/api/manager', managerRouter);
+    app.use('/api/order', orderRouter);
+    app.use('/api/orderItems', orderItemsRouter);
+    app.use('/api/procumentStaff', procumentStaffRouter);
+    app.use('/api/site', siteRouter);
+    app.use('/api/siteManager', siteManagerRouter);
+    app.use('/api/supplier', supplierRouter);
 }
 
 export default routers;

@@ -12,7 +12,7 @@ const PORT = process.env.REACT_APP_BACKEND_PORT;
 app.use(cors());
 app.use(bodyParser.json());
 
-// routers(app);
+routers(app);
 
 app.use(session({
     secret: 'beheth_kade',
