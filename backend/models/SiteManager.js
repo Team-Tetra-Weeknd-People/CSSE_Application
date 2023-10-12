@@ -27,12 +27,10 @@ const SiteManagerSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        unique: true,
     },
     permissionLevel: {
         type: String,
         default: "SITE_MANAGER",
-        required: true,
     }
 }, {
     timestamps: {

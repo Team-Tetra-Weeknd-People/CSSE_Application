@@ -3,6 +3,7 @@ import Supplier from "../../controllers/Supplier.js";
 
 const router = express.Router()
 
+router.post("/auth", Supplier.authSupplier);
 router.get("/", Supplier.getAllSuppliers);
 router.get("/:id", Supplier.getSupplier);
 router.post("/", Supplier.createSupplier);
