@@ -29,12 +29,10 @@ const AdminSchema = new Schema({
     password: {
         type: String,
         required: true,
-        unique: true,
     },
     permissionLevel: {
         type: String,
         default: "ADMIN",
-        required: true,
     }
 }, {
     timestamps: {

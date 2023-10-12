@@ -27,12 +27,10 @@ const ManagerSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        unique: true,
     },
     permissionLevel: {
         type: String,
         default: "MANAGER",
-        required: true,
     }
 }, {
     timestamps: {
