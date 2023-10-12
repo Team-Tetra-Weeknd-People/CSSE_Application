@@ -27,12 +27,10 @@ const SupplierSchema = mongoose.Schema({
     password: {
         type: String,
         required: true,
-        unique: true,
     },
     permissionLevel: {
         type: String,
         default: "SUPPLIER",
-        required: true,
     },
     type: {
         type: String,
