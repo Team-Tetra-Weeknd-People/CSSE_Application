@@ -16,7 +16,7 @@ export default function Sidebar(){
       <CDBSidebar className='sidebar-initial' textColor="#000000" backgroundColor="#310365">
         <CDBSidebarHeader className='sidebar-header' prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none">
-            SHPMOFY
+            SHMOFY
           </a>
         </CDBSidebarHeader>
 
