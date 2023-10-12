@@ -1,0 +1,30 @@
+ /* .sidebar-item {
+  position: fixed;
+  display: flex;
+  height: max-content; 
+  overflow: initial;
+}  */
+
+.text-decoration-none{
+    color:white;
+  }
+  
+  .sidebar-header{
+    color:white;
+  }
+  
+  .sidebar-item:hover {
+    padding: none;
+    background-color: #ffffff;
+    border-radius: 20px;
+    color: black;
+  }
+  
+  .sidebar-item{
+    color:white;
+  }
+  
+  .sidebar-footer{
+    color:white;
+    text-align: 'center';
+  }
