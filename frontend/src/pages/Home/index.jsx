@@ -1,18 +1,29 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import {
+    Container,
+    Button,
+    Row,
+    Col
+} from 'react-bootstrap';
+
+
+import '../../styles/randula/home.css'
+import HomeImage from '../../assets/images/home.jpg'
 
 export default function Home() {
     return (
-        <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the cards content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
-        </Card>
+        <div className="home">
+            <Container >
+                <Row>
+                    <Col sm={8} md={6}>
+                        <h2>SHMOFY</h2>
+                        <h3>Efficiency in Every Transaction, Excellence in Every Handover</h3>
+                        <Button variant="primary">Get Started</Button>{' '}
+                    </Col>
+                    <Col sm={8} md={6}>
+                        <img src={HomeImage} alt="" style={{ height: "95vh", borderRadius: "10px" }} />
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     );
 }
