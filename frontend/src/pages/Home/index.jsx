@@ -1,4 +1,4 @@
-import '../../styles/sudul/home.css'
+import '../../styles/sudul/common.css';
 import ProcurementSidebar from '../../components/procurement-staff/Sidebar';
 
 export default function Home() {
