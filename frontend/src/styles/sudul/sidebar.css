@@ -1,0 +1,41 @@
+/* Sidebar container */
+.sidebar {
+    background-color: #010929;
+    color: #fff;
+    height: 100vh;
+    padding: 20px;
+
+  }
+  
+  /* Sidebar header */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .menu .btn-primary{
+    margin-left: 20%;
+    text-align: left;
+    display: block;
+    color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-decoration: none;
+    width: 100%;
+  }
+  
+  /* Logout at the bottom */
+  .logout {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Optional: Add a hover effect for menu items */
+  .menu .btn-primary:hover {
+    color: #000000;
+    background-color: #ffffff;
+  }
+  
