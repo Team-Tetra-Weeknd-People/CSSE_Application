@@ -10,7 +10,7 @@ export const getAllSite = async () => {
 }
 
 export const getOneSite = async (id) => {
-    return await axios.get(url.siteID(id), {
+    return await axios.get(url.siteGetOne(id), {
         headers: {
             "Content-Type": "application/json"
         },

@@ -13,14 +13,14 @@ export const catalogueSupplier = (id) => `${BASE_URL}/catelouge/supplier/${id}`;
 export const item = `${BASE_URL}/item`;
 export const itemID = (id) => `${BASE_URL}/item/${id}`;
 export const itemGetOne = (id) => `${BASE_URL}/item/getOne/${id}`;
-export const itemCatalogue = (id) => `${BASE_URL}/item/catalogue/${id}`;
+export const itemCatalogue = (id) => `${BASE_URL}/item/catelouge/${id}`;
 export const itemSupplier = (id) => `${BASE_URL}/item/supplier/${id}`;
 
 export const managerAuth = `${BASE_URL}/manager/auth`;
 export const manager = `${BASE_URL}/manager`;
 export const managerID = (id) => `${BASE_URL}/manager/${id}`;
 
-export const order = `${BASE_URL}/order`;
+export const order = `${BASE_URL}/order/`;
 export const orderID = (id) => `${BASE_URL}/order/${id}`;
 export const orderGetOne = (id) => `${BASE_URL}/order/getOne/${id}`;
 export const orderSiteManager = (id) => `${BASE_URL}/order/siteManager/${id}`;
