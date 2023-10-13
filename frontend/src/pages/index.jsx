@@ -17,7 +17,10 @@ import {
 } from './manager';
 
 import {
-    SiteManagerDashboard
+    SiteManagerDashboard,
+    SiteManagerInventory,
+    SiteManagerNotifications,
+    SiteManagerProfile
 } from './siteManager';
 
 import {
@@ -42,6 +45,9 @@ export {
     ManagerDashboard,
 
     SiteManagerDashboard,
+    SiteManagerInventory,
+    SiteManagerNotifications,
+    SiteManagerProfile,
 
     SupplierDashboard,
     SupplierDelivery,
