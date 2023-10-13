@@ -40,16 +40,40 @@ const OrderSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: 'CART',
-        enum: ['CART', 'PENDING', 'PLACED', 'ACCEPT', 'REJECT', 'DELIVERED', 'PAID', 'SEND_APPROVE', 'RECEIVED'],
+        default: 'PENDING',
+        enum: ['PENDING', 'PLACED', 'ACCEPT', 'REJECT', 'DELIVERED', 'PAID', 'SEND_APPROVE', 'RECEIVED'],
     },
-    totalPrice: {
+    itemID: {
+        type: String,
+        required: true,
+    },
+    itemName: {
+        type: String,
+        required: true,
+    },
+    itemPrice: {
         type: Number,
-        default: 0
+        required: true,
+    },
+    itemUnit: {
+        type: String,
+        required: true,
+    },
+    quantity: {
+        type: Number,
+        default: 1
     },
     placedDate: {
         type: Date,
         default: fulldate
+    },
+    deliveryDate: {
+        type: Date,
+        default: fulldate
+    },
+    funding: {
+        type: String,
+        required: true,
     },
 });
 

@@ -13,6 +13,10 @@ const ItemSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    supplierShopName: {
+        type: String,
+        required: true,
+    },
     quantity: {
         type: Number,
         required: true,

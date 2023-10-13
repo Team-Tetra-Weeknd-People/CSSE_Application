@@ -28,6 +28,10 @@ const SupplierSchema = mongoose.Schema({
         type: String,
         default: "SUPPLIER",
     },
+    shopName: {
+        type: String,
+        required: true,
+    },
     type: {
         type: String,
         required: true,
