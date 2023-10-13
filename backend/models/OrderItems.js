@@ -21,10 +21,6 @@ const OrderItemSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    quantity: {
-        type: Number,
-        required: true,
-    },
     availableQuantity: {
         type: Number,
         required: true

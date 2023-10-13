@@ -1,5 +1,5 @@
 import adminRouter from './router/Admin.js';
-import catelougeRouter from './router/Catelouge.js';
+import catelougeRouter from './router/Catalogue.js';
 import itemRouter from './router/Item.js';
 import managerRouter from './router/Manager.js';
 import orderRouter from './router/Order.js';
