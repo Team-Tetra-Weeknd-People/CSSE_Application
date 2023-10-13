@@ -27,14 +27,14 @@ export default function ProcurementSidebar() {
         >
           Order Requests
         </Link>
-        <Link
-          to="/procurement-pricing"
+        <Link  
           className="btn btn-primary btn-block"
           style={
             sidebarStatus === "procurement-pricing"
               ? { color: "#000000", backgroundColor: "#ffffff" }
               : null
           }
+          title="Select an Order From Order Requests to Price the Items"
         >
           Pricing
         </Link>

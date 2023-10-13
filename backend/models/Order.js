@@ -48,10 +48,14 @@ const OrderSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: 'PENDING',
-        enum: ['PENDING', 'PLACED', 'ACCEPT', 'REJECT', 'DELIVERED', 'PAID', 'SEND_APPROVE', 'RECEIVED'],
+        default: 'To Be Priced',
+        enum: ['To Be Priced', 'Approval Requested', 'Approved', 'Rejected', 'Delivered', 'Closed', 'Received'],
     },
-    itemID: {
+    supplierId: {
+        type: String,
+        required: true,
+    },
+    supplierName: {
         type: String,
         required: true,
     },
@@ -61,11 +65,11 @@ const OrderSchema = mongoose.Schema({
     },
     itemPrice: {
         type: Number,
-        required: true,
+        // required: true,
     },
     itemUnit: {
         type: String,
-        required: true,
+        // required: true,
     },
     quantity: {
         type: Number,
