@@ -5,10 +5,10 @@ export const adminAuth = `${BASE_URL}/admin/auth`;
 export const admin = `${BASE_URL}/admin`;
 export const adminID = (id) => `${BASE_URL}/admin/${id}`;
 
-export const catalogue = `${BASE_URL}/catalogue`;
-export const catalogueID = (id) => `${BASE_URL}/catalogue/${id}`;
-export const catalogueGetOne = (id) => `${BASE_URL}/catalogue/getOne/${id}`;
-export const catalogueSupplier = (id) => `${BASE_URL}/catalogue/supplier/${id}`;
+export const catalogue = `${BASE_URL}/catelouge/`;
+export const catalogueID = (id) => `${BASE_URL}/catelouge//${id}`;
+export const catalogueGetOne = (id) => `${BASE_URL}/catelouge/getOne/${id}`;
+export const catalogueSupplier = (id) => `${BASE_URL}/catelouge/supplier/${id}`;
 
 export const item = `${BASE_URL}/item`;
 export const itemID = (id) => `${BASE_URL}/item/${id}`;
