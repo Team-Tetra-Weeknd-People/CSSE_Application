@@ -1,0 +1,56 @@
+.proc-pricing {
+    padding: 20px;
+  }
+  
+  .proc-pricing-container {
+    width: 100%;
+    display: block;
+  }
+  
+  .pricing-order-details-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .pricing-order-details-table th,
+  .pricing-order-details-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .pricing-order-details-table th {
+    background-color: #f0f0f0;
+  }
+  
+  .total-and-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .total-and-buttons h4 {
+    margin: 0;
+  }
+  
+  .pricing-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .pricing-buttons button {
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pricing-buttons .btn-danger:hover {
+    background-color: #b24454;
+  }
+  .pricing-buttons button:hover {
+    background-color: #25bb8b;
+  }
+  
