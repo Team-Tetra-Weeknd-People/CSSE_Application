@@ -13,6 +13,10 @@ const ItemSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    supplierShopName: {
+        type: String,
+        required: true,
+    },
     quantity: {
         type: Number,
         required: true,
@@ -22,10 +26,6 @@ const ItemSchema = mongoose.Schema({
         required: true,
     },
     unit: {
-        type: String,
-        required: true,
-    },
-    image: {
         type: String,
         required: true,
     },

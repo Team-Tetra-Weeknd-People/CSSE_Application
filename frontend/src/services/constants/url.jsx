@@ -1,5 +1,5 @@
 // add API enpoints here
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'http://localhost:8080/api';
 
 export const adminAuth = `${BASE_URL}/admin/auth`;
 export const admin = `${BASE_URL}/admin`;
@@ -24,9 +24,6 @@ export const order = `${BASE_URL}/order`;
 export const orderID = `${BASE_URL}/order/:id`;
 export const orderGetOne = `${BASE_URL}/order/getOne/:id`;
 export const orderSiteManager = `${BASE_URL}/order/siteManager/:id`;
-
-export const orderItem = `${BASE_URL}/orderItem`;
-export const orderItemID = `${BASE_URL}/orderItem/:id`;
 
 export const procumentStaffAuth = `${BASE_URL}/procumentStaff/auth`;
 export const procumentStaff = `${BASE_URL}/procumentStaff`;

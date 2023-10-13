@@ -20,10 +20,6 @@ const SupplierSchema = mongoose.Schema({
         required: true,
         unique: true,
     },
-    profilePic: {
-        type: String,
-        required: true,
-    },
     password: {
         type: String,
         required: true,
@@ -31,6 +27,10 @@ const SupplierSchema = mongoose.Schema({
     permissionLevel: {
         type: String,
         default: "SUPPLIER",
+    },
+    shopName: {
+        type: String,
+        required: true,
     },
     type: {
         type: String,

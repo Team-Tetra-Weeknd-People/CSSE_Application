@@ -20,10 +20,6 @@ const SiteManagerSchema = mongoose.Schema({
         required: true,
         unique: true,
     },
-    profilePic: {
-        type: String,
-        required: true,
-    },
     password: {
         type: String,
         required: true,
