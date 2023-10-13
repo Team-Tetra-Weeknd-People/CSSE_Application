@@ -21,7 +21,7 @@ const ItemSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
-    price: {
+    pricePerUnit: {
         type: Number,
         required: true,
     },

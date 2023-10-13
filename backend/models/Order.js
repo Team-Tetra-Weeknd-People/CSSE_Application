@@ -30,11 +30,19 @@ const OrderSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    siteManagerEmail: {
+    siteManagerContact: {
         type: String,
         required: true,
     },
-    siteManagerPhone: {
+    siteName: {
+        type: String,
+        required: true,
+    },
+    siteAddress: {
+        type: String,
+        required: true,
+    },
+    siteContact: {
         type: String,
         required: true,
     },
@@ -65,16 +73,21 @@ const OrderSchema = mongoose.Schema({
     },
     placedDate: {
         type: Date,
-        default: fulldate
+        default: fulldate,
+        immutable: true
     },
     deliveryDate: {
         type: Date,
-        default: fulldate
+        default: null
     },
     funding: {
         type: String,
         required: true,
     },
+    lastModifiedDateTime: {
+        type: Date,
+        default: date_ob
+    }
 });
 
 const Order = mongoose.model('Order', OrderSchema);

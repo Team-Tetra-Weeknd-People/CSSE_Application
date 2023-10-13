@@ -26,7 +26,7 @@ export const getAllManager = async () => {
 }
 
 export const getOneManager = async (id) => {
-    return await axios.get(url.managerID.replace(':id', id), {
+    return await axios.get(url.managerID(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -34,7 +34,7 @@ export const getOneManager = async (id) => {
 }
 
 export const updateManager = async (id, data) => {
-    return await axios.put(url.managerID.replace(':id', id), data, {
+    return await axios.put(url.managerID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -42,7 +42,7 @@ export const updateManager = async (id, data) => {
 }
 
 export const deleteManager = async (id) => {
-    return await axios.delete(url.managerID.replace(':id', id), {
+    return await axios.delete(url.managerID(id), {
         headers: {
             "Content-Type": "application/json"
         },

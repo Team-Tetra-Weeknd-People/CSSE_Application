@@ -26,7 +26,7 @@ export const getAllProcumentStaff = async () => {
 }
 
 export const getOneProcumentStaff = async (id) => {
-    return await axios.get(url.procumentStaffID.replace(':id', id), {
+    return await axios.get(url.procumentStaffID(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -34,7 +34,7 @@ export const getOneProcumentStaff = async (id) => {
 }
 
 export const updateProcumentStaff = async (id, data) => {
-    return await axios.put(url.procumentStaffID.replace(':id', id), data, {
+    return await axios.put(url.procumentStaffID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -42,7 +42,7 @@ export const updateProcumentStaff = async (id, data) => {
 }
 
 export const deleteProcumentStaff = async (id) => {
-    return await axios.delete(url.procumentStaffID.replace(':id', id), {
+    return await axios.delete(url.procumentStaffID(id), {
         headers: {
             "Content-Type": "application/json"
         },
