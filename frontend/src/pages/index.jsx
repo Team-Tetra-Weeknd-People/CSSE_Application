@@ -21,7 +21,11 @@ import {
 } from './siteManager';
 
 import {
-    SupplierDashboard
+    SupplierDashboard,
+    SupplierDelivery,
+    SupplierNewOrders,
+    SupplierNotifications,
+    SupplierProfile,
 } from './supplier';
 
 export {
@@ -39,5 +43,9 @@ export {
 
     SiteManagerDashboard,
 
-    SupplierDashboard
+    SupplierDashboard,
+    SupplierDelivery,
+    SupplierNewOrders,
+    SupplierNotifications,
+    SupplierProfile
 };

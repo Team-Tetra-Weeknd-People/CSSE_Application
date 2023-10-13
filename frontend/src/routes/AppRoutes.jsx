@@ -15,7 +15,11 @@ import {
 
     SiteManagerDashboard,
 
-    SupplierDashboard
+    SupplierDashboard,
+    SupplierDelivery,
+    SupplierNewOrders,
+    SupplierNotifications,
+    SupplierProfile
 } from "../pages";
 
 export default function App() {
@@ -43,6 +47,11 @@ export default function App() {
 
                 {/* Supplier Routes */}
                 <Route path="/supplier-dashboard" element={<SupplierDashboard />} />
+                <Route path="/supplier-delivery" element={<SupplierDelivery />} />
+                <Route path="/supplier-new-orders" element={<SupplierNewOrders />} />
+                <Route path="/supplier-notifications" element={<SupplierNotifications />} />
+                <Route path="/supplier-profile" element={<SupplierProfile />} />
+
             </Routes>
         </Router>
     )

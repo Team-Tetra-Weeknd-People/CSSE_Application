@@ -1,12 +1,12 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/sudul/sidebar.css";
 
 export default function ProcurementSidebar() {
-  const sidebarStatus = localStorage.getItem("sidebarStatus");
+  const sidebarStatus = sessionStorage.getItem("sidebarStatus");
 
   function logout() {
     localStorage.clear();
+    sessionStorage.clear();
     window.location.href = "/";
   }
 

@@ -1,8 +1,8 @@
 import "../../styles/sudul/common.css";
 import SupplierSidebar from "../../components/supplier/Sidebar";
 
-export default function SupplierDashboard() {
-    sessionStorage.setItem("sidebarStatus", "supplier-dashboard");
+export default function SupplierNewOrders() {
+    sessionStorage.setItem("sidebarStatus", "supplier-new-orders");
     return (
         <>
             <div className="whole-content">
