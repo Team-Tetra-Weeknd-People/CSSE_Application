@@ -25,9 +25,6 @@ export const orderID = `${BASE_URL}/order/:id`;
 export const orderGetOne = `${BASE_URL}/order/getOne/:id`;
 export const orderSiteManager = `${BASE_URL}/order/siteManager/:id`;
 
-export const orderItem = `${BASE_URL}/orderItem`;
-export const orderItemID = `${BASE_URL}/orderItem/:id`;
-
 export const procumentStaffAuth = `${BASE_URL}/procumentStaff/auth`;
 export const procumentStaff = `${BASE_URL}/procumentStaff`;
 export const procumentStaffID = `${BASE_URL}/procumentStaff/:id`;
