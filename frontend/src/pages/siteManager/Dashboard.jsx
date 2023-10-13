@@ -5,8 +5,14 @@ import {
     Card,
     Row,
     Col,
-    Alert
+    Alert,
+    Modal,
+    Spinner
 } from 'react-bootstrap';
+
+import Swal from "sweetalert2";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
 import "../../styles/sudul/common.css";
 import "../../styles/chanudi/dashboard.css"
@@ -16,6 +22,9 @@ import SiteManagerNavbar from "../../components/siteManager/Navbar";
 
 import SiteService from '../../services/Site.Service';
 import OrderService from '../../services/Order.Service';
+import CatelougeService from '../../services/Catalogue.Service';
+import ItemService from '../../services/Item.Service';
+import SiteManagerService from '../../services/SiteManager.Service';
 
 import SiteImage from '../../assets/images/site.avif'
 
@@ -37,6 +46,16 @@ export default function SupplierDashboard() {
 
     const [sites, setSites] = useState([]);
     const [orders, setOrders] = useState([]);
+    const [items, setItems] = useState([]);
+    const [catelouges, setCatelouges] = useState([]);
+    const [catelouge, setCatelouge] = useState("");
+    const [isCatSelected, setIsCatSelected] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const [showAddOrder, setShowAddOrder] = useState(false);
+
+    const handleCloseAddOrder = () => setShowAddOrder(false);
+    const handleShowAddOrder = () => setShowAddOrder(true);
 
     useEffect(() => {
         SiteService.getSiteByManager(localStorage.getItem("id")).then((res) => {
@@ -47,6 +66,12 @@ export default function SupplierDashboard() {
     useEffect(() => {
         OrderService.getOrderSiteManager(localStorage.getItem("id")).then((res) => {
             setOrders(res.data);
+        });
+    }, []);
+
+    useEffect(() => {
+        CatelougeService.getAllCatalogue().then((res) => {
+            setCatelouges(res.data);
         });
     }, []);
 
@@ -73,6 +98,72 @@ export default function SupplierDashboard() {
         }
     };
 
+    const initialValues = {
+        siteManagerId: localStorage.getItem("id"),
+        siteId: "",
+        itemId: "",
+        quantity: "",
+        funding: "",
+    }
+
+    const validationSchema = Yup.object().shape({
+        siteId: Yup.string().required("Required"),
+        itemId: Yup.string().required("Required"),
+        quantity: Yup.number()
+            .required("Required")
+            .min(1, "Quantity should be greater than 0"),
+        funding: Yup.string()
+            .required("Required")
+            .min(2, 'Too Short!')
+    });
+
+    async function placeOrder(values) {
+        const siteManager = await SiteManagerService.getSiteManager(values.siteManagerId);
+        const site = await SiteService.getOneSite(values.siteId);
+        const item = await ItemService.getOneItem(values.itemId);
+
+        const data = {
+            siteManagerID: values.siteManagerId,
+            siteManagerfName: siteManager.data.fname,
+            siteManagerlName: siteManager.data.lname,
+            siteManagerContact: siteManager.data.contactNo,
+            siteName: site.data.siteName,
+            siteAddress: site.data.address,
+            siteContact: site.data.contact,
+            itemID: values.itemId,
+            itemName: item.data.name,
+            itemPrice: item.data.pricePerUnit,
+            itemUnit: item.data.unit,
+            quantity: values.quantity,
+            funding: values.funding,
+        };
+
+        console.log(data);
+
+        OrderService.createOrder(data).then((res) => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Order Placed Successfully!',
+                footer: 'Order will be reviewd within 2/3 business days',
+                showConfirmButton: false,
+                timer: 2500,
+                timerProgressBar: true,
+            }).then(() => {
+                window.location.reload();
+            });
+        }).catch((err) => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            }).then(() => {
+                console.log(err);
+            });
+        });
+
+        setIsSubmitted(false);
+    }
 
     return (
         <>
@@ -186,7 +277,7 @@ export default function SupplierDashboard() {
                                             </Swiper>
                                         </div>
                                         <br />
-                                        <Button variant="primary">Place a new Order</Button>
+                                        <Button variant="primary" onClick={handleShowAddOrder}>Place a new Order</Button>
 
                                     </Col>
                                 </Row>
@@ -195,6 +286,165 @@ export default function SupplierDashboard() {
                     </div>
                 </div>
             </div>
+
+            <Modal
+                show={showAddOrder}
+                onHide={handleCloseAddOrder}
+                backdrop="static"
+                keyboard={false}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Place a New Order</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={(values) => {
+                            setIsSubmitted(true);
+                            if (isCatSelected) {
+                                placeOrder(values);
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Please select a catelouge first!',
+                                }).then(() => {
+                                    setIsSubmitted(false);
+                                });
+                            }
+                        }}
+                    >
+                        {({ errors, touched }) => (
+                            <Form>
+                                {/* dropdown to select site */}
+                                <div className="form-group">
+                                    <label htmlFor="siteId">Site</label>
+                                    <Field
+                                        as="select"
+                                        className={`form-control ${touched.siteId && errors.siteId ? "is-invalid" : ""
+                                            }`}
+                                        id="siteId"
+                                        name="siteId"
+                                    >
+                                        <option value="">Select Site</option>
+                                        {sites.map((site) => (
+                                            <option value={site._id} key={site.id}>{site.siteName} - {site.address}</option>
+                                        ))}
+                                    </Field>
+                                    {touched.siteId && errors.siteId ? (
+                                        <div className="invalid-feedback">{errors.siteId}</div>
+                                    ) : null}
+
+                                </div>
+
+                                {/* dropdown to select catelouge */}
+                                <div className="form-group">
+                                    <div className="form-group">
+                                        <label htmlFor="catelougeId">Catelouge</label>
+                                        <select
+                                            name="catelougeId"
+                                            id="catelougeId"
+                                            className="form-control"
+                                            onChange={(e) => {
+                                                setCatelouge(e.target.value);
+                                                if (e.target.value) {
+                                                    setIsCatSelected(true);
+                                                    ItemService.getItemCatelogue(e.target.value).then((res) => {
+                                                        setItems(res.data);
+                                                        console.log(res.data);
+                                                    });
+                                                } else {
+                                                    setIsCatSelected(false);
+                                                    setItems([]);
+                                                }
+                                            }}>
+                                            <option value="">Select Item</option>
+                                            {catelouges.map((catelouge) => (
+                                                <option value={catelouge._id} key={catelouge._id}>{catelouge.name}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {/* dropdown to select item */}
+                                <div className="form-group">
+                                    <label htmlFor="itemId">Item</label>
+                                    <Field
+                                        as="select"
+                                        className={`form-control ${touched.itemId && errors.itemId ? "is-invalid" : ""
+                                            }`}
+                                        id="itemId"
+                                        name="itemId"
+                                    >
+                                        <option value="">Select Item</option>
+                                        {items.map((item) => (
+                                            <option value={item._id} key={item._id}>{item.name} - Rs.{item.pricePerUnit} per {item.unit}</option>
+                                        ))}
+                                    </Field>
+                                    {touched.itemId && errors.itemId ? (
+                                        <div className="invalid-feedback">{errors.itemId}</div>
+                                    ) : null}
+                                </div>
+
+                                {/* quantity */}
+                                <div className="form-group">
+                                    <label htmlFor="quantity">Quantity</label>
+                                    <Field
+                                        type="number"
+                                        className={`form-control ${touched.quantity && errors.quantity ? "is-invalid" : ""
+                                            }`}
+                                        id="quantity"
+                                        name="quantity"
+                                    />
+                                    {touched.quantity && errors.quantity ? (
+                                        <div className="invalid-feedback">{errors.quantity}</div>
+                                    ) : null}
+
+                                </div>
+
+                                {/* funding */}
+                                <div className="form-group">
+                                    <label htmlFor="funding">Funding</label>
+                                    <Field
+                                        type="text"
+                                        className={`form-control ${touched.funding && errors.funding ? "is-invalid" : ""
+                                            }`}
+                                        id="funding"
+                                        name="funding"
+                                    />
+                                    {touched.funding && errors.funding ? (
+                                        <div className="invalid-feedback">{errors.funding}</div>
+                                    ) : null}
+                                </div>
+
+                                <br />
+                                {/* submit button */}
+                                {isSubmitted ? (
+                                    <Button variant="primary" disabled>
+                                        <Spinner
+                                            as="span"
+                                            animation="grow"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        &nbsp; Processing...
+                                    </Button>
+                                ) : (
+                                    <Button variant="primary" type="submit">
+                                        Place Order
+                                    </Button>
+                                )}
+                            </Form>
+                        )}
+                    </Formik>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseAddOrder}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }

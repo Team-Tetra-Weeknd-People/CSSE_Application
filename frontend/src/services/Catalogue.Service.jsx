@@ -35,7 +35,7 @@ export const createCatalogue = async (data) => {
 
 
 export const updateCatalogue = async (id, data) => {
-    return await axios.put(url.CatalogueID(id), data, {
+    return await axios.put(url.catalogueID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
