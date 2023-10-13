@@ -18,7 +18,7 @@ export const getOneSite = async (id) => {
 }
 
 export const getSiteByManager = async (id) => {
-    return await axios.get(url.siteManager(id), {
+    return await axios.get(url.siteSiteManager(id), {
         headers: {
             "Content-Type": "application/json"
         },
