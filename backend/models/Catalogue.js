@@ -5,6 +5,10 @@ const CatalougeSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    description: {
+        type: String,
+        required: true,
+    },
     supplierID: {
         type: String,
         required: true,
