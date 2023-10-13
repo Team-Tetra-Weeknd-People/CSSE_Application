@@ -34,7 +34,7 @@ export default function App() {
 
                 {/* Procurement Staff Routes */}
                 <Route path="/procurement-order-requests" element={<ProcurementOrderRequests />} />
-                <Route path="/procurement-pricing" element={<ProcurementPricing />} />
+                <Route path="/procurement-pricing/:id" element={<ProcurementPricing />} />
                 <Route path="/procurement-supplier-catalogues" element={<ProcurementSupplierCatalogues />} />
                 <Route path="/procurement-dashboard" element={<ProcurementDashboard />} />
 
