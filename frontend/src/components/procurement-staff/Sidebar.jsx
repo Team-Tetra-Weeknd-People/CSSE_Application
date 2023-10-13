@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 import "../../styles/sudul/sidebar.css";
 
 export default function ProcurementSidebar() {
-  const sidebarStatus = sessionStorage.getItem("sidebarStatus");
+  const sidebarStatus = localStorage.getItem("sidebarStatus");
+
+  function logout() {
+    localStorage.clear();
+    window.location.href = "/";
+  }
+
   return (
     <div className="sidebar">
       <div className="header">
@@ -56,7 +62,9 @@ export default function ProcurementSidebar() {
         </Link>
       </div>
       <div className="logout">
-        <button className="btn btn-danger btn-block">Logout</button>
+        <button className="btn btn-danger btn-block"
+          onClick={logout}
+        >Logout</button>
       </div>
     </div>
   );
