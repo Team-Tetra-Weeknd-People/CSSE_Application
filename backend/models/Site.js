@@ -25,15 +25,11 @@ const SiteSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    siteManagerEmail: {
+    siteManagerlName: {
         type: String,
         required: true,
     },
     siteManagerContact: {
-        type: String,
-        required: true,
-    },
-    siteManagerProfilePic: {
         type: String,
         required: true,
     },

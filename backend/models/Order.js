@@ -38,6 +38,14 @@ const OrderSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    siteName: {
+        type: String,
+        required: true,
+    },
+    siteAddress: {
+        type: String,
+        required: true,
+    },
     status: {
         type: String,
         default: 'PENDING',
