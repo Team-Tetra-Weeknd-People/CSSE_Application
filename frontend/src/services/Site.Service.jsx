@@ -10,7 +10,7 @@ export const getAllSite = async () => {
 }
 
 export const getOneSite = async (id) => {
-    return await axios.get(url.siteID.replace(':id', id), {
+    return await axios.get(url.siteID(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -18,7 +18,7 @@ export const getOneSite = async (id) => {
 }
 
 export const getSiteByManager = async (id) => {
-    return await axios.get(url.siteManager.replace(':id', id), {
+    return await axios.get(url.siteManager(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -34,7 +34,7 @@ export const createSite = async (data) => {
 }
 
 export const updateSite = async (id, data) => {
-    return await axios.put(url.siteID.replace(':id', id), data, {
+    return await axios.put(url.siteID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -42,7 +42,7 @@ export const updateSite = async (id, data) => {
 }
 
 export const deleteSite = async (id) => {
-    return await axios.delete(url.siteID.replace(':id', id), {
+    return await axios.delete(url.siteID(id), {
         headers: {
             "Content-Type": "application/json"
         },

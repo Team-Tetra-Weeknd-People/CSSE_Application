@@ -26,7 +26,7 @@ export const getAllSiteManagers = async () => {
 }
 
 export const getSiteManager = async (id) => {
-    return await axios.get(url.siteManagerID.replace(':id', id), {
+    return await axios.get(url.siteManagerID(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -34,7 +34,7 @@ export const getSiteManager = async (id) => {
 }
 
 export const updateSiteManager = async (id, data) => {
-    return await axios.put(url.siteManagerID.replace(':id', id), data, {
+    return await axios.put(url.siteManagerID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -42,7 +42,7 @@ export const updateSiteManager = async (id, data) => {
 }
 
 export const deleteSiteManager = async (id) => {
-    return await axios.delete(url.siteManagerID.replace(':id', id), {
+    return await axios.delete(url.siteManagerID(id), {
         headers: {
             "Content-Type": "application/json"
         },

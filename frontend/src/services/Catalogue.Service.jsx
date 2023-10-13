@@ -2,7 +2,7 @@ import axios from "axios";
 import * as url from './constants/url.jsx'
 
 export const getAllCatalogue = async () => {
-    return await axios.get(url.Catalogue, {
+    return await axios.get(url.catalogue, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -10,7 +10,7 @@ export const getAllCatalogue = async () => {
 }
 
 export const getOneCatalogue = async (id) => {
-    return await axios.get(url.CatalogueGetOne.replace(':id', id), {
+    return await axios.get(url.catalogueGetOne(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -18,7 +18,7 @@ export const getOneCatalogue = async (id) => {
 }
 
 export const getCatalogueSupplier = async (id) => {
-    return await axios.get(url.CatalogueSupplier.replace(':id', id), {
+    return await axios.get(url.catalogueSupplier(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -26,7 +26,7 @@ export const getCatalogueSupplier = async (id) => {
 }
 
 export const createCatalogue = async (data) => {
-    return await axios.post(url.Catalogue, data, {
+    return await axios.post(url.catalogue, data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -35,7 +35,7 @@ export const createCatalogue = async (data) => {
 
 
 export const updateCatalogue = async (id, data) => {
-    return await axios.put(url.CatalogueID.replace(':id', id), data, {
+    return await axios.put(url.CatalogueID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -43,7 +43,7 @@ export const updateCatalogue = async (id, data) => {
 }
 
 export const deleteCatalogue = async (id) => {
-    return await axios.delete(url.CatalogueID.replace(':id', id), {
+    return await axios.delete(url.catalogueID(id), {
         headers: {
             "Content-Type": "application/json"
         },

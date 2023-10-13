@@ -10,7 +10,7 @@ export const getAllOrder = async () => {
 }
 
 export const getOneOrder = async (id) => {
-    return await axios.get(url.orderGetOne.replace(':id', id), {
+    return await axios.get(url.orderGetOne(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -18,7 +18,7 @@ export const getOneOrder = async (id) => {
 }
 
 export const getOrderSiteManager = async (id) => {
-    return await axios.get(url.orderSiteManager.replace(':id', id), {
+    return await axios.get(url.orderSiteManager(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -34,7 +34,7 @@ export const createOrder = async (data) => {
 }
 
 export const updateOrder = async (id, data) => {
-    return await axios.put(url.orderID.replace(':id', id), data, {
+    return await axios.put(url.orderID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -42,7 +42,7 @@ export const updateOrder = async (id, data) => {
 }
 
 export const deleteOrder = async (id) => {
-    return await axios.delete(url.orderID.replace(':id', id), {
+    return await axios.delete(url.orderID(id), {
         headers: {
             "Content-Type": "application/json"
         },
