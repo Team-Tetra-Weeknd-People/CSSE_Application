@@ -63,6 +63,10 @@ const OrderSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    itemDescription: {
+        type: String,
+        required: true,
+    },
     unitPrice: {
         type: Number,
     },
