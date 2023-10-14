@@ -23,8 +23,8 @@ import SiteManagerNavbar from "../../components/siteManager/Navbar";
 import SiteService from '../../services/Site.Service';
 import OrderService from '../../services/Order.Service';
 import CatelougeService from '../../services/Catalogue.Service';
-import ItemService from '../../services/Item.Service';
 import SiteManagerService from '../../services/SiteManager.Service';
+import SupplierService from '../../services/Supplier.Service';
 
 import SiteImage from '../../assets/images/site.avif'
 
@@ -47,6 +47,7 @@ export default function SupplierDashboard() {
     const [sites, setSites] = useState([]);
     const [orders, setOrders] = useState([]);
     const [items, setItems] = useState([]);
+    const [suppliers, setSuppliers] = useState([]);
     const [catelouges, setCatelouges] = useState([]);
     const [catelouge, setCatelouge] = useState("");
     const [isCatSelected, setIsCatSelected] = useState(false);
@@ -61,19 +62,17 @@ export default function SupplierDashboard() {
         SiteService.getSiteByManager(localStorage.getItem("id")).then((res) => {
             setSites(res.data);
         });
-    }, []);
-
-    useEffect(() => {
         OrderService.getOrderSiteManager(localStorage.getItem("id")).then((res) => {
             setOrders(res.data);
         });
-    }, []);
-
-    useEffect(() => {
         CatelougeService.getAllCatalogue().then((res) => {
             setCatelouges(res.data);
         });
+        SupplierService.getAllSuppliers().then((res) => {
+            setSuppliers(res.data);
+        });
     }, []);
+
 
     const getStatusColor = (status) => {
         switch (status) {
@@ -101,14 +100,22 @@ export default function SupplierDashboard() {
     const initialValues = {
         siteManagerId: localStorage.getItem("id"),
         siteId: "",
-        itemId: "",
+        supplierId: "",
+        itemName: "",
+        itemDescription: "",
         quantity: "",
         funding: "",
     }
 
     const validationSchema = Yup.object().shape({
         siteId: Yup.string().required("Required"),
-        itemId: Yup.string().required("Required"),
+        supplierId: Yup.string().required("Required"),
+        itemName: Yup.string()
+            .required("Required")
+            .min(2, 'Too Short!'),
+        itemDescription: Yup.string()
+            .required("Required")
+            .min(2, 'Too Short!'),
         quantity: Yup.number()
             .required("Required")
             .min(1, "Quantity should be greater than 0"),
@@ -118,9 +125,12 @@ export default function SupplierDashboard() {
     });
 
     async function placeOrder(values) {
+        console.log(values);
         const siteManager = await SiteManagerService.getSiteManager(values.siteManagerId);
         const site = await SiteService.getOneSite(values.siteId);
-        const item = await ItemService.getOneItem(values.itemId);
+        const supplier = await SupplierService.getSupplier(values.supplierId);
+
+
 
         const data = {
             siteManagerID: values.siteManagerId,
@@ -130,10 +140,10 @@ export default function SupplierDashboard() {
             siteName: site.data.siteName,
             siteAddress: site.data.address,
             siteContact: site.data.contact,
-            itemID: values.itemId,
-            itemName: item.data.name,
-            itemPrice: item.data.pricePerUnit,
-            itemUnit: item.data.unit,
+            supplierId: values.supplierId,
+            supplierName: supplier.data.shopName,
+            itemName: values.itemName,
+            itemDescription: values.itemDescription,
             quantity: values.quantity,
             funding: values.funding,
         };
@@ -301,17 +311,7 @@ export default function SupplierDashboard() {
                         validationSchema={validationSchema}
                         onSubmit={(values) => {
                             setIsSubmitted(true);
-                            if (isCatSelected) {
-                                placeOrder(values);
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'Please select a catelouge first!',
-                                }).then(() => {
-                                    setIsSubmitted(false);
-                                });
-                            }
+                            placeOrder(values);
                         }}
                     >
                         {({ errors, touched }) => (
@@ -337,52 +337,53 @@ export default function SupplierDashboard() {
 
                                 </div>
 
-                                {/* dropdown to select catelouge */}
+                                {/* dropdown to select supplier */}
                                 <div className="form-group">
-                                    <div className="form-group">
-                                        <label htmlFor="catelougeId">Catelouge</label>
-                                        <select
-                                            name="catelougeId"
-                                            id="catelougeId"
-                                            className="form-control"
-                                            onChange={(e) => {
-                                                setCatelouge(e.target.value);
-                                                if (e.target.value) {
-                                                    setIsCatSelected(true);
-                                                    ItemService.getItemCatelogue(e.target.value).then((res) => {
-                                                        setItems(res.data);
-                                                        console.log(res.data);
-                                                    });
-                                                } else {
-                                                    setIsCatSelected(false);
-                                                    setItems([]);
-                                                }
-                                            }}>
-                                            <option value="">Select Item</option>
-                                            {catelouges.map((catelouge) => (
-                                                <option value={catelouge._id} key={catelouge._id}>{catelouge.name}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                </div>
-
-                                {/* dropdown to select item */}
-                                <div className="form-group">
-                                    <label htmlFor="itemId">Item</label>
+                                    <label htmlFor="supplierId">Supplier</label>
                                     <Field
                                         as="select"
-                                        className={`form-control ${touched.itemId && errors.itemId ? "is-invalid" : ""
+                                        className={`form-control ${touched.supplierId && errors.supplierId ? "is-invalid" : ""
                                             }`}
-                                        id="itemId"
-                                        name="itemId"
+                                        id="supplierId"
+                                        name="supplierId"
                                     >
-                                        <option value="">Select Item</option>
-                                        {items.map((item) => (
-                                            <option value={item._id} key={item._id}>{item.name} - Rs.{item.pricePerUnit} per {item.unit}</option>
+                                        <option value="">Select Supplier</option>
+                                        {suppliers.map((supplier) => (
+                                            <option value={supplier._id} key={supplier.id}>{supplier.shopName} - {supplier.type}</option>
                                         ))}
                                     </Field>
-                                    {touched.itemId && errors.itemId ? (
-                                        <div className="invalid-feedback">{errors.itemId}</div>
+                                    {touched.supplierId && errors.supplierId ? (
+                                        <div className="invalid-feedback">{errors.supplierId}</div>
+                                    ) : null}
+                                </div>
+
+                                {/* itemName */}
+                                <div className="form-group">
+                                    <label htmlFor="itemName">Item Name</label>
+                                    <Field
+                                        type="text"
+                                        className={`form-control ${touched.itemName && errors.itemName ? "is-invalid" : ""
+                                            }`}
+                                        id="itemName"
+                                        name="itemName"
+                                    />
+                                    {touched.itemName && errors.itemName ? (
+                                        <div className="invalid-feedback">{errors.itemName}</div>
+                                    ) : null}
+                                </div>
+
+                                {/* itemDescription */}
+                                <div className="form-group">
+                                    <label htmlFor="itemDescription">Item Description</label>
+                                    <Field
+                                        type="text"
+                                        className={`form-control ${touched.itemDescription && errors.itemDescription ? "is-invalid" : ""
+                                            }`}
+                                        id="itemDescription"
+                                        name="itemDescription"
+                                    />
+                                    {touched.itemDescription && errors.itemDescription ? (
+                                        <div className="invalid-feedback">{errors.itemDescription}</div>
                                     ) : null}
                                 </div>
 
