@@ -13,7 +13,6 @@ export default function ProcurementSupplierCatalogues() {
     // Fetch the list of suppliers when the component mounts
     SupplierService.getAllSuppliers().then((res) => {
       const allSuppliers = res.data;
-      console.log(allSuppliers);
       setSuppliers(allSuppliers);
       setFilteredSuppliers(allSuppliers); // Initialize filteredSuppliers with all suppliers
     });
@@ -47,19 +46,33 @@ export default function ProcurementSupplierCatalogues() {
                 <input
                   type="text"
                   className="sup-search-bar"
-                  placeholder="Search..."
+                  placeholder="Search Supplier Shop Name"
                   value={searchValue}
                   onChange={handleSearchChange}
                 />
-                <button className="sup-search-button">Search</button>
               </div>
             </div>
             <div className="proc-sup-suppliers">
-              <ul>
-                {filteredSuppliers.map((supplier) => (
-                  <li key={supplier._id}>{supplier.shopName}</li>
-                ))}
-              </ul>
+              <table className="supplier-table">
+                <thead>
+                  <tr>
+                    <th>Shop Name</th>
+                    <th>Contact Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredSuppliers.map((supplier) => (
+                    <tr key={supplier._id}>
+                      <td>{supplier.shopName}</td>
+                      <td>{supplier.contactName}</td>
+                      <td>{supplier.phoneNumber}</td>
+                      <td>{supplier.email}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

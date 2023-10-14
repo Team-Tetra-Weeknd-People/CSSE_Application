@@ -22,17 +22,17 @@
   outline: none;
 }
 
-/* Style the search button */
-.sup-search-button {
-  padding: 10px 20px;
-  background-color: #0a080845;
-    color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 10px; /* Add space between the input and the button */
-}
-.sup-search-button:hover{
-  background-color: #6f0cd2;
-  color: #000;
-}
+.supplier-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .supplier-table th, .supplier-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .supplier-table th {
+    background-color: #f0f0f0;
+  }
