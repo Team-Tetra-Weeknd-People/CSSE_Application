@@ -5,16 +5,18 @@ import SupplierService from "../../services/Supplier.Service";
 import ProcurementSidebar from "../../components/procurement-staff/Sidebar";
 
 export default function ProcurementSupplierCatalogues() {
+  sessionStorage.setItem("sidebarStatus", "procurement-supplier-catalogues");
   const [suppliers, setSuppliers] = useState([]);
   const [filteredSuppliers, setFilteredSuppliers] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [supplierCatalogueId, setSupplierCatalogueId] = useState('');
 
   useEffect(() => {
     // Fetch the list of suppliers when the component mounts
     SupplierService.getAllSuppliers().then((res) => {
       const allSuppliers = res.data;
       setSuppliers(allSuppliers);
-      setFilteredSuppliers(allSuppliers); // Initialize filteredSuppliers with all suppliers
+      setFilteredSuppliers(allSuppliers);
     });
   }, []);
 
@@ -57,22 +59,44 @@ export default function ProcurementSupplierCatalogues() {
                 <thead>
                   <tr>
                     <th>Shop Name</th>
-                    <th>Contact Name</th>
+                    <th>Type</th>
                     <th>Phone Number</th>
                     <th>Email</th>
+                    <th>Catalogue</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredSuppliers.map((supplier) => (
-                    <tr key={supplier._id}>
+                    <tr key={supplier._id} onClick={() =>{setSupplierCatalogueId(supplier.catelougues[1]  ? supplier.catelougues[1]  : "Not Available")}}> 
                       <td>{supplier.shopName}</td>
-                      <td>{supplier.contactName}</td>
-                      <td>{supplier.phoneNumber}</td>
+                      <td>{supplier.type}</td>
+                      <td>{supplier.contactNo}</td>
                       <td>{supplier.email}</td>
+                      <td>
+                        {supplier.catelougues[1] ? "Available" : "Not Available"}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
+            <div className="proc-sup-catalogue-det">
+              <div className="proc-sup-search-bar">
+                <div className="proc-sup-search-bar-header">
+                  <h3>Supplier Catalogue</h3>
+                  <h5>Supplier: {`${supplierCatalogueId=="Not Available" ? 'Selected Supplier doesn\'t have a catalogue!' : supplierCatalogueId}`}</h5>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    className="sup-search-bar"
+                    placeholder="Search Items"
+                    value={searchValue}
+                    onChange={handleSearchChange}
+                  />
+                </div>
+              </div>
+              {supplierCatalogueId=="Not Available" ? ('sd') : ('f')}
             </div>
           </div>
         </div>

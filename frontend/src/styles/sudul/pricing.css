@@ -1,69 +1,73 @@
 .proc-pricing {
-    padding: 20px;
-  }
-  
-  .proc-pricing-container {
-    width: 100%;
-    display: block;
-  }
-  
-  .pricing-order-details-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .pricing-order-details-table th,
-  .pricing-order-details-table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .pricing-order-details-table th {
-    background-color: #f0f0f0;
-  }
-  
-  .total-and-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .total-and-buttons h4 {
-    margin: 0;
-  }
-  
-  /* Style for the pricing-buttons container */
-  .pricing-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .pricing-buttons button {
-    padding: 10px 20px;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #1c966f; /* Default button background color */
-  }
-  
-  .pricing-buttons .btn-danger {
-    background-color: #c50c27; /* Button background color on hover */
-  }
-  .pricing-buttons button.btn-req{
-    background-color: #cb741cef;
-  }
-  .pricing-buttons button.btn-save{
-    background-color: rgb(28, 203, 31)
-  }
-  .pricing-buttons button:hover {
-    background-color: #dae09a;
-    color: #000;
-  }
-  .pricing-order-details-table input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+  padding: 20px;
+}
+
+.proc-pricing-container {
+  width: 100%;
+  display: block;
+}
+
+.pricing-order-details-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pricing-order-details-table th,
+.pricing-order-details-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.pricing-order-details-table th {
+  background-color: #f0f0f0;
+}
+
+.total-and-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.total-and-buttons h4 {
+  margin: 0;
+}
+
+/* Style for the pricing-buttons container */
+.pricing-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.pricing-buttons button {
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #1c966f; /* Default button background color */
+}
+
+.pricing-buttons .btn-danger {
+  background-color: #c50c27; /* Button background color on hover */
+}
+.pricing-buttons button.btn-req {
+  background-color: #cb741cef;
+}
+.pricing-buttons button.btn-save {
+  background-color: rgb(28, 203, 31);
+}
+.pricing-buttons button:hover {
+  background-color: #dae09a;
+  color: #000;
+}
+.pricing-order-details-table input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input{
+  border: 1px solid #ccc;
+  text-align: center; 
+}
