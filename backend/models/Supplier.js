@@ -31,10 +31,16 @@ const SupplierSchema = mongoose.Schema({
     shopName: {
         type: String,
         required: true,
+        unique: true,
     },
     type: {
         type: String,
         required: true,
+        unique: true,
+    },
+    catelougues: {
+        type: Array,
+        default: [],
     },
 }, {
     timestamps: {

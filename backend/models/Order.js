@@ -65,15 +65,12 @@ const OrderSchema = mongoose.Schema({
     },
     unitPrice: {
         type: Number,
-        // required: true,
     },
     itemUnit: {
         type: String,
-        // required: true,
     },
     subTotal: {
         type: Number,
-        // required: true,
     },
     quantity: {
         type: Number,

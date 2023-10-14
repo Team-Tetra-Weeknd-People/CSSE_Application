@@ -1,4 +1,5 @@
 import Supplier from '../models/Supplier.js';
+import Catalogue from '../models/Catalogue.js';
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 
@@ -31,6 +32,12 @@ export const authSupplier = async (req, res) => {
 export const getAllSuppliers = async (req, res) => {
     try {
         const suppliers = await Supplier.find();
+        for (let i = 0; i < suppliers.length; i++) {
+            //get catelougues by supplier
+            const catelougues = await Catalogue.find({ supplierID: suppliers[i]._id });
+            // append catelougues to supplier
+            suppliers[i].catelougues = catelougues;
+        }
         res.status(200).json(suppliers);
     }
     catch (error) {
