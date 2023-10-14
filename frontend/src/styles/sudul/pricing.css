@@ -25,7 +25,7 @@
   
   .total-and-buttons {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     margin-top: 20px;
   }
@@ -34,6 +34,7 @@
     margin: 0;
   }
   
+  /* Style for the pricing-buttons container */
   .pricing-buttons {
     display: flex;
     gap: 10px;
@@ -45,12 +46,24 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    background-color: #1c966f; /* Default button background color */
   }
   
-  .pricing-buttons .btn-danger:hover {
-    background-color: #b24454;
+  .pricing-buttons .btn-danger {
+    background-color: #c50c27; /* Button background color on hover */
+  }
+  .pricing-buttons button.btn-req{
+    background-color: #cb741cef;
+  }
+  .pricing-buttons button.btn-save{
+    background-color: rgb(28, 203, 31)
   }
   .pricing-buttons button:hover {
-    background-color: #25bb8b;
+    background-color: #dae09a;
+    color: #000;
   }
-  
+  .pricing-order-details-table input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
