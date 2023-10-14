@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function SelectUser() {
+export default function ManagerLogin() {
     return (
         <View>
-            <Text>SelectUser</Text>
+            <Text>ManagerLogin</Text>
         </View>
     )
 }
