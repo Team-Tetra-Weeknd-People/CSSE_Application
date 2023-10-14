@@ -10,13 +10,20 @@ export default function ProcurementPricing() {
   sessionStorage.setItem("sidebarStatus", "procurement-pricing");
 
   const [orderRequest, setOrderRequest] = useState({});
-  const [unitPrice, setUnitPrice] = useState('');
+  const [unitPrice, setUnitPrice] = useState("");
   const [subTotal, setSubTotal] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+  const [itemName, setItemName] = useState("");
+  const [funding, setFunding] = useState("");
 
   useEffect(() => {
     try {
       OrderService.getOneOrder(id).then((res) => {
         setOrderRequest(res.data);
+        setUnitPrice(res.data.unitPrice);
+        setQuantity(res.data.quantity);
+        setItemName(res.data.itemName);
+        setFunding(res.data.funding);
       });
     } catch (error) {
       console.error(error);
@@ -25,13 +32,27 @@ export default function ProcurementPricing() {
 
   const handleUnitPriceChange = (e) => {
     const price = parseFloat(e.target.value);
-
-    if (!isNaN(price)) {
-      setUnitPrice(price);
-      setSubTotal(price * orderRequest.quantity);
-    }
+    setUnitPrice(price);
+    setSubTotal(price * quantity);
+  };
+  const handleQuantityChange = (e) => {
+    const quantityO = parseInt(e.target.value);
+    setQuantity(e.target.value);
+    setSubTotal(unitPrice * quantityO);
   };
 
+  const handleSave = () => {
+    const newOrder = {
+      itemName: itemName,
+      quantity: quantity,
+      unitPrice: unitPrice,
+      funding: funding,
+      subTotal: subTotal,
+    };
+    OrderService.updateOrder(id, newOrder).then((res) => {
+      console.log(res.data);
+    });
+  };
   return (
     <>
       <div className="whole-content">
@@ -61,14 +82,32 @@ export default function ProcurementPricing() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{orderRequest.itemName}</td>
-                    <td>{orderRequest.quantity}</td>
                     <td>
                       <input
-                        placeholder="Rs. "
+                        placeholder="Item Name"
+                        type="text"
+                        value={itemName}
+                        onChange={(e) => setItemName(e.target.value)}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        placeholder="Quantity"
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => {
+                          handleQuantityChange(e);
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        placeholder="Rs."
                         type="number"
                         value={unitPrice}
-                        onChange={handleUnitPriceChange}
+                        onChange={(e) => {
+                          handleUnitPriceChange(e);
+                        }}
                       />
                     </td>
                     <td>
@@ -81,20 +120,29 @@ export default function ProcurementPricing() {
                         ? orderRequest.deliveryDate.split("T")[0]
                         : "None"}
                     </td>
-                    <td>{orderRequest.funding}</td>
-                    <td>{subTotal.toFixed(2)}</td>
+                    <td>
+                      <input
+                        placeholder="Funding Account"
+                        type="text"
+                        value={funding}
+                        onChange={(e) => setFunding(e.target.value)}
+                      />
+                    </td>
+                    <td>{subTotal ? subTotal.toFixed(2) : (0).toFixed(2)}</td>
                     <td>{orderRequest.status}</td>
                   </tr>
                 </tbody>
               </table>
               <div className="total-and-buttons">
-                <div className="total-price"><h4>Total: Rs.{subTotal.toFixed(2)}</h4></div> 
+                <div className="total-price">
+                  <h4>
+                    Total: Rs.{subTotal ? subTotal.toFixed(2) : (0).toFixed(2)}
+                  </h4>
+                </div>
                 <div className="pricing-buttons">
                   {subTotal > 100000 ? (
                     <>
-                    <button className="btn btn-primary btn-save">
-                        Save
-                      </button>
+                      <button className="btn btn-primary btn-save" onClick={handleSave}>Save</button>
                       <button className="btn btn-primary btn-req">
                         Request Approval
                       </button>
@@ -107,12 +155,8 @@ export default function ProcurementPricing() {
                     </>
                   ) : (
                     <>
-                    <button className="btn btn-primary btn-save">
-                        Save
-                      </button>
-                      <button className="btn btn-primary">
-                        Approve
-                      </button>
+                      <button className="btn btn-primary btn-save">Save</button>
+                      <button className="btn btn-primary">Approve</button>
                       <button className="btn btn-primary btn-req">
                         Request Approval
                       </button>
