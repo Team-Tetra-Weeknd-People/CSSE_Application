@@ -3,21 +3,22 @@
     cursor:default;
     display: block;
     padding: 10px;
-    height: 100vh; /* Add padding for spacing */
+    height: 100vh;
+  overflow: scroll;
 }
 
 .proc-search-bar {
     padding: 10px;
     display: flex;
     justify-content: flex-end;
-  align-items: center; /* Add padding to the search bar */
+    align-items: center; 
 }
 
 /* Style the search bar input */
 .search-bar {
   padding: 10px;
-  width: 200px; /* Adjust the width as needed */
-  border: 1px solid #ccc;
+  width: 300px; /* Adjust the width as needed */
+  border: 1px solid #0a080845;
   border-radius: 5px;
   outline: none;
 }
@@ -25,11 +26,16 @@
 /* Style the search button */
 .search-button {
   padding: 10px 20px;
-  color: #fff;
+  background-color: #0a080845;
+    color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-left: 10px; /* Add space between the input and the button */
+}
+.search-button:hover{
+  background-color: #6f0cd2;
+  color: #000;
 }
 .proc-today-orders {
     padding: 10px; /* Add padding to today's orders */

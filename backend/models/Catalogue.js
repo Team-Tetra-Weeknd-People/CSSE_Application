@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const CatalougeSchema = mongoose.Schema({
+const CatalogueSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -20,5 +20,5 @@ const CatalougeSchema = mongoose.Schema({
     }
 });
 
-const Catalouge = mongoose.model('Catalouge', CatalougeSchema);
-export default Catalouge;
+const Catalogue = mongoose.model('Catalogue', CatalogueSchema);
+export default Catalogue;

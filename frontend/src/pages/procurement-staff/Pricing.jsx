@@ -10,7 +10,7 @@ export default function ProcurementPricing() {
   sessionStorage.setItem("sidebarStatus", "procurement-pricing");
 
   const [orderRequest, setOrderRequest] = useState({});
-  const [unitPrice, setUnitPrice] = useState(0);
+  const [unitPrice, setUnitPrice] = useState('');
   const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
@@ -82,18 +82,24 @@ export default function ProcurementPricing() {
                         : "None"}
                     </td>
                     <td>{orderRequest.funding}</td>
-                    <td>{subTotal}</td>
+                    <td>{subTotal.toFixed(2)}</td>
                     <td>{orderRequest.status}</td>
                   </tr>
                 </tbody>
               </table>
               <div className="total-and-buttons">
-                <h4>Total: Rs.{subTotal}</h4>
+                <div className="total-price"><h4>Total: Rs.{subTotal.toFixed(2)}</h4></div> 
                 <div className="pricing-buttons">
                   {subTotal > 100000 ? (
                     <>
-                      <button className="btn btn-primary">
-                        Save & Request Approval
+                    <button className="btn btn-primary btn-save">
+                        Save
+                      </button>
+                      <button className="btn btn-primary btn-req">
+                        Request Approval
+                      </button>
+                      <button className="btn btn-danger btn-block">
+                        Reject
                       </button>
                       <button className="btn btn-danger btn-block">
                         Reject & Delete
@@ -101,11 +107,14 @@ export default function ProcurementPricing() {
                     </>
                   ) : (
                     <>
-                      <button className="btn btn-primary">
-                        Save & Approve
+                    <button className="btn btn-primary btn-save">
+                        Save
                       </button>
                       <button className="btn btn-primary">
-                        Save & Request Approval
+                        Approve
+                      </button>
+                      <button className="btn btn-primary btn-req">
+                        Request Approval
                       </button>
                       <button className="btn btn-danger btn-block">
                         Reject
