@@ -10,7 +10,7 @@ export const getAllItem = async () => {
 }
 
 export const getOneItem = async (id) => {
-    return await axios.get(url.itemGetOne.replace(':id', id), {
+    return await axios.get(url.itemGetOne(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -18,7 +18,7 @@ export const getOneItem = async (id) => {
 }
 
 export const getItemCatelogue = async (id) => {
-    return await axios.get(url.itemCatelogue.replace(':id', id), {
+    return await axios.get(url.itemCatalogue(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -26,7 +26,7 @@ export const getItemCatelogue = async (id) => {
 }
 
 export const getItemSupplier = async (id) => {
-    return await axios.get(url.itemSupplier.replace(':id', id), {
+    return await axios.get(url.itemSupplier(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -42,7 +42,7 @@ export const createItem = async (data) => {
 }
 
 export const updateItem = async (id, data) => {
-    return await axios.put(url.itemID.replace(':id', id), data, {
+    return await axios.put(url.itemID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -50,7 +50,7 @@ export const updateItem = async (id, data) => {
 }
 
 export const deleteItem = async (id) => {
-    return await axios.delete(url.itemID.replace(':id', id), {
+    return await axios.delete(url.itemID(id), {
         headers: {
             "Content-Type": "application/json"
         },

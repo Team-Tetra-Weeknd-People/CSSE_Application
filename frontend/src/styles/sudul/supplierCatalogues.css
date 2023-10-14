@@ -1,0 +1,38 @@
+.proc-sup-content {
+    cursor:default;
+    display: block;
+    padding: 10px;
+    height: 100vh;
+  overflow: scroll;
+}
+
+.proc-sup-search-bar {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+/* Style the search bar input */
+.sup-search-bar {
+  padding: 10px;
+  width: 300px; /* Adjust the width as needed */
+  border: 1px solid #0a080845;
+  border-radius: 5px;
+  outline: none;
+}
+
+.supplier-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .supplier-table th, .supplier-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .supplier-table th {
+    background-color: #f0f0f0;
+  }

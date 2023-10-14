@@ -26,7 +26,7 @@ export const getAllSuppliers = async () => {
 }
 
 export const getSupplier = async (id) => {
-    return await axios.get(url.supplierID.replace(':id', id), {
+    return await axios.get(url.supplierID(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -34,7 +34,7 @@ export const getSupplier = async (id) => {
 }
 
 export const updateSupplier = async (id, data) => {
-    return await axios.put(url.supplierID.replace(':id', id), data, {
+    return await axios.put(url.supplierID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -42,7 +42,7 @@ export const updateSupplier = async (id, data) => {
 }
 
 export const deleteSupplier = async (id) => {
-    return await axios.delete(url.supplierID.replace(':id', id), {
+    return await axios.delete(url.supplierID(id), {
         headers: {
             "Content-Type": "application/json"
         },

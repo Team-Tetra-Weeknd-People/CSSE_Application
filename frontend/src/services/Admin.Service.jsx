@@ -26,7 +26,7 @@ export const getAllAdmins = async () => {
 }
 
 export const getAdmin = async (id) => {
-    return await axios.get(url.adminID.replace(':id', id), {
+    return await axios.get(url.adminID(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -34,7 +34,7 @@ export const getAdmin = async (id) => {
 }
 
 export const updateAdmin = async (id, data) => {
-    return await axios.put(url.adminID.replace(':id', id), data, {
+    return await axios.put(url.adminID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -42,7 +42,7 @@ export const updateAdmin = async (id, data) => {
 }
 
 export const deleteAdmin = async (id) => {
-    return await axios.delete(url.adminID.replace(':id', id), {
+    return await axios.delete(url.adminID(id), {
         headers: {
             "Content-Type": "application/json"
         },

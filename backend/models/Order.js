@@ -30,27 +30,73 @@ const OrderSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    siteManagerEmail: {
+    siteManagerContact: {
         type: String,
         required: true,
     },
-    siteManagerPhone: {
+    siteName: {
+        type: String,
+        required: true,
+    },
+    siteAddress: {
+        type: String,
+        required: true,
+    },
+    siteContact: {
         type: String,
         required: true,
     },
     status: {
         type: String,
-        default: 'CART',
-        enum: ['CART', 'PENDING', 'PLACED', 'ACCEPT', 'REJECT', 'DELIVERED', 'PAID', 'SEND_APPROVE', 'RECEIVED'],
+        default: 'To Be Priced',
+        enum: ['To Be Priced', 'Priced', 'Approval Requested', 'Approved', 'Confirmed', 'Rejected', 'Delivered', 'Closed', 'Received'],
     },
-    totalPrice: {
+    supplierId: {
+        type: String,
+        required: true,
+    },
+    supplierName: {
+        type: String,
+        required: true,
+    },
+    itemName: {
+        type: String,
+        required: true,
+    },
+    itemDescription: {
+        type: String,
+        required: true,
+    },
+    unitPrice: {
         type: Number,
-        default: 0
+    },
+    itemUnit: {
+        type: String,
+    },
+    subTotal: {
+        type: Number,
+    },
+    quantity: {
+        type: Number,
+        default: 1
     },
     placedDate: {
         type: Date,
-        default: fulldate
+        default: fulldate,
+        immutable: true
     },
+    deliveryDate: {
+        type: Date,
+        default: null
+    },
+    funding: {
+        type: String,
+        required: true,
+    },
+    lastModifiedDateTime: {
+        type: Date,
+        default: date_ob
+    }
 });
 
 const Order = mongoose.model('Order', OrderSchema);

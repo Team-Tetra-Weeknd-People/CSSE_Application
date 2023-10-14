@@ -1,0 +1,82 @@
+/* Assuming these are your styles for the three blocks */
+.proc-content {
+    cursor:default;
+    display: block;
+    padding: 10px;
+    height: 100vh;
+  overflow: scroll;
+}
+
+.proc-search-bar {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; 
+}
+
+/* Style the search bar input */
+.search-bar {
+  padding: 10px;
+  width: 300px; /* Adjust the width as needed */
+  border: 1px solid #0a080845;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Style the search button */
+.search-button {
+  padding: 10px 20px;
+  background-color: #0a080845;
+    color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px; /* Add space between the input and the button */
+}
+.search-button:hover{
+  background-color: #6f0cd2;
+  color: #000;
+}
+.proc-today-orders {
+    padding: 10px; /* Add padding to today's orders */
+}
+.proc-today, .proc-prev{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+}
+.proc-prev-orders {
+    padding: 10px; /* Add padding to previous orders */
+}
+.proc-today-orders tr{
+    cursor: pointer;
+}
+.proc-order-requests-table {
+    width: 100%;
+  }
+  .proc-order-requests-table tr{
+    width: 100%;
+    border-bottom: 3px solid #ffffff ;
+  }
+  
+  .proc-order-requests-table th,
+  .proc-order-requests-table td{
+    border-right: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;  /* Reduce border thickness for the right border */
+    text-align: center;
+    padding: 10px;
+  }
+
+
+  .proc-order-requests-table th {
+    background-color: #f0f0f0;
+  }
+  .proc-order-requests-table tbody td{
+    border-radius: 10px;
+  }
+  .proc-order-requests-table tbody tr:hover td{
+    background-color: #0000003f;
+    cursor: pointer;
+    border-bottom: 5px solid #ffffff ;
+    border-right: 2px solid #ffffff;
+    border-radius: 10px;
+  }

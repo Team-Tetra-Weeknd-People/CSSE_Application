@@ -1,0 +1,18 @@
+.supDash {
+    margin: 0;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.supDashContainer {
+    width: 80%;
+    height: 70vh;
+    background-color: #ccc;
+    text-align: center;
+}
+
+.swiper {
+    width: 400px;
+}
