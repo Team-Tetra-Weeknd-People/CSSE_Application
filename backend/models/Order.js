@@ -49,7 +49,7 @@ const OrderSchema = mongoose.Schema({
     status: {
         type: String,
         default: 'To Be Priced',
-        enum: ['To Be Priced', 'Approval Requested', 'Approved', 'Rejected', 'Delivered', 'Closed', 'Received'],
+        enum: ['To Be Priced', 'Priced', 'Approval Requested', 'Approved', 'Confirmed', 'Rejected', 'Delivered', 'Closed', 'Received'],
     },
     supplierId: {
         type: String,
