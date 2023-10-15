@@ -130,8 +130,6 @@ export default function SupplierDashboard() {
         const site = await SiteService.getOneSite(values.siteId);
         const supplier = await SupplierService.getSupplier(values.supplierId);
 
-
-
         const data = {
             siteManagerID: values.siteManagerId,
             siteManagerfName: siteManager.data.fname,
