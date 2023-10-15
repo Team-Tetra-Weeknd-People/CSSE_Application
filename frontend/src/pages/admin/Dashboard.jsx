@@ -10,6 +10,8 @@ import {
     Alert,
 } from 'react-bootstrap';
 
+import NavBar from '../../components/admin/NavBar'
+
 import '../../styles/randula/home.css'
 
 import { Tooltip } from "react-tooltip";
@@ -507,8 +509,9 @@ export default function AdminDashboard() {
 
     return (
         <>
-            <div className="loginMain">
-                <div className="loginContainer">
+            <NavBar />
+            <div className="adminDash">
+                <div className="adminContainer">
                     <Container >
                         <Row style={{ marginTop: "10px" }}>
                             <Col className="d-flex justify-content-center">

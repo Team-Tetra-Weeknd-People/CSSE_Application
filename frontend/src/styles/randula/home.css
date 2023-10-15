@@ -22,3 +22,17 @@
     display: grid;
     grid-template-columns: auto auto auto auto;
 }
+
+.adminDash {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.adminContainer {
+    width: 80%;
+    height: 80vh;
+    background-color: #ccc;
+    text-align: center;
+}
