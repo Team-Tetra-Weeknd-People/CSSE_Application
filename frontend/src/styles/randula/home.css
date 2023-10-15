@@ -17,3 +17,8 @@
     background-color: #ccc;
     text-align: center;
 }
+
+.userList {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
