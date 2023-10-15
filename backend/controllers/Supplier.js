@@ -20,26 +20,22 @@ export const authSupplier = async (req, res) => {
           }
         );
 
-        return res
-          .status(200)
-          .json({
-            success: true,
-            user: supplier.permissionLevel,
-            message: "Supplier authenticated",
-            token: token,
-          });
+        return res.status(200).json({
+          success: true,
+          user: supplier.permissionLevel,
+          message: "Supplier authenticated",
+          token: token,
+        });
       }
       return res
         .status(406)
         .json({ success: false, user: true, message: "Password Incorrect" });
     } else {
-      return res
-        .status(402)
-        .json({
-          success: false,
-          user: false,
-          message: "Supplier doesn't exist",
-        });
+      return res.status(402).json({
+        success: false,
+        user: false,
+        message: "Supplier doesn't exist",
+      });
     }
   } catch (error) {
     return res.status(404).json({ message: error });
@@ -47,7 +43,6 @@ export const authSupplier = async (req, res) => {
 };
 
 export const getAllSuppliers = async (req, res) => {
-  console.log("getAllSuppliers");
   try {
     const suppliers = await Supplier.find();
     for (let i = 0; i < suppliers.length; i++) {
@@ -56,7 +51,7 @@ export const getAllSuppliers = async (req, res) => {
         supplierID: suppliers[i]._id,
       });
       // append catelougues to supplier
-      suppliers[i].catelougues = catelougues;
+      suppliers[i].catalogues = catelougues;
     }
     res.status(200).json(suppliers);
   } catch (error) {

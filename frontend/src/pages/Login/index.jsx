@@ -26,7 +26,7 @@ import Staff from '../../assets/images/staff.jpg';
 import Supplier from '../../assets/images/supplier.jpg';
 
 import AdminService from '../../services/Admin.Service';
-import ProcurementStaffService from '../../services/ProcumentStaff.Service';
+import ProcurementStaffService from '../../services/ProcurementStaff.Service';
 import SupplierService from '../../services/Supplier.Service';
 import ManagerService from '../../services/Manager.Service';
 import SiteManagerService from '../../services/SiteManager.Service';
@@ -279,7 +279,7 @@ export default function Login() {
                                 {card("Admin", adminText, Admin, handleShowAdmin)}
                             </Col>
                             <Col className="d-flex justify-content-center">
-                                {card("Procument Staff", procurementText, Manager, handleShowProcurement)}
+                                {card("Procurement Staff", procurementText, Manager, handleShowProcurement)}
                             </Col>
                             <Col className="d-flex justify-content-center">
                                 {card("Supplier", supplierText, Supplier, handleShowSupplier)}

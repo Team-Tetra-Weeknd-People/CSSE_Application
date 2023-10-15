@@ -36,35 +36,35 @@ import 'swiper/css/scrollbar';
 import CatImage from '../../assets/images/cat.png'
 import ItemImage from '../../assets/images/items.webp'
 
-import CatelougeService from '../../services/Catalogue.Service';
+import Catalogueservice from '../../services/Catalogue.Service';
 import ItemService from '../../services/Item.Service';
 import SupplierService from '../../services/Supplier.Service';
 
 export default function SupplierDashboard() {
     sessionStorage.setItem("sidebarStatus", "supplier-dashboard");
 
-    const [catelouges, setCatelouges] = useState([]);
+    const [catalogues, setCatalogues] = useState([]);
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const [showAddCatelouge, setShowAddCatelouge] = useState(false);
+    const [showAddCatalogue, setShowAddCatalogue] = useState(false);
     const [showAddItem, setShowAddItem] = useState(false);
-    const [showEditCatelouge, setShowEditCatelouge] = useState(false);
+    const [showEditCatalogue, setShowEditCatalogue] = useState(false);
     const [showEditItem, setShowEditItem] = useState(false);
 
-    const handleCloseAddCatelouge = () => setShowAddCatelouge(false);
-    const handleShowAddCatelouge = () => setShowAddCatelouge(true);
+    const handleCloseAddCatalogue = () => setShowAddCatalogue(false);
+    const handleShowAddCatalogue = () => setShowAddCatalogue(true);
     const handleCloseAddItem = () => setShowAddItem(false);
     const handleShowAddItem = () => setShowAddItem(true);
-    const handleCloseEditCatelouge = () => setShowEditCatelouge(false);
-    const handleShowEditCatelouge = () => setShowEditCatelouge(true);
+    const handleCloseEditCatalogue = () => setShowEditCatalogue(false);
+    const handleShowEditCatalogue = () => setShowEditCatalogue(true);
     const handleCloseEditItem = () => setShowEditItem(false);
     const handleShowEditItem = () => setShowEditItem(true);
 
     useEffect(() => {
-        CatelougeService.getCatalogueSupplier(localStorage.getItem("id")).then((res) => {
-            setCatelouges(res.data);
+        Catalogueservice.getCatalogueSupplier(localStorage.getItem("id")).then((res) => {
+            setCatalogues(res.data);
         });
         ItemService.getItemSupplier(localStorage.getItem("id")).then((res) => {
             setItems(res.data);
@@ -75,19 +75,19 @@ export default function SupplierDashboard() {
         }, 2000);
     }, []);
 
-    const initialValuesAddCatelouge = {
+    const initialValuesAddCatalogue = {
         name: "",
         description: "",
     };
 
-    const validationSchemaAddCatelouge = Yup.object().shape({
+    const validationSchemaAddCatalogue = Yup.object().shape({
         name: Yup.string().required("Required"),
         description: Yup.string().required("Required"),
     });
 
     const initialValuesAddItem = {
         name: "",
-        catelougeID: "",
+        catalogueID: "",
         quantity: null,
         pricePerUnit: null,
         unit: ""
@@ -95,28 +95,28 @@ export default function SupplierDashboard() {
 
     const validationSchemaAddItem = Yup.object().shape({
         name: Yup.string().required("Required"),
-        catelougeID: Yup.string().required("Required"),
+        catalogueID: Yup.string().required("Required"),
         quantity: Yup.number().required("Required"),
         pricePerUnit: Yup.number().required("Required"),
         unit: Yup.string().required("Required")
     });
 
-    async function addCatelouge(values) {
+    async function addCatalogue(values) {
         const data = {
             name: values.name,
             description: values.description,
             supplierID: localStorage.getItem("id"),
         };
-        await CatelougeService.createCatalogue(data).then((res) => {
+        await Catalogueservice.createCatalogue(data).then((res) => {
             if (res.status === 201) {
                 Swal.fire({
                     icon: "success",
                     title: "Success",
-                    text: "Catelouge Added Successfully",
+                    text: "Catalogue Added Successfully",
                 }).then(() => {
-                    handleCloseAddCatelouge();
-                    CatelougeService.getCatalogueSupplier(localStorage.getItem("id")).then((res) => {
-                        setCatelouges(res.data);
+                    handleCloseAddCatalogue();
+                    Catalogueservice.getCatalogueSupplier(localStorage.getItem("id")).then((res) => {
+                        setCatalogues(res.data);
                     });
                 });
             } else {
@@ -138,7 +138,7 @@ export default function SupplierDashboard() {
 
         const data = {
             name: values.name,
-            catelougeID: values.catelougeID,
+            catalogueID: values.catalogueID,
             supplierID: localStorage.getItem("id"),
             supplierShopName: supplier.data.shopName,
             quantity: values.quantity,
@@ -170,8 +170,8 @@ export default function SupplierDashboard() {
         setIsSubmitted(false);
     }
 
-    //delete catelouge confirmation swal
-    async function deleteCatelouge(id) {
+    //delete catalogue confirmation swal
+    async function deleteCatalogue(id) {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -182,15 +182,15 @@ export default function SupplierDashboard() {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                CatelougeService.deleteCatalogue(id).then((res) => {
+                Catalogueservice.deleteCatalogue(id).then((res) => {
                     if (res.status === 200) {
                         Swal.fire({
                             icon: "success",
                             title: "Success",
-                            text: "Catelouge Deleted Successfully",
+                            text: "Catalogue Deleted Successfully",
                         }).then(() => {
-                            CatelougeService.getCatalogueSupplier(localStorage.getItem("id")).then((res) => {
-                                setCatelouges(res.data);
+                            Catalogueservice.getCatalogueSupplier(localStorage.getItem("id")).then((res) => {
+                                setCatalogues(res.data);
                             });
                         });
                     } else {
@@ -254,7 +254,7 @@ export default function SupplierDashboard() {
                                 <Row>
                                     <Col>
                                         <Alert key='primary' variant='primary'>
-                                            <Alert.Heading>Catelouges</Alert.Heading>
+                                            <Alert.Heading>Catalogues</Alert.Heading>
                                         </Alert>
 
                                         <div className="swiper">
@@ -272,21 +272,21 @@ export default function SupplierDashboard() {
                                                     <div className="sweet-loading">
                                                         <ClockLoader color="#ffffff" size={150} />
                                                     </div>
-                                                ) : catelouges.length > 0 ? (
-                                                    catelouges.map((catelouge) => (
-                                                        <SwiperSlide key={catelouge.id}>
+                                                ) : catalogues.length > 0 ? (
+                                                    catalogues.map((catalogue) => (
+                                                        <SwiperSlide key={catalogue.id}>
                                                             <Card style={{ width: '25rem', height: '20rem' }}>
                                                                 <Card.Img loading="lazy" variant="top" src={CatImage} style={{ width: '10rem', marginLeft: "123px" }} />
                                                                 <Card.Body>
-                                                                    <Card.Title>{catelouge.name}</Card.Title>
+                                                                    <Card.Title>{catalogue.name}</Card.Title>
                                                                     <Card.Text>
-                                                                        {catelouge.description}
+                                                                        {catalogue.description}
                                                                     </Card.Text>
                                                                     <Button variant="success">Edit</Button>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                     <Button variant="danger"
                                                                         onClick={() => {
-                                                                            deleteCatelouge(catelouge._id)
+                                                                            deleteCatalogue(catalogue._id)
                                                                         }}>Delete</Button>
                                                                 </Card.Body>
                                                             </Card>
@@ -294,7 +294,7 @@ export default function SupplierDashboard() {
                                                     ))
                                                 ) : (
                                                     <div className="sweet-loading">
-                                                        <h3>No Catelouges</h3>
+                                                        <h3>No Catalogues</h3>
                                                     </div>
                                                 )}
 
@@ -302,7 +302,7 @@ export default function SupplierDashboard() {
                                         </div>
 
                                         <br />
-                                        <Button variant="primary" onClick={handleShowAddCatelouge}>Add New Catelouge</Button>
+                                        <Button variant="primary" onClick={handleShowAddCatalogue}>Add New Catalogue</Button>
                                     </Col>
                                     <Col>
                                         <Alert key='primary' variant='primary'>
@@ -365,17 +365,17 @@ export default function SupplierDashboard() {
             </div>
 
             {/* cat add modal */}
-            <Modal show={showAddCatelouge} onHide={handleCloseAddCatelouge}>
+            <Modal show={showAddCatalogue} onHide={handleCloseAddCatalogue}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add Catelouge</Modal.Title>
+                    <Modal.Title>Add Catalogue</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Formik
-                        initialValues={initialValuesAddCatelouge}
-                        validationSchema={validationSchemaAddCatelouge}
+                        initialValues={initialValuesAddCatalogue}
+                        validationSchema={validationSchemaAddCatalogue}
                         onSubmit={(values) => {
                             setIsSubmitted(true);
-                            addCatelouge(values);
+                            addCatalogue(values);
                         }}
                     >
                         {({ errors, touched }) => (
@@ -416,7 +416,7 @@ export default function SupplierDashboard() {
                                     </Button>
                                 ) : (
                                     <Button variant="primary" type="submit">
-                                        Add Catelouge
+                                        Add Catalogue
                                     </Button>
                                 )}
 
@@ -424,7 +424,7 @@ export default function SupplierDashboard() {
                         )}
                     </Formik>
                 </Modal.Body><Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseAddCatelouge}>
+                    <Button variant="secondary" onClick={handleCloseAddCatalogue}>
                         Close
                     </Button>
                 </Modal.Footer>
@@ -457,18 +457,18 @@ export default function SupplierDashboard() {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="catelougeID">Catelouge</label>
-                                    {/* get catelouge by dropdown */}
+                                    <label htmlFor="catalogueID">Catalogue</label>
+                                    {/* get catalogue by dropdown */}
                                     <Field
                                         as="select"
-                                        name="catelougeID"
-                                        className={`form-control ${touched.catelougeID && errors.catelougeID ? "is-invalid" : ""
+                                        name="catalogueID"
+                                        className={`form-control ${touched.catalogueID && errors.catalogueID ? "is-invalid" : ""
                                             }`}
                                     >
-                                        <option value="">Select Catelouge</option>
-                                        {catelouges.map((catelouge) => (
-                                            <option key={catelouge._id} value={catelouge._id}>
-                                                {catelouge.name}
+                                        <option value="">Select Catalogue</option>
+                                        {catalogues.map((catalogue) => (
+                                            <option key={catalogue.id} value={catalogue.id}>
+                                                {catalogue.name}
                                             </option>
                                         ))}
                                     </Field>
@@ -532,7 +532,7 @@ export default function SupplierDashboard() {
                                     </Button>
                                 ) : (
                                     <Button variant="primary" type="submit">
-                                        Add Catelouge
+                                        Add Catalogue
                                     </Button>
                                 )}
                             </Form>

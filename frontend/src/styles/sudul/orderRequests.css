@@ -5,19 +5,23 @@
     padding: 10px;
     height: 100vh;
   overflow: scroll;
+  font-family: Montserrat;
 }
 
 .proc-search-bar {
     padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center; 
 }
 
 /* Style the search bar input */
 .search-bar {
+  width: 100%;
   padding: 10px;
-  width: 300px; /* Adjust the width as needed */
+  padding-left: 8%;
   border: 1px solid #0a080845;
   border-radius: 5px;
   outline: none;
@@ -37,11 +41,25 @@
   background-color: #6f0cd2;
   color: #000;
 }
+.search-container {
+  width: 40%;
+  position: relative;
+}
+
+/* Styles for the search icon */
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
+  color: #666; /* Adjust the color as needed */
+  pointer-events: none; /* Prevent the icon from blocking interactions with the input */
+}
+
 .proc-today-orders {
     padding: 10px; /* Add padding to today's orders */
 }
-.proc-today, .proc-prev{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.proc-today{
     font-weight: bold;
 }
 .proc-prev-orders {
@@ -51,6 +69,7 @@
     cursor: pointer;
 }
 .proc-order-requests-table {
+  font-weight: 500;
     width: 100%;
   }
   .proc-order-requests-table tr{
@@ -74,6 +93,7 @@
     border-radius: 10px;
   }
   .proc-order-requests-table tbody tr:hover td{
+    color: #ffffff;
     background-color: #0000003f;
     cursor: pointer;
     border-bottom: 5px solid #ffffff ;
