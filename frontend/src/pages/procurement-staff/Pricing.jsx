@@ -70,7 +70,7 @@ export default function ProcurementPricing() {
             status: statChange,
           };
           OrderService.updateOrder(id, newOrder)
-            .then((res) => {
+            .then(() => {
               if (statChange === "Priced") {
                 Swal.fire({
                   icon: "success",

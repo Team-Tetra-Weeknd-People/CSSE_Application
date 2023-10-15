@@ -38,7 +38,7 @@ const SupplierSchema = mongoose.Schema({
         required: true,
         unique: true,
     },
-    catelougues: {
+    catalogues: {
         type: Array,
         default: [],
     },

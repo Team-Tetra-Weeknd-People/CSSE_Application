@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get("/", Item.getAllItems);
 router.get("/getOne/:id", Item.getItem);
-router.get("/catelouge/:catelougeID", Item.getItemByCatelougeID);
+router.get("/catalogue/:catalogueID", Item.getItemByCatalogueID);
 router.get("/supplier/:supplierID", Item.getItemBySupplierID);
 router.post("/", Item.createItem);
 router.put("/:id", Item.updateItem);
