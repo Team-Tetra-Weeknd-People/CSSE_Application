@@ -67,7 +67,7 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input{
+.pricing-order-details-table input{
   border: 1px solid #ccc;
   text-align: center; 
 }
