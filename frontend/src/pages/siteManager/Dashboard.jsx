@@ -46,11 +46,9 @@ export default function SupplierDashboard() {
 
     const [sites, setSites] = useState([]);
     const [orders, setOrders] = useState([]);
-    const [items, setItems] = useState([]);
     const [suppliers, setSuppliers] = useState([]);
     const [catalogues, setCatalogues] = useState([]);
-    const [catalogue, setCatalogue] = useState("");
-    const [isCatSelected, setIsCatSelected] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const [showAddOrder, setShowAddOrder] = useState(false);
@@ -71,6 +69,9 @@ export default function SupplierDashboard() {
         SupplierService.getAllSuppliers().then((res) => {
             setSuppliers(res.data);
         });
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
     }, []);
 
 
@@ -245,11 +246,11 @@ export default function SupplierDashboard() {
                                                 onSwiper={(swiper) => console.log(swiper)}
                                                 onSlideChange={() => console.log('slide change')}
                                             >
-                                                {!orders.length ? (
+                                                {loading ? (
                                                     <div className="sweet-loading">
                                                         <ClockLoader color="#36D7B7" size={150} />
                                                     </div>
-                                                ) : (
+                                                ) : orders.length > 0 ? (
                                                     orders.map((order) => (
                                                         <SwiperSlide key={order.id}>
                                                             <Card style={{ width: '25rem', height: '20rem' }}>
@@ -280,13 +281,16 @@ export default function SupplierDashboard() {
                                                             </Card>
                                                         </SwiperSlide>
                                                     ))
+                                                ) : (
+                                                    <div className="sweet-loading">
+                                                        <h3>No Orders Placed</h3>
+                                                    </div>
                                                 )}
 
                                             </Swiper>
                                         </div>
                                         <br />
                                         <Button variant="primary" onClick={handleShowAddOrder}>Place a new Order</Button>
-
                                     </Col>
                                 </Row>
                             </Container>
