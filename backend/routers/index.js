@@ -7,6 +7,7 @@ import procurementStaffRouter from './router/ProcurementStaff.js';
 import siteRouter from './router/Site.js';
 import siteManagerRouter from './router/SiteManager.js';
 import supplierRouter from './router/Supplier.js';
+import deliveryNoteRouter from './router/DeliveryNote.js';
 
 function routers(app) {
     app.use('/api/admin', adminRouter);
@@ -18,6 +19,7 @@ function routers(app) {
     app.use('/api/site', siteRouter);
     app.use('/api/siteManager', siteManagerRouter);
     app.use('/api/supplier', supplierRouter);
+    app.use('/api/deliveryNote', deliveryNoteRouter);
 }
 
 export default routers;
