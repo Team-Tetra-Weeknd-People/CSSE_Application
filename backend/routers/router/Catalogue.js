@@ -1,13 +1,13 @@
 import express from "express";
-import Catalouge from "../../controllers/Catalogue.js";
+import Catalogue from "../../controllers/Catalogue.js";
 
 const router = express.Router()
 
-router.get("/", Catalouge.getAllCatalogues);
-router.get("/getOne/:id", Catalouge.getCatalogue);
-router.get("/supplier/:supplierID", Catalouge.getCatalogueBySupplierID);
-router.post("/", Catalouge.createCatalogue);
-router.put("/:id", Catalouge.updateCatalogue);
-router.delete("/:id", Catalouge.deleteCatalogue);
+router.get("/", Catalogue.getAllCatalogues);
+router.get("/getOne/:id", Catalogue.getCatalogue);
+router.get("/supplier/:supplierID", Catalogue.getCatalogueBySupplierID);
+router.post("/", Catalogue.createCatalogue);
+router.put("/:id", Catalogue.updateCatalogue);
+router.delete("/:id", Catalogue.deleteCatalogue);
 
 export default router;

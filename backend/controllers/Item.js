@@ -20,11 +20,11 @@ export const getItem = async (req, res) => {
     }
 }
 
-//get by catelougeID
-export const getItemByCatelougeID = async (req, res) => {
-    const catelougeID = req.params.catelougeID;
+//get by catalogueID
+export const getItemByCatalogueID = async (req, res) => {
+    const catalogueID = req.params.catalogueID;
     try {
-        const item = await Item.find({ catelougeID: catelougeID });
+        const item = await Item.find({ catalogueID: catalogueID });
         res.status(200).json(item);
     } catch (error) {
         res.status(404).json({ message: error });
@@ -80,7 +80,7 @@ export const deleteItem = async (req, res) => {
 export default {
     getAllItems,
     getItem,
-    getItemByCatelougeID,
+    getItemByCatalogueID,
     getItemBySupplierID,
     createItem,
     updateItem,

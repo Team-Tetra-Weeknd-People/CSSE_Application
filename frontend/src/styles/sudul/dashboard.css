@@ -1,0 +1,53 @@
+.proc-dashboard {
+  cursor: default;
+  padding: 10px;
+  height: 100vh;
+  overflow: scroll;
+  font-family: Montserrat;
+}
+
+.proc-order-det {
+  padding: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.proc-pie-chart {
+  width: 50%;
+  height: 50%;
+  padding: 10px;
+}
+.proc-status-det {
+  width: 50%; /* Adjust the width to leave space for the table */
+  padding: 10px;
+}
+
+/* Add a little space between the pie chart and the table */
+.proc-pie-chart,
+.proc-status-det {
+  margin-right: 10px;
+}
+.proc-profile-det{
+    padding: 10px;
+}
+.profile-details-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .profile-details-table th,
+  .profile-details-table td {
+    border: 2px solid #ffffff;
+    background-color: rgba(127, 255, 212, 0.486);
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .profile-details-table th {
+    background-color: #f0f0f0;
+  }

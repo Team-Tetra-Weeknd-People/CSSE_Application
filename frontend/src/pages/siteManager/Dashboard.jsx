@@ -22,7 +22,7 @@ import SiteManagerNavbar from "../../components/siteManager/Navbar";
 
 import SiteService from '../../services/Site.Service';
 import OrderService from '../../services/Order.Service';
-import CatelougeService from '../../services/Catalogue.Service';
+import CatalogueService from '../../services/Catalogue.Service';
 import SiteManagerService from '../../services/SiteManager.Service';
 import SupplierService from '../../services/Supplier.Service';
 
@@ -48,8 +48,8 @@ export default function SupplierDashboard() {
     const [orders, setOrders] = useState([]);
     const [items, setItems] = useState([]);
     const [suppliers, setSuppliers] = useState([]);
-    const [catelouges, setCatelouges] = useState([]);
-    const [catelouge, setCatelouge] = useState("");
+    const [catalogues, setCatalogues] = useState([]);
+    const [catalogue, setCatalogue] = useState("");
     const [isCatSelected, setIsCatSelected] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -65,8 +65,8 @@ export default function SupplierDashboard() {
         OrderService.getOrderSiteManager(localStorage.getItem("id")).then((res) => {
             setOrders(res.data);
         });
-        CatelougeService.getAllCatalogue().then((res) => {
-            setCatelouges(res.data);
+        CatalogueService.getAllCatalogue().then((res) => {
+            setCatalogues(res.data);
         });
         SupplierService.getAllSuppliers().then((res) => {
             setSuppliers(res.data);
