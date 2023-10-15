@@ -17,3 +17,44 @@
     background-color: #ccc;
     text-align: center;
 }
+
+.userList {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.adminDash {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.adminContainer {
+    width: 80%;
+    height: 80vh;
+    background-color: #ccc;
+    text-align: center;
+}
+
+.homeMain {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.homeContainer {
+    width: 100%;
+    height: 83vh;
+    background-color: #ccc;
+    text-align: center;
+    margin-top: 0px;
+}
+
+img.carImage {
+    width: 120%;
+    height: 120%;
+}

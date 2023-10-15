@@ -1,16 +1,16 @@
 .proc-sup-content {
-    cursor:default;
-    display: block;
-    padding: 10px;
-    height: 100vh;
+  cursor: default;
+  display: block;
+  padding: 10px;
+  height: 100vh;
   overflow: scroll;
 }
 
 .proc-sup-search-bar {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Style the search bar input */
@@ -23,16 +23,37 @@
 }
 
 .supplier-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .supplier-table th, .supplier-table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .supplier-table th {
-    background-color: #f0f0f0;
-  }
+  max-height: 50%;
+  width: 100%;
+  border-collapse: collapse;
+  overflow: scroll;
+}
+
+.supplier-table th {
+  background-color: #f0f0f0;
+}
+
+.supplier-table tr{
+  width: 100%;
+  border-bottom: 3px solid #ffffff ;
+}
+
+.supplier-table th,
+.supplier-table td{
+  border-right: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;  /* Reduce border thickness for the right border */
+  text-align: center;
+  padding: 10px;
+}
+
+.supplier-table tbody td{
+  background-color: rgba(137, 43, 226, 0.315);
+  border-radius: 10px;
+}
+.supplier-table tbody tr:hover td{
+  background-color:rgba(49, 3, 92, 0.345);
+  cursor: pointer;
+  border-bottom: 5px solid #ffffff ;
+  border-right: 2px solid #ffffff;
+  border-radius: 10px;
+}
