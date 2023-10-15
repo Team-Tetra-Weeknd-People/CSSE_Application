@@ -36,7 +36,7 @@ export const getOrderBySiteManagerID = async (req, res) => {
 export const getOrderBySupplierID = async (req, res) => {
   const supplierID = req.params.supplierID;
   try {
-    const order = await Order.find({ supplierID: supplierID });
+    const order = await Order.find({ supplierId: supplierID });
     res.status(200).json(order);
   } catch (error) {
     res.status(404).json({ message: error });

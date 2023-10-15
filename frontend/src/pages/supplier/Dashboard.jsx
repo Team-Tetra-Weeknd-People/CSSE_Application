@@ -467,7 +467,7 @@ export default function SupplierDashboard() {
                                     >
                                         <option value="">Select Catalogue</option>
                                         {catalogues.map((catalogue) => (
-                                            <option key={catalogue.id} value={catalogue.id}>
+                                            <option key={catalogue.id} value={catalogue._id}>
                                                 {catalogue.name}
                                             </option>
                                         ))}
