@@ -49,17 +49,6 @@ export default function SiteManagerSidebar() {
                 >
                     Inventory
                 </Link>
-                <Link
-                    to="/site-manager-profile"
-                    className="btn btn-primary btn-block"
-                    style={
-                        sidebarStatus === "site-manager-profile"
-                            ? { color: "#000000", backgroundColor: "#ffffff" }
-                            : null
-                    }
-                >
-                    Profile
-                </Link>
             </div>
             <div className="logout">
                 <button className="btn btn-danger btn-block"

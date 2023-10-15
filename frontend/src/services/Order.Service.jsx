@@ -25,6 +25,15 @@ export const getOrderSiteManager = async (id) => {
     });
 }
 
+export const getOrderStatusSupplier = async (status, id) => {
+    console.log(url.orderStatusSupplier(status, id))
+    return await axios.get(url.orderStatusSupplier(status, id), {
+        headers: {
+            "Content-Type": "application/json"
+        },
+    });
+}
+
 export const createOrder = async (data) => {
     return await axios.post(url.order, data, {
         headers: {
@@ -53,6 +62,7 @@ export default {
     getAllOrder,
     getOneOrder,
     getOrderSiteManager,
+    getOrderStatusSupplier,
     createOrder,
     updateOrder,
     deleteOrder,
