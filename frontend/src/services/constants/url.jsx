@@ -6,7 +6,7 @@ export const admin = `${BASE_URL}/admin`;
 export const adminID = (id) => `${BASE_URL}/admin/${id}`;
 
 export const catalogue = `${BASE_URL}/catelouge/`;
-export const catalogueID = (id) => `${BASE_URL}/catelouge//${id}`;
+export const catalogueID = (id) => `${BASE_URL}/catelouge/${id}`;
 export const catalogueGetOne = (id) => `${BASE_URL}/catelouge/getOne/${id}`;
 export const catalogueSupplier = (id) => `${BASE_URL}/catelouge/supplier/${id}`;
 

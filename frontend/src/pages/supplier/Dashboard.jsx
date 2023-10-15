@@ -6,7 +6,8 @@ import {
     Row,
     Col,
     Alert,
-    Modal
+    Modal,
+    Spinner
 } from 'react-bootstrap';
 
 // import Swiper core and required modules
@@ -45,6 +46,7 @@ export default function SupplierDashboard() {
     const [catelouges, setCatelouges] = useState([]);
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const [showAddCatelouge, setShowAddCatelouge] = useState(false);
     const [showAddItem, setShowAddItem] = useState(false);
@@ -126,6 +128,7 @@ export default function SupplierDashboard() {
                 });
             }
         });
+        setIsSubmitted(false);
     }
 
     async function addItem(values) {
@@ -163,6 +166,76 @@ export default function SupplierDashboard() {
                 });
             }
         });
+        setIsSubmitted(false);
+    }
+
+    //delete catelouge confirmation swal
+    async function deleteCatelouge(id) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#1cc88a",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                CatelougeService.deleteCatalogue(id).then((res) => {
+                    if (res.status === 200) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: "Catelouge Deleted Successfully",
+                        }).then(() => {
+                            CatelougeService.getCatalogueSupplier(localStorage.getItem("id")).then((res) => {
+                                setCatelouges(res.data);
+                            });
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Something went wrong!",
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    async function deleteItem(id) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#1cc88a",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                ItemService.deleteItem(id).then((res) => {
+                    if (res.status === 200) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: "Item Deleted Successfully",
+                        }).then(() => {
+                            ItemService.getItemSupplier(localStorage.getItem("id")).then((res) => {
+                                setItems(res.data);
+                            });
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Something went wrong!",
+                        });
+                    }
+                });
+            }
+        });
     }
 
 
@@ -196,7 +269,7 @@ export default function SupplierDashboard() {
                                             >
                                                 {loading ? (
                                                     <div className="sweet-loading">
-                                                        <ClockLoader color="#36D7B7" size={150} />
+                                                        <ClockLoader color="#ffffff" size={150} />
                                                     </div>
                                                 ) : catelouges.length > 0 ? (
                                                     catelouges.map((catelouge) => (
@@ -210,7 +283,10 @@ export default function SupplierDashboard() {
                                                                     </Card.Text>
                                                                     <Button variant="success">Edit</Button>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    <Button variant="danger">Delete</Button>
+                                                                    <Button variant="danger"
+                                                                        onClick={() => {
+                                                                            deleteCatelouge(catelouge._id)
+                                                                        }}>Delete</Button>
                                                                 </Card.Body>
                                                             </Card>
                                                         </SwiperSlide>
@@ -245,21 +321,26 @@ export default function SupplierDashboard() {
                                             >
                                                 {loading ? (
                                                     <div className="sweet-loading">
-                                                        <ClockLoader color="#36D7B7" size={150} />
+                                                        <ClockLoader color="#ffffff" size={150} />
                                                     </div>
                                                 ) : items.length > 0 ? (
                                                     items.map((item) => (
                                                         <SwiperSlide key={item.id}>
                                                             <Card style={{ width: '25rem', height: '20rem' }}>
-                                                                <Card.Img loading="lazy" variant="top" src={ItemImage} style={{ width: '10rem', marginLeft: "123px" }} />
+                                                                <Card.Img loading="lazy" variant="top" src={ItemImage} style={{ width: '13rem', marginLeft: "100px" }} />
                                                                 <Card.Body>
                                                                     <Card.Title>{item.name}</Card.Title>
                                                                     <Card.Text>
                                                                         {item.description}
                                                                     </Card.Text>
+                                                                    <Card.Subtitle className="mb-2 text-muted">Quantity - {item.quantity}</Card.Subtitle>
+                                                                    <Card.Subtitle className="mb-2 text-muted">Rs. {item.pricePerUnit} per {item.unit}</Card.Subtitle>
                                                                     <Button variant="success">Edit</Button>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    <Button variant="danger">Delete</Button>
+                                                                    <Button variant="danger"
+                                                                        onClick={() => {
+                                                                            deleteItem(item._id)
+                                                                        }}>Delete</Button>
                                                                 </Card.Body>
                                                             </Card>
                                                         </SwiperSlide>
@@ -292,6 +373,7 @@ export default function SupplierDashboard() {
                         initialValues={initialValuesAddCatelouge}
                         validationSchema={validationSchemaAddCatelouge}
                         onSubmit={(values) => {
+                            setIsSubmitted(true);
                             addCatelouge(values);
                         }}
                     >
@@ -318,12 +400,25 @@ export default function SupplierDashboard() {
                                         {errors.description}
                                     </div>
                                 </div>
-
-                                {/* submit button */}
                                 <br />
-                                <Button variant="primary" type="submit">
-                                    Add Catelouge
-                                </Button>
+                                {/* submit button */}
+                                {isSubmitted ? (
+                                    <Button variant="primary" disabled>
+                                        <Spinner
+                                            as="span"
+                                            animation="grow"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        &nbsp; Processing...
+                                    </Button>
+                                ) : (
+                                    <Button variant="primary" type="submit">
+                                        Add Catelouge
+                                    </Button>
+                                )}
+
                             </Form>
                         )}
                     </Formik>
@@ -343,6 +438,7 @@ export default function SupplierDashboard() {
                     <Formik
                         initialValues={initialValuesAddItem}
                         onSubmit={(values) => {
+                            setIsSubmitted(true);
                             addItem(values);
                         }}
                         validationSchema={validationSchemaAddItem}
@@ -420,11 +516,24 @@ export default function SupplierDashboard() {
                                     </div>
                                 </div>
 
-                                {/* submit button */}
                                 <br />
-                                <Button variant="primary" type="submit">
-                                    Add Item
-                                </Button>
+                                {/* submit button */}
+                                {isSubmitted ? (
+                                    <Button variant="primary" disabled>
+                                        <Spinner
+                                            as="span"
+                                            animation="grow"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        &nbsp; Processing...
+                                    </Button>
+                                ) : (
+                                    <Button variant="primary" type="submit">
+                                        Add Catelouge
+                                    </Button>
+                                )}
                             </Form>
                         )}
                     </Formik>
