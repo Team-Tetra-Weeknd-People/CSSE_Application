@@ -8,6 +8,10 @@ import {
   ManagerLogin,
   SiteManagerLogin,
   SupplierLogin,
+  ManagerDashboard,
+  ProcStaffDashboard,
+  SiteManagerDashboard,
+  SupplierDashboard,
   Grid,
 } from './pages';
 
@@ -22,7 +26,16 @@ function App() {
         <Stack.Screen name="ManagerLogin" component={ManagerLogin} />
         <Stack.Screen name="SiteManagerLogin" component={SiteManagerLogin} />
         <Stack.Screen name="SupplierLogin" component={SupplierLogin} />
-
+        <Stack.Screen name="ManagerDashboard" component={ManagerDashboard} />
+        <Stack.Screen
+          name="ProcStaffDashboard"
+          component={ProcStaffDashboard}
+        />
+        <Stack.Screen
+          name="SiteManagerDashboard"
+          component={SiteManagerDashboard}
+        />
+        <Stack.Screen name="SupplierDashboard" component={SupplierDashboard} />
         <Stack.Screen name="Grid" component={Grid} />
       </Stack.Navigator>
     </NavigationContainer>

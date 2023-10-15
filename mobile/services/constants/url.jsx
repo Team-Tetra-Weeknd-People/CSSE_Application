@@ -1,5 +1,5 @@
 // add API enpoints here
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'https://csse-backend-b5wl.onrender.com/api';
 
 export const adminAuth = `${BASE_URL}/admin/auth`;
 export const admin = `${BASE_URL}/admin`;

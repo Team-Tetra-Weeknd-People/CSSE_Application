@@ -279,7 +279,7 @@ export default function Login() {
                                 {card("Admin", adminText, Admin, handleShowAdmin)}
                             </Col>
                             <Col className="d-flex justify-content-center">
-                                {card("Procument Staff", procurementText, Manager, handleShowProcurement)}
+                                {card("Procurement Staff", procurementText, Manager, handleShowProcurement)}
                             </Col>
                             <Col className="d-flex justify-content-center">
                                 {card("Supplier", supplierText, Supplier, handleShowSupplier)}

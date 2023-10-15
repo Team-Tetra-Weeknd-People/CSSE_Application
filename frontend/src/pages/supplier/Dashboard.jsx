@@ -101,7 +101,6 @@ export default function SupplierDashboard() {
         unit: Yup.string().required("Required")
     });
 
-
     async function addCatalogue(values) {
         const data = {
             name: values.name,
@@ -146,6 +145,8 @@ export default function SupplierDashboard() {
             pricePerUnit: values.pricePerUnit,
             unit: values.unit,
         };
+
+        console.log(data);
         await ItemService.createItem(data).then((res) => {
             if (res.status === 201) {
                 Swal.fire({
