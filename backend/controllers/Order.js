@@ -43,6 +43,18 @@ export const getOrderBySupplierID = async (req, res) => {
   }
 };
 
+//get orders by status and supplierID
+export const getOrdersByStatusAndSupplierID = async (req, res) => {
+  const status = req.params.status;
+  const supplierID = req.params.supplierID;
+  try {
+    const order = await Order.find({ status: status, supplierId: supplierID });
+    res.status(200).json(order);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
 //create order
 export const createOrder = async (req, res) => {
   const order = req.body;
@@ -83,6 +95,7 @@ export default {
   getOrder,
   getOrderBySiteManagerID,
   getOrderBySupplierID,
+  getOrdersByStatusAndSupplierID,
   createOrder,
   updateOrder,
   deleteOrder,
