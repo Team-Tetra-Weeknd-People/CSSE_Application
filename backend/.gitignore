@@ -22,9 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-
-# environment files
-.env
-
-package-lock.json
