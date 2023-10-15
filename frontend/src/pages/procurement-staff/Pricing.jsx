@@ -4,6 +4,7 @@ import ProcurementSidebar from "../../components/procurement-staff/Sidebar";
 import { useParams } from "react-router-dom";
 import OrderService from "../../services/Order.Service";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function ProcurementPricing() {
   const { id } = useParams();
@@ -24,6 +25,7 @@ export default function ProcurementPricing() {
         setQuantity(res.data.quantity);
         setItemName(res.data.itemName);
         setFunding(res.data.funding);
+        setSubTotal(res.data.subTotal);
       });
     } catch (error) {
       console.error(error);
@@ -41,18 +43,111 @@ export default function ProcurementPricing() {
     setSubTotal(unitPrice * quantityO);
   };
 
-  const handleSave = () => {
-    const newOrder = {
-      itemName: itemName,
-      quantity: quantity,
-      unitPrice: unitPrice,
-      funding: funding,
-      subTotal: subTotal,
-    };
-    OrderService.updateOrder(id, newOrder).then((res) => {
-      console.log(res.data);
+  const handleActionClick = (statChange, actionMessage) => {
+    Swal.fire({
+      title: "Confirmation",
+      text: `Are you sure you want to ${actionMessage}?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed the action
+        if (
+          quantity > 0 &&
+          unitPrice > 0 &&
+          itemName !== "" &&
+          funding !== "" &&
+          (orderRequest.status === "To Be Priced" || orderRequest.status === "Priced")
+        ) {
+          const newOrder = {
+            itemName: itemName,
+            quantity: quantity,
+            unitPrice: unitPrice,
+            funding: funding,
+            subTotal: subTotal,
+            status: statChange,
+          };
+          OrderService.updateOrder(id, newOrder)
+            .then((res) => {
+              if (statChange === "Priced") {
+                Swal.fire({
+                  icon: "success",
+                  title: "Success",
+                  text: "Order Priced Successfully!",
+                });
+              } else if (statChange === "Approved") {
+                Swal.fire({
+                  icon: "success",
+                  title: "Success",
+                  text: "Order Approved!",
+                });
+              } else if (statChange === "Approval Requested") {
+                Swal.fire({
+                  icon: "success",
+                  title: "Success",
+                  text: "Approval Requested!",
+                });
+              } else if (statChange === "Rejected") {
+                Swal.fire({
+                  icon: "success",
+                  title: "Success",
+                  text: "Order Rejected!",
+                });
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Something went wrong!",
+              });
+            });
+        }else{
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Please fill all the fields!",
+          });
+        }
+      }
     });
   };
+
+const deleteRequest = () => {
+  Swal.fire({
+    title: "Delete Confirmation",
+    text: "Are you sure you want to delete this order?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete it",
+    cancelButtonText: "No, cancel",
+    confirmButtonColor: "#d33", 
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // User confirmed the deletion
+      OrderService.deleteOrder(id)
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Order Deleted!",
+          });
+          window.location = "/procurement-order-requests";
+        })
+        .catch((err) => {
+          console.error(err);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Something went wrong!",
+          });
+        });
+    }
+  });
+};
   return (
     <>
       <div className="whole-content">
@@ -102,7 +197,7 @@ export default function ProcurementPricing() {
                     </td>
                     <td>
                       <input
-                        placeholder="Rs."
+                        placeholder="Price per Unit (Rs.)"
                         type="number"
                         value={unitPrice}
                         onChange={(e) => {
@@ -142,30 +237,77 @@ export default function ProcurementPricing() {
                 <div className="pricing-buttons">
                   {subTotal > 100000 ? (
                     <>
-                      <button className="btn btn-primary btn-save" onClick={handleSave}>Save</button>
-                      <button className="btn btn-primary btn-req">
-                        Request Approval
-                      </button>
-                      <button className="btn btn-danger btn-block">
-                        Reject
-                      </button>
-                      <button className="btn btn-danger btn-block">
-                        Reject & Delete
-                      </button>
+                      {(orderRequest.status === "To Be Priced" ||
+                        orderRequest.status === "Priced") && (
+                        <>
+                          <button
+                            className="btn btn-primary btn-save"
+                            onClick={() => handleActionClick("Priced","save the price")}
+                          >
+                            Save
+                          </button>
+                          <button
+                            className="btn btn-primary btn-req"
+                            onClick={() =>
+                              handleActionClick("Approval Requested","save the price and request approval")
+                            }
+                          >
+                            Request Approval
+                          </button>
+                          <button
+                            className="btn btn-danger btn-block"
+                            onClick={() => handleActionClick("Rejected", "reject the order")}
+                          >
+                            Reject
+                          </button>
+                          <button
+                            className="btn btn-danger btn-block"
+                            onClick={() => deleteRequest()}
+                          >
+                            Reject & Delete
+                          </button>
+                        </>
+                      )}
                     </>
                   ) : (
                     <>
-                      <button className="btn btn-primary btn-save">Save</button>
-                      <button className="btn btn-primary">Approve</button>
-                      <button className="btn btn-primary btn-req">
-                        Request Approval
-                      </button>
-                      <button className="btn btn-danger btn-block">
-                        Reject
-                      </button>
-                      <button className="btn btn-danger btn-block">
-                        Reject & Delete
-                      </button>
+                      {(orderRequest.status === "To Be Priced" ||
+                        orderRequest.status === "Priced") && (
+                        <>
+                          <button
+                            className="btn btn-primary btn-save"
+                            onClick={() => handleActionClick("Priced","save the price")}
+                          >
+                            Save
+                          </button>
+                          <button
+                            className="btn btn-primary"
+                            onClick={() => handleActionClick("Approved","approve the order")}
+                          >
+                            Approve
+                          </button>
+                          <button
+                            className="btn btn-primary btn-req"
+                            onClick={() =>
+                              handleActionClick("Approval Requested","save the price and request approval")
+                            }
+                          >
+                            Request Approval
+                          </button>
+                          <button
+                            className="btn btn-danger btn-block"
+                            onClick={() => handleActionClick("Rejected","reject")}
+                          >
+                            Reject
+                          </button>
+                          <button
+                            className="btn btn-danger btn-block"
+                            onClick={() => deleteRequest()}
+                          >
+                            Reject & Delete
+                          </button>
+                        </>
+                      )}
                     </>
                   )}
                 </div>

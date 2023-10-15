@@ -96,7 +96,7 @@ export default function ProcurementSupplierCatalogues() {
                   />
                 </div>
               </div>
-              {supplierCatalogueId=="Not Available" ? ('sd') : ('f')}
+              {supplierCatalogueId=="Not Available" ? ('') : ('f')}
             </div>
           </div>
         </div>
