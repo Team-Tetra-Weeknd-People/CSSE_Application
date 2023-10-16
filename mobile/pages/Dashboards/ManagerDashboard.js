@@ -52,7 +52,7 @@ export default function ManagerDashboard() {
 
   function handleRequestClick(id) {
     // navigate(`/manager-placeorder/${id}`);
-    navigation.navigate(`/manager-placeorder/${id}`);
+    // navigation.navigate(`/manager-placeorder/${id}`);
   }
 
   const handleSearchChange = (e) => {
