@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ManagerSidebar from "../../components/manager/SideBar";
 import OrderService from "../../services/Order.Service";
 
-export default function ManagerDashboard() {
+export default function ManagerPlaceOrders() {
     sessionStorage.setItem("sidebarStatus", "manager-placeorders");
     const [orderRequests, setOrderRequests] = useState([]);
     const [filteredOrderRequests, setFilteredOrderRequests] = useState([]);
@@ -120,6 +120,7 @@ export default function ManagerDashboard() {
                 <th>Supplier</th>
                 <th>Placed Date</th>
                 <th>Expected Delivery</th>
+                <th>Sub Total</th>
                 <th>Funding Account</th>
                 <th>Status</th>
               </tr>
@@ -138,6 +139,7 @@ export default function ManagerDashboard() {
                   <td>
                     {orderRequest.deliveryDate ? orderRequest.deliveryDate : "None"}
                   </td>
+                  <td>Rs. {orderRequest.subTotal}</td>
                   <td>{orderRequest.funding}</td>
                   <td>{orderRequest.status}</td>
                 </tr>
