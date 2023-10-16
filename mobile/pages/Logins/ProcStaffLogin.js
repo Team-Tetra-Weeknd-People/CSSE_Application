@@ -32,7 +32,7 @@ export default function ProcStaffLogin({navigation}) {
         AsyncStorage.getItem('id').then(value => {
           console.log(value);
         });
-        navigation.navigate('ProcStaffDashboard');
+        navigation.navigate('Procurement Staff');
       } else {
         alert('Login Failed');
       }
