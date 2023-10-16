@@ -76,25 +76,30 @@ export default function SupplierDashboard() {
 
 
     const getStatusColor = (status) => {
+
         switch (status) {
-            case 'PENDING':
-                return 'gold';
-            case 'PLACED':
-                return 'blue';
-            case 'ACCEPT':
-                return 'green';
-            case 'REJECT':
-                return 'red';
-            case 'DELIVERED':
-                return 'purple';
-            case 'PAID':
-                return 'orange';
-            case 'SEND_APPROVE':
-                return 'cyan';
-            case 'RECEIVED':
-                return 'pink';
+            case "To Be Priced":
+                return "gray";
+            case "Priced":
+                return "blue";
+            case "Approval Requested":
+                return "orange";
+            case "Approved":
+                return "green";
+            case "Confirmed":
+                return "purple";
+            case "Rejected":
+                return "red";
+            case "Sent To Delivery":
+                return "cyan";
+            case "Delivered":
+                return "pink";
+            case "Completed":
+                return "teal";
+            case "Received":
+                return "brown";
             default:
-                return 'black';
+                return "black";
         }
     };
 
@@ -264,17 +269,20 @@ export default function SupplierDashboard() {
                                                                         {order.itemName} - {order.quantity} - {order.itemUnit}/s
                                                                     </Card.Text>
                                                                     <Card.Text>
-                                                                        Rs. {order.itemPrice * order.quantity}
+                                                                        {order.subTotal ? (
+                                                                            <div>Sub Total - Rs. {order.subTotal}</div>
+                                                                        ) : (
+                                                                            <div>Not Priced Yet</div>
+                                                                        )}
                                                                     </Card.Text>
-                                                                    <Card.Text>
-                                                                        <div style={{ color: getStatusColor(order.status) }}>
+                                                                    <Card.Text style={{ backgroundColor: getStatusColor(order.status), borderRadius: "10px" }}>
+                                                                        <div style={{ color: "white" }}>
                                                                             Status - {order.status}
                                                                         </div>
                                                                     </Card.Text>
                                                                     <Card.Text>
                                                                         Placed Date - {order.placedDate.slice(0, 10)}
                                                                     </Card.Text>
-                                                                    <Button variant="success">Edit</Button>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                     <Button variant="danger">Delete</Button>
                                                                 </Card.Body>
