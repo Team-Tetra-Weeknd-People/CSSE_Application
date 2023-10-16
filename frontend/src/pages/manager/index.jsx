@@ -1,5 +1,9 @@
 import ManagerDashboard from "./Dashboard";
+import ManagerPlaceOrders from "./PlaceOrders";
+import ManagerPlaceOrder from "./PlaceOrder";
 
 export {
-    ManagerDashboard
+    ManagerDashboard,
+    ManagerPlaceOrders,
+    ManagerPlaceOrder
 }
