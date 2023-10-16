@@ -36,7 +36,7 @@ export default function SupplierSidebar() {
                             : null
                     }
                 >
-                    New Orders
+                    Orders
                 </Link>
                 <Link
                     to="/supplier-delivery"
@@ -49,7 +49,7 @@ export default function SupplierSidebar() {
                 >
                     Delivery
                 </Link>
-                <Link
+                {/* <Link
                     to="/supplier-notifications"
                     className="btn btn-primary btn-block"
                     style={
@@ -70,7 +70,7 @@ export default function SupplierSidebar() {
                     }
                 >
                     Profile
-                </Link>
+                </Link> */}
             </div>
             <div className="logout">
                 <button className="btn btn-danger btn-block"

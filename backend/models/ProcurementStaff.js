@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-const ProcumentStaffSchema = mongoose.Schema({
+const ProcurementStaffSchema = mongoose.Schema({
     fname: {
         type: String,
         required: true
@@ -26,7 +26,7 @@ const ProcumentStaffSchema = mongoose.Schema({
     },
     permissionLevel: {
         type: String,
-        default: "PROCUMENT_STAFF",
+        default: "PROCUREMENT_STAFF",
     }
 }, {
     timestamps: {
@@ -35,7 +35,7 @@ const ProcumentStaffSchema = mongoose.Schema({
     }
 });
 
-ProcumentStaffSchema.pre("save", async function (next) {
+ProcurementStaffSchema.pre("save", async function (next) {
     const user = this;
     const password = user.password;
 
@@ -51,5 +51,5 @@ ProcumentStaffSchema.pre("save", async function (next) {
     return next();
 });
 
-const ProcumentStaff = mongoose.model('ProcumentStaff', ProcumentStaffSchema);
-export default ProcumentStaff;
+const ProcurementStaff = mongoose.model('ProcurementStaff', ProcurementStaffSchema);
+export default ProcurementStaff;

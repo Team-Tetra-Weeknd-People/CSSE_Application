@@ -16,3 +16,13 @@
 .swiper {
     width: 400px;
 }
+
+.newOrderCont {
+    height: 80vh;
+    width: 90%;
+    overflow-y: scroll;
+}
+
+.smnotifications {
+    overflow-y: scroll;
+}

@@ -5,7 +5,7 @@ const ItemSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    catelougeID: {
+    catalogueID: {
         type: String,
         required: true,
     },

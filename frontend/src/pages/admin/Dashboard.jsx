@@ -29,7 +29,7 @@ import Supplier from '../../assets/images/supplier.jpg';
 import AdminService from '../../services/Admin.Service';
 import ManagerService from '../../services/Manager.Service';
 import SiteManagerService from '../../services/SiteManager.Service';
-import ProcumentStaffService from '../../services/ProcumentStaff.Service';
+import ProcurementStaffService from '../../services/ProcurementStaff.Service';
 import SupplierService from '../../services/Supplier.Service';
 
 export default function AdminDashboard() {
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
             console.log(e);
         })
 
-        ProcumentStaffService.getAllProcumentStaff().then(response => {
+        ProcurementStaffService.getAllProcurementStaff().then(response => {
             setProcurementStaffs(response.data);
         }).catch(e => {
             console.log(e);
@@ -258,7 +258,7 @@ export default function AdminDashboard() {
     }
 
     async function addProcurementStaff(values) {
-        ProcumentStaffService.register(values).then(response => {
+        ProcurementStaffService.register(values).then(response => {
             Swal.fire({
                 icon: 'success',
                 title: 'Success',
@@ -267,7 +267,7 @@ export default function AdminDashboard() {
                 timer: 1500,
                 timerProgressBar: true,
             })
-            ProcumentStaffService.getAllProcumentStaff().then(response => {
+            ProcurementStaffService.getAllProcurementStaff().then(response => {
                 setProcurementStaffs(response.data);
             }).catch(e => {
                 console.log(e);
@@ -286,7 +286,7 @@ export default function AdminDashboard() {
     }
 
     async function deleteProcurementStaff(id) {
-        ProcumentStaffService.deleteProcumentStaff(id).then(response => {
+        ProcurementStaffService.deleteProcurementStaff(id).then(response => {
             Swal.fire({
                 icon: 'success',
                 title: 'Success',
@@ -295,7 +295,7 @@ export default function AdminDashboard() {
                 timer: 1500,
                 timerProgressBar: true,
             })
-            ProcumentStaffService.getAllProcumentStaff().then(response => {
+            ProcurementStaffService.getAllProcurementStaff().then(response => {
                 setProcurementStaffs(response.data);
             }).catch(e => {
                 console.log(e);

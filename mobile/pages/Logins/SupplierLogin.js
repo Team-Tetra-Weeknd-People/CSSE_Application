@@ -1,15 +1,45 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 
-export default function SupplierLogin() {
+export default function SupplierLogin({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Add your authentication logic here
-    // For this example, we'll just show an alert with the entered username and password.
-    alert(`Email: ${email}\nPassword: ${password}`);
-  };
+  async function handleLogin() {
+    const data = {
+      email: email,
+      password: password,
+    };
+
+    if (email == '' || password == '') {
+      alert('Please fill all fields');
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        'https://csse-backend-b5wl.onrender.com/api/supplier/auth',
+        data,
+      );
+
+      if (response.status == 200) {
+        const token = response.data.token;
+        const decodedToken = jwtDecode(token);
+        AsyncStorage.setItem('id', decodedToken.id);
+        AsyncStorage.getItem('id').then(value => {
+          console.log(value);
+        });
+        navigation.navigate('SupplierDashboard');
+      } else {
+        alert('Login Failed');
+      }
+    } catch (error) {
+      alert('Login Failed');
+    }
+  }
 
   return (
     <View style={styles.container}>

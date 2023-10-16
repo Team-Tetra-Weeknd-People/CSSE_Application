@@ -22,7 +22,7 @@ import SiteManagerNavbar from "../../components/siteManager/Navbar";
 
 import SiteService from '../../services/Site.Service';
 import OrderService from '../../services/Order.Service';
-import CatelougeService from '../../services/Catalogue.Service';
+import CatalogueService from '../../services/Catalogue.Service';
 import SiteManagerService from '../../services/SiteManager.Service';
 import SupplierService from '../../services/Supplier.Service';
 
@@ -46,11 +46,9 @@ export default function SupplierDashboard() {
 
     const [sites, setSites] = useState([]);
     const [orders, setOrders] = useState([]);
-    const [items, setItems] = useState([]);
     const [suppliers, setSuppliers] = useState([]);
-    const [catelouges, setCatelouges] = useState([]);
-    const [catelouge, setCatelouge] = useState("");
-    const [isCatSelected, setIsCatSelected] = useState(false);
+    const [catalogues, setCatalogues] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const [showAddOrder, setShowAddOrder] = useState(false);
@@ -65,35 +63,43 @@ export default function SupplierDashboard() {
         OrderService.getOrderSiteManager(localStorage.getItem("id")).then((res) => {
             setOrders(res.data);
         });
-        CatelougeService.getAllCatalogue().then((res) => {
-            setCatelouges(res.data);
+        CatalogueService.getAllCatalogue().then((res) => {
+            setCatalogues(res.data);
         });
         SupplierService.getAllSuppliers().then((res) => {
             setSuppliers(res.data);
         });
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
     }, []);
 
 
     const getStatusColor = (status) => {
+
         switch (status) {
-            case 'PENDING':
-                return 'gold';
-            case 'PLACED':
-                return 'blue';
-            case 'ACCEPT':
-                return 'green';
-            case 'REJECT':
-                return 'red';
-            case 'DELIVERED':
-                return 'purple';
-            case 'PAID':
-                return 'orange';
-            case 'SEND_APPROVE':
-                return 'cyan';
-            case 'RECEIVED':
-                return 'pink';
+            case "To Be Priced":
+                return "gray";
+            case "Priced":
+                return "blue";
+            case "Approval Requested":
+                return "orange";
+            case "Approved":
+                return "green";
+            case "Confirmed":
+                return "purple";
+            case "Rejected":
+                return "red";
+            case "Sent To Delivery":
+                return "cyan";
+            case "Delivered":
+                return "pink";
+            case "Completed":
+                return "teal";
+            case "Received":
+                return "brown";
             default:
-                return 'black';
+                return "black";
         }
     };
 
@@ -129,8 +135,6 @@ export default function SupplierDashboard() {
         const siteManager = await SiteManagerService.getSiteManager(values.siteManagerId);
         const site = await SiteService.getOneSite(values.siteId);
         const supplier = await SupplierService.getSupplier(values.supplierId);
-
-
 
         const data = {
             siteManagerID: values.siteManagerId,
@@ -247,11 +251,11 @@ export default function SupplierDashboard() {
                                                 onSwiper={(swiper) => console.log(swiper)}
                                                 onSlideChange={() => console.log('slide change')}
                                             >
-                                                {!orders.length ? (
+                                                {loading ? (
                                                     <div className="sweet-loading">
                                                         <ClockLoader color="#36D7B7" size={150} />
                                                     </div>
-                                                ) : (
+                                                ) : orders.length > 0 ? (
                                                     orders.map((order) => (
                                                         <SwiperSlide key={order.id}>
                                                             <Card style={{ width: '25rem', height: '20rem' }}>
@@ -265,30 +269,36 @@ export default function SupplierDashboard() {
                                                                         {order.itemName} - {order.quantity} - {order.itemUnit}/s
                                                                     </Card.Text>
                                                                     <Card.Text>
-                                                                        Rs. {order.itemPrice * order.quantity}
+                                                                        {order.subTotal ? (
+                                                                            <div>Sub Total - Rs. {order.subTotal}</div>
+                                                                        ) : (
+                                                                            <div>Not Priced Yet</div>
+                                                                        )}
                                                                     </Card.Text>
-                                                                    <Card.Text>
-                                                                        <div style={{ color: getStatusColor(order.status) }}>
+                                                                    <Card.Text style={{ backgroundColor: getStatusColor(order.status), borderRadius: "10px" }}>
+                                                                        <div style={{ color: "white" }}>
                                                                             Status - {order.status}
                                                                         </div>
                                                                     </Card.Text>
                                                                     <Card.Text>
                                                                         Placed Date - {order.placedDate.slice(0, 10)}
                                                                     </Card.Text>
-                                                                    <Button variant="success">Edit</Button>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                     <Button variant="danger">Delete</Button>
                                                                 </Card.Body>
                                                             </Card>
                                                         </SwiperSlide>
                                                     ))
+                                                ) : (
+                                                    <div className="sweet-loading">
+                                                        <h3>No Orders Placed</h3>
+                                                    </div>
                                                 )}
 
                                             </Swiper>
                                         </div>
                                         <br />
                                         <Button variant="primary" onClick={handleShowAddOrder}>Place a new Order</Button>
-
                                     </Col>
                                 </Row>
                             </Container>

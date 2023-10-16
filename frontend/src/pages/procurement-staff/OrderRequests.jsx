@@ -13,31 +13,52 @@ export default function ProcurementOrderRequests() {
 
   const handleCheckStatus = (status) => {
     let styles = {};
-  
+
     switch (status) {
       case "To Be Priced":
         styles = {
-            backgroundColor: "#ff4444",
-            color: "white",
+          backgroundColor: "#ff444499",
         };
         break;
-  
+      case "Priced":
+        styles = {
+          backgroundColor: "#d861258f",
+        };
+        break;
+
       case "Approval Requested":
         styles = {
-          backgroundColor: "#ffc414",
+          backgroundColor: "#ffc41499",
         };
         break;
-        case "Approved":
-          styles = {
-            backgroundColor: "#51eb49",
-          };
-          break;
+      case "Approved":
+        styles = {
+          backgroundColor: "#51eb4999",
+        };
+        break;
+      case "Rejected":
+        styles = {
+          backgroundColor: "#ff0000",
+          color: "#fff",
+        };
+        break;
+      case "Confirmed":
+        styles = {
+          backgroundColor: "#00bcd499",
+        };
+        break;
+      case "Delivered":
+        styles = {
+          backgroundColor: "#0d47a1",
+          color: "#fff",
+        };
+        break;
       default:
         styles = {
-          backgroundColor: "#ce91ff",
+          backgroundColor: "#ce91ff99",
         };
     }
-  
+
     return styles;
   };
 
@@ -45,7 +66,7 @@ export default function ProcurementOrderRequests() {
     try {
       OrderService.getAllOrder().then((res) => {
         setOrderRequests(res.data);
-        setFilteredOrderRequests(res.data); // Initialize filteredOrderRequests with all order requests
+        setFilteredOrderRequests(res.data);
       });
     } catch (error) {
       console.error(error);
@@ -54,8 +75,10 @@ export default function ProcurementOrderRequests() {
 
   const navigate = useNavigate();
 
-  function handleRequestClick(id) {
-    navigate(`/procurement-pricing/${id}`);
+  function handleRequestClick(id, status) {
+    if (status === "To Be Priced" || status === "Priced") {
+      navigate(`/procurement-pricing/${id}`);
+    }
   }
 
   const handleSearchChange = (e) => {
@@ -77,17 +100,19 @@ export default function ProcurementOrderRequests() {
       <div className="right-content">
         <div className="proc-content">
           <div className="proc-search-bar">
-            <input
-              type="text"
-              className="search-bar"
-              placeholder="Search Order Requests by Item"
-              value={searchValue}
-              onChange={handleSearchChange}
-            />
+            <h2 className="proc-today">Order Requests</h2>
+            <div class="search-container">
+              <i class="search-icon fas fa-search"></i>
+              <input
+                type="text"
+                class="search-bar"
+                placeholder="Search Order Requests by Item"
+                value={searchValue}
+                onChange={handleSearchChange}
+              />
+            </div>
           </div>
           <div className="proc-today-orders">
-            {/* <span className="proc-today">Today</span> */}
-            <h2 className="proc-today">Order Requests</h2>
             <div className="proc-today-orders-list">
               <OrderRequestsTable
                 data={filteredOrderRequests}
@@ -96,9 +121,6 @@ export default function ProcurementOrderRequests() {
               />
             </div>
           </div>
-          {/* <div className="proc-prev-orders">
-            <span className="proc-prev">Previous Orders</span>
-          </div> */}
         </div>
       </div>
     </div>
@@ -122,9 +144,10 @@ function OrderRequestsTable({ data, onRowClick, checkStatus }) {
       </thead>
       <tbody>
         {data.map((orderRequest) => (
-          <tr style={checkStatus(orderRequest.status)}
+          <tr
+            style={checkStatus(orderRequest.status)}
             key={orderRequest._id}
-            onClick={() => onRowClick(orderRequest._id)}
+            onClick={() => onRowClick(orderRequest._id, orderRequest.status)}
           >
             <td>{orderRequest._id}</td>
             <td>{orderRequest.itemName}</td>
