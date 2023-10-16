@@ -12,6 +12,8 @@ import {
     AdminDashboard,
 
     ManagerDashboard,
+    ManagerPlaceOrders,
+    ManagerPlaceOrder,
 
     SiteManagerDashboard,
     SiteManagerInventory,
@@ -43,6 +45,8 @@ export default function App() {
 
                 {/* Manager Routes */}
                 <Route path="/manager-dashboard" element={<ManagerDashboard />} />
+                <Route path="/manager-placeorders" element={<ManagerPlaceOrders />} />
+                <Route path="/manager-placeorder/:id" element={<ManagerPlaceOrder />} />
 
                 {/* Site Manager Routes */}
                 <Route path="/site-manager-dashboard" element={<SiteManagerDashboard />} />
