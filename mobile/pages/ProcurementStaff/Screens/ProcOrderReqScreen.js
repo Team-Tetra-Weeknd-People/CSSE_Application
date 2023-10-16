@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 // Replace these with your actual service calls
 import { getAllOrder } from '../../../services/Order.Service';
+import DeliveryNoteService from '../../../services/DeliveryNote.Service';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ProcOrderReqScreen() {
     const [orderRequests, setOrderRequests] = useState([]);
     const [filteredOrderRequests, setFilteredOrderRequests] = useState([]);
     const [searchValue, setSearchValue] = useState('');
-
+    const navigation = useNavigation();
     useEffect(() => {
         // Replace with your service call to fetch order requests
         getAllOrder()
@@ -23,7 +25,10 @@ export default function ProcOrderReqScreen() {
     function handleRequestClick(id, status) {
         // Add your navigation logic here when a row is clicked
         if (status === 'Sent To Delivery' || status === 'Delivered' || status === 'Received') {
-            alert('This order request has already been sent to delivery');
+            DeliveryNoteService.getDeliveryNoteOrder(id).then((res) => {
+                console.log(res.data[0]);
+                navigation.navigate('Delivery Notes', { deliveryNote: res.data[0] });
+            });
         }
     }
 
