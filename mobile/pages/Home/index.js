@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 
 export default function Home({navigation}) {
   const data = [
@@ -24,6 +25,17 @@ export default function Home({navigation}) {
       <Text>{item.title}</Text>
     </TouchableOpacity>
   );
+
+  useEffect(() => {
+    axios
+      .get('https://csse-backend-b5wl.onrender.com/')
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <View>
