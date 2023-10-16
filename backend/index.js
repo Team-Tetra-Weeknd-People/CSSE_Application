@@ -33,7 +33,7 @@ mongoose.connect(URL);
 
 //sample call
 app.get("/", (req, res) => {
-  res.send("Hello from Server");
+  res.send("The Prodigal son is awake now!");
 });
 
 const connection = mongoose.connection;
