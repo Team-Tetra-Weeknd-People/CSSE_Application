@@ -17,7 +17,7 @@ export const getOneItem = async (id) => {
     });
 }
 
-export const getItemCatelogue = async (id) => {
+export const getItemCatalogue = async (id) => {
     return await axios.get(url.itemCatalogue(id), {
         headers: {
             "Content-Type": "application/json"
@@ -60,7 +60,7 @@ export const deleteItem = async (id) => {
 export default {
     getAllItem,
     getOneItem,
-    getItemCatelogue,
+    getItemCatalogue,
     getItemSupplier,
     createItem,
     updateItem,

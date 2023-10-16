@@ -14,6 +14,7 @@ import {
   SupplierDashboard,
   Grid,
 } from './pages';
+import ProcurementStaffMain from './pages/ProcurementStaff/ProcurementStaffMain';
 
 const Stack = createStackNavigator();
 
@@ -28,8 +29,8 @@ function App() {
         <Stack.Screen name="SupplierLogin" component={SupplierLogin} />
         <Stack.Screen name="ManagerDashboard" component={ManagerDashboard} />
         <Stack.Screen
-          name="ProcStaffDashboard"
-          component={ProcStaffDashboard}
+          name="Procurement Staff"
+          component={ProcurementStaffMain}
         />
         <Stack.Screen
           name="SiteManagerDashboard"

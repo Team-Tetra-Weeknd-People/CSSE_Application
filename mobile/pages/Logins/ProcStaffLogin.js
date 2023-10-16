@@ -21,7 +21,7 @@ export default function ProcStaffLogin({navigation}) {
 
     try {
       const response = await axios.post(
-        'https://csse-backend-b5wl.onrender.com/api/procumentStaff/auth',
+        'https://csse-backend-b5wl.onrender.com/api/procurementStaff/auth',
         data,
       );
 
@@ -32,7 +32,7 @@ export default function ProcStaffLogin({navigation}) {
         AsyncStorage.getItem('id').then(value => {
           console.log(value);
         });
-        navigation.navigate('ProcStaffDashboard');
+        navigation.navigate('Procurement Staff');
       } else {
         alert('Login Failed');
       }
