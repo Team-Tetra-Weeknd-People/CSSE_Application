@@ -53,6 +53,10 @@ export default function ProcurementOrderRequests() {
           color: "#fff",
         };
         break;
+      case "Sent to Delivery":
+        styles = {
+          backgroundColor: "#00bcd499",
+        };
       default:
         styles = {
           backgroundColor: "#ce91ff99",
