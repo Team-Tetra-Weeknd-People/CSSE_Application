@@ -14,10 +14,14 @@ const DeliveryNoteSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    deliveryNote: {
+      type: String,
+      required: true,
+    },
     deliveryDescription: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: {

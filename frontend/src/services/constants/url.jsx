@@ -1,5 +1,5 @@
 // add API enpoints here
-const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'https://csse-backend-b5wl.onrender.com/api';
 
 export const adminAuth = `${BASE_URL}/admin/auth`;
 export const admin = `${BASE_URL}/admin`;
@@ -24,6 +24,7 @@ export const order = `${BASE_URL}/order/`;
 export const orderID = (id) => `${BASE_URL}/order/${id}`;
 export const orderGetOne = (id) => `${BASE_URL}/order/getOne/${id}`;
 export const orderSiteManager = (id) => `${BASE_URL}/order/siteManager/${id}`;
+export const orderStatusSupplier = (status, id) => `${BASE_URL}/order/status/${status}/supplier/${id}`;
 
 export const procurementStaffAuth = `${BASE_URL}/procurementStaff/auth`;
 export const procurementStaff = `${BASE_URL}/procurementStaff`;
@@ -42,3 +43,7 @@ export const supplierAuth = `${BASE_URL}/supplier/auth`;
 export const supplier = `${BASE_URL}/supplier`;
 export const supplierID = (id) => `${BASE_URL}/supplier/${id}`;
 
+export const deliveryNote = `${BASE_URL}/deliveryNote`;
+export const deliveryNoteID = (id) => `${BASE_URL}/deliveryNote/${id}`;
+export const deliveryNoteGetOne = (id) => `${BASE_URL}/deliveryNote/getOne/${id}`;
+export const deliveryNoteOrder = (id) => `${BASE_URL}/deliveryNote/order/${id}`;

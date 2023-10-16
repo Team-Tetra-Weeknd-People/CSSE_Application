@@ -14,26 +14,33 @@ app.use(bodyParser.json());
 
 routers(app);
 
-app.use(session({
-    secret: 'beheth_kade',
+app.use(
+  session({
+    secret: "beheth_kade",
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 1000 * 60 * 60,
-        sameSite: 'none',
-        secure: true
-    }
-}));
+      maxAge: 1000 * 60 * 60,
+      sameSite: "none",
+      secure: true,
+    },
+  })
+);
 
 const URL = process.env.REACT_APP_MONGODB_URL;
 
 mongoose.connect(URL);
 
+//sample call
+app.get("/", (req, res) => {
+  res.send("The Prodigal son is awake now!");
+});
+
 const connection = mongoose.connection;
 connection.once("open", () => {
-    console.log("MongoDB connection success!");
+  console.log("MongoDB connection success!");
 });
 
 app.listen(PORT, () => {
-    console.log(`Node Server is up and running on port ${PORT}`);
+  console.log(`Node Server is up and running on port ${PORT}`);
 });
