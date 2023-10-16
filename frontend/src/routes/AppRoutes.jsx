@@ -16,14 +16,11 @@ import {
     ManagerPlaceOrder,
 
     SiteManagerDashboard,
-    SiteManagerInventory,
     SiteManagerNotifications,
-    SiteManagerProfile,
+
     SupplierDashboard,
     SupplierDelivery,
     SupplierNewOrders,
-    SupplierNotifications,
-    SupplierProfile
 } from "../pages";
 
 export default function App() {
@@ -50,17 +47,12 @@ export default function App() {
 
                 {/* Site Manager Routes */}
                 <Route path="/site-manager-dashboard" element={<SiteManagerDashboard />} />
-                <Route path="/site-manager-inventory" element={<SiteManagerInventory />} />
                 <Route path="/site-manager-notifications" element={<SiteManagerNotifications />} />
-                <Route path="/site-manager-profile" element={<SiteManagerProfile />} />
 
                 {/* Supplier Routes */}
                 <Route path="/supplier-dashboard" element={<SupplierDashboard />} />
                 <Route path="/supplier-delivery" element={<SupplierDelivery />} />
                 <Route path="/supplier-new-orders" element={<SupplierNewOrders />} />
-                <Route path="/supplier-notifications" element={<SupplierNotifications />} />
-                <Route path="/supplier-profile" element={<SupplierProfile />} />
-
             </Routes>
         </Router>
     )

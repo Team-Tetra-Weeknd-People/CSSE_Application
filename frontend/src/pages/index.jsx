@@ -20,17 +20,13 @@ import {
 
 import {
     SiteManagerDashboard,
-    SiteManagerInventory,
     SiteManagerNotifications,
-    SiteManagerProfile
 } from './siteManager';
 
 import {
     SupplierDashboard,
     SupplierDelivery,
     SupplierNewOrders,
-    SupplierNotifications,
-    SupplierProfile,
 } from './supplier';
 
 export {
@@ -49,13 +45,9 @@ export {
     ManagerPlaceOrder,
 
     SiteManagerDashboard,
-    SiteManagerInventory,
     SiteManagerNotifications,
-    SiteManagerProfile,
 
     SupplierDashboard,
     SupplierDelivery,
     SupplierNewOrders,
-    SupplierNotifications,
-    SupplierProfile
 };
