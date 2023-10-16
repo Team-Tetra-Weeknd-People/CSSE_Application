@@ -21,7 +21,7 @@ export default function ProcStaffLogin({navigation}) {
 
     try {
       const response = await axios.post(
-        'https://csse-backend-b5wl.onrender.com/api/procumentStaff/auth',
+        'https://csse-backend-b5wl.onrender.com/api/procurementStaff/auth',
         data,
       );
 
