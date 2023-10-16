@@ -22,3 +22,7 @@
     width: 90%;
     overflow-y: scroll;
 }
+
+.smnotifications {
+    overflow-y: scroll;
+}

@@ -37,6 +37,12 @@ export const getOrderBySupplierID = async (req, res) => {
   const supplierID = req.params.supplierID;
   try {
     const order = await Order.find({ supplierId: supplierID });
+    // sort order by lastModifiedDateTime
+    order.sort((a, b) => {
+      return (
+        new Date(b.lastModifiedDateTime) - new Date(a.lastModifiedDateTime)
+      );
+    });
     res.status(200).json(order);
   } catch (error) {
     res.status(404).json({ message: error });
