@@ -23,20 +23,19 @@ export default function ManagerDashboard() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [1]);
 
   useEffect(() => {
     try {
       OrderService.getAllOrder().then((res) => {
         setOrders(res.data);
-        // Filter orders based on their status
-        const allowedStatus = ["Approved", "Approval Requested", "Rejected"];
+        console.log(res.data);
+        // const allowedStatus = ["Approval Requested"];
 
         // Filter the data based on the allowedStatus array
-        const filteredData = orders.filter((orderRequest) =>
-          allowedStatus.includes(orderRequest.status)
-        );
-        setfilteredOrders(filteredData);
+        // const filteredData = orders.filter( (order) => order.status === "Approval Requested")
+        // setfilteredOrders(filteredData);
+        // console.log(filteredData);
       });
     } catch (error) {
       console.error(error);
@@ -60,8 +59,9 @@ export default function ManagerDashboard() {
             </div>
             <div className="manager-order-count">
               <p className="manager-order-count-text">
-                {filteredOrders.filter( (order) => order.status === "Approval Requested").length}
+                {orders.filter( (order) => order.status === "Approval Requested").length}
                 {/* {pendingOrders.length} */}
+                {/* {filteredOrders.length} */}
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ export default function ManagerDashboard() {
               </tr>
             </thead>
             <tbody>
-              {pendingOrders.map((orderRequest) => (
+              {orders.filter( (order) => order.status === "Approval Requested").map((orderRequest) => (
                 <tr>
                   <td>{orderRequest._id}</td>
                   <td>{orderRequest.itemName}</td>
