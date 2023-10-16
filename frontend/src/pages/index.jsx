@@ -13,7 +13,9 @@ import {
 } from './admin';
 
 import {
-    ManagerDashboard
+    ManagerDashboard,
+    ManagerPlaceOrders,
+    ManagerPlaceOrder,
 } from './manager';
 
 import {
@@ -43,6 +45,8 @@ export {
     AdminDashboard,
 
     ManagerDashboard,
+    ManagerPlaceOrders,
+    ManagerPlaceOrder,
 
     SiteManagerDashboard,
     SiteManagerInventory,
