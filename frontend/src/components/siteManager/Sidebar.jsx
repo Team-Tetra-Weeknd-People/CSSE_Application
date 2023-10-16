@@ -28,17 +28,17 @@ export default function SiteManagerSidebar() {
                     Dashboards
                 </Link>
                 <Link
-                    to="/site-manager-inventory"
+                    to="/site-manager-notifications"
                     className="btn btn-primary btn-block"
                     style={
-                        sidebarStatus === "site-manager-inventory"
+                        sidebarStatus === "site-manager-notifications"
                             ? { color: "#000000", backgroundColor: "#ffffff" }
                             : null
                     }
                 >
                     Notifications
                 </Link>
-                <Link
+                {/* <Link
                     to="/site-manager-notifications"
                     className="btn btn-primary btn-block"
                     style={
@@ -48,7 +48,7 @@ export default function SiteManagerSidebar() {
                     }
                 >
                     Inventory
-                </Link>
+                </Link> */}
             </div>
             <div className="logout">
                 <button className="btn btn-danger btn-block"

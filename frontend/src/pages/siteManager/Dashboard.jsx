@@ -283,7 +283,6 @@ export default function SupplierDashboard() {
                                                                     <Card.Text>
                                                                         Placed Date - {order.placedDate.slice(0, 10)}
                                                                     </Card.Text>
-                                                                    <Button variant="success">Edit</Button>
                                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                     <Button variant="danger">Delete</Button>
                                                                 </Card.Body>

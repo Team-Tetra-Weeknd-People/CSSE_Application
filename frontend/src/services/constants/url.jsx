@@ -43,3 +43,7 @@ export const supplierAuth = `${BASE_URL}/supplier/auth`;
 export const supplier = `${BASE_URL}/supplier`;
 export const supplierID = (id) => `${BASE_URL}/supplier/${id}`;
 
+export const deliveryNote = `${BASE_URL}/deliveryNote`;
+export const deliveryNoteID = (id) => `${BASE_URL}/deliveryNote/${id}`;
+export const deliveryNoteGetOne = (id) => `${BASE_URL}/deliveryNote/getOne/${id}`;
+export const deliveryNoteOrder = (id) => `${BASE_URL}/deliveryNote/order/${id}`;
