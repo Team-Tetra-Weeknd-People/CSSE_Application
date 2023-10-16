@@ -1,0 +1,91 @@
+.manager-pricing {
+    padding: 20px;
+    font-family: Montserrat;
+  }
+  
+  .manager-pricing-container {
+    width: 100%;
+    display: block;
+  }
+  
+  .pricing-order-details-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .pricing-order-details-table th,
+  .pricing-order-details-table td {
+    border: 2px solid #ffffff;
+    background-color: rgba(127, 255, 212, 0.486);
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .pricing-order-details-table th {
+    background-color: #f0f0f0;
+  }
+  
+  .total-and-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .total-and-buttons h4 {
+    margin: 10px;
+  }
+  
+  /* Style for the pricing-buttons container */
+  .pricing-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  
+  .pricing-buttons button {
+    min-width: 200px;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+  }
+  .pricing-buttons .btn-primary,
+  .pricing-buttons .btn-primary:active{
+    background-color: #1a89f8a8;
+    color: #000;
+  }
+  
+  .pricing-buttons .btn-danger {
+    background-color: #c50c28;
+  }
+  
+  .pricing-buttons button.btn-req:active,
+  .pricing-buttons button.btn-req {
+    background-color: #eeff00a0;
+    color: #000;
+  }
+  .pricing-buttons button.btn-save:active,
+  .pricing-buttons button.btn-save {
+    background-color: rgba(28, 203, 31, 0.623);
+    color: #000;
+  }
+  
+  .pricing-buttons .btn:hover{
+    box-shadow: #250443b3 4px 4px 4px;
+  }
+  
+  .pricing-order-details-table input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .pricing-order-details-table input{
+    border: none;
+    background-color: transparent;
+    text-align: center; 
+  }

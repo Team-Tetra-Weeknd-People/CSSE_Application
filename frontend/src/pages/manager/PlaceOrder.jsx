@@ -1,5 +1,5 @@
 import "../../styles/sudul/common.css";
-import "../../styles/sudul/pricing.css";
+import "../../styles/madusha/placeorder.css";
 import ManagerSidebar from "../../components/manager/SideBar";
 import { useParams } from "react-router-dom";
 import OrderService from "../../services/Order.Service";
@@ -117,12 +117,12 @@ const deleteRequest = () => {
           <ManagerSidebar />
         </div>
         <div className="right-content">
-          <div className="proc-pricing">
-            <div className="proc-pricing-header">
+          <div className="manager-pricing">
+            <div className="manager-pricing-header">
               <h2>Order Request: {orderRequest._id}</h2>
               <h3>Supplier: {orderRequest.supplierName}</h3>
             </div>
-            <div className="proc-pricing-container">
+            <div className="manager-pricing-container">
               <h4>Order Details</h4>
               <table className="pricing-order-details-table">
                 <thead>
@@ -176,7 +176,7 @@ const deleteRequest = () => {
                   {orderRequest.status === "Approval Requested" && (
                     <>
                       <button
-                        className="btn btn-danger btn-block"
+                        className="btn btn-primary"
                         onClick={() => handleActionClick("Approved", "Approve the order")}
                       >
                         Approve
