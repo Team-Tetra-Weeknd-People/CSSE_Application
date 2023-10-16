@@ -46,18 +46,18 @@ export default function SupplierLogin({navigation}) {
       <Text style={styles.title}>Supplier Login</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder='Email'
         onChangeText={text => setEmail(text)}
         value={email}
       />
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder='Password'
         secureTextEntry
         onChangeText={text => setPassword(text)}
         value={password}
       />
-      <Button title="Login" onPress={handleLogin} />
+      <Button title='Login' onPress={handleLogin} />
     </View>
   );
 }
