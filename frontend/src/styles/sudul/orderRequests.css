@@ -27,16 +27,6 @@
   outline: none;
 }
 
-/* Style the search button */
-.search-button {
-  padding: 10px 20px;
-  background-color: #0a080845;
-    color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 10px; /* Add space between the input and the button */
-}
 .search-button:hover{
   background-color: #6f0cd2;
   color: #000;
