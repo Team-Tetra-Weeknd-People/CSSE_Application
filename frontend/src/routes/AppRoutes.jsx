@@ -6,7 +6,7 @@ import {
 
     ProcurementDashboard,
     ProcurementOrderRequests,
-    ProcurementPricing,
+    ProcurementPricingAndDeliveryNotes,
     ProcurementSupplierCatalogues,
 
     AdminDashboard,
@@ -36,7 +36,7 @@ export default function App() {
 
                 {/* Procurement Staff Routes */}
                 <Route path="/procurement-order-requests" element={<ProcurementOrderRequests />} />
-                <Route path="/procurement-pricing/:id" element={<ProcurementPricing />} />
+                <Route path="/procurement-pricing-and-delivery-notes/:id" element={<ProcurementPricingAndDeliveryNotes />} />
                 <Route path="/procurement-supplier-catalogues" element={<ProcurementSupplierCatalogues />} />
                 <Route path="/procurement-dashboard" element={<ProcurementDashboard />} />
 

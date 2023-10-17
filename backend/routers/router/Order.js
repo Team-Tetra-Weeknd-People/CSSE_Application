@@ -14,5 +14,6 @@ router.get(
 router.post("/", Order.createOrder);
 router.put("/:id", Order.updateOrder);
 router.delete("/:id", Order.deleteOrder);
+router.post("/sendEmail", Order.emailForInvoice);
 
 export default router;

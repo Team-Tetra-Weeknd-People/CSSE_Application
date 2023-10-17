@@ -14,6 +14,7 @@ export default function ProcurementSidebar() {
     <div className="sidebar">
       <div className="header">
         <h2>SHMOFY</h2>
+        <p>Procurement Staff</p>
       </div>
       <div className="menu">
         <Link
@@ -36,7 +37,7 @@ export default function ProcurementSidebar() {
           }
           title="Select an Order From Order Requests to Price the Items"
         >
-          Pricing
+          Pricing & Delivery Notes
         </Link>
         <Link
           to="/procurement-supplier-catalogues"

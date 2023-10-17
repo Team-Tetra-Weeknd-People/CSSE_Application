@@ -1,4 +1,5 @@
 import Order from "../models/Order.js";
+import nodemailer from "nodemailer";
 
 //get all orders
 export const getAllOrders = async (req, res) => {
@@ -96,6 +97,32 @@ export const deleteOrder = async (req, res) => {
   }
 };
 
+export const emailForInvoice = async (req, res) => {
+  const email = req.body;
+  console.log(email);
+  const transporter = nodemailer.createTransport({
+    host: "smtp.zoho.com", 
+    port: 465, 
+    secure: true, 
+    auth: {
+      user: "shmofy@zohomail.com",
+      pass: "eSLVbH97heLJ", 
+
+    },
+  });
+  try {
+    await transporter.sendMail({
+      from: '"SHMOFY" <shmofy@zohomail.com>',
+      to: email.email,
+      subject: `SHMOFY Invoice | Order ID: ${email.orderId}}`,
+      html: email.htmlBody,
+    });
+    res.status(200).send({ status: "Order Invoice Email Sent" });
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+}
+
 export default {
   getAllOrders,
   getOrder,
@@ -105,4 +132,5 @@ export default {
   createOrder,
   updateOrder,
   deleteOrder,
+  emailForInvoice,
 };
