@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "mocha --timeout 5000 'tests/**/*.test.js'"
+    "test": "mocha 'tests/**/*.test.js'"
   },
   "author": "Team Tetra",
   "license": "MIT",
