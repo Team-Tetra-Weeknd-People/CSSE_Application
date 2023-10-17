@@ -1,12 +1,12 @@
 import ProcurementDashboard from "./Dashboard";
 import ProcurementOrderRequests from "./OrderRequests";
-import ProcurementPricing from "./Pricing";
+import ProcurementPricingAndDeliveryNotes from "./ProcurementPricingAndDeliveryNotes";
 import ProcurementSupplierCatalogues from "./SupplierCatalogues";
 
 export {
     ProcurementDashboard,
     ProcurementOrderRequests,
-    ProcurementPricing,
+    ProcurementPricingAndDeliveryNotes,
     ProcurementSupplierCatalogues
 };
 

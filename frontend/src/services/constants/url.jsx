@@ -21,6 +21,7 @@ export const manager = `${BASE_URL}/manager`;
 export const managerID = (id) => `${BASE_URL}/manager/${id}`;
 
 export const order = `${BASE_URL}/order/`;
+export const emailForInvoice = `${BASE_URL}/order/sendEmail`;
 export const orderID = (id) => `${BASE_URL}/order/${id}`;
 export const orderGetOne = (id) => `${BASE_URL}/order/getOne/${id}`;
 export const orderSiteManager = (id) => `${BASE_URL}/order/siteManager/${id}`;

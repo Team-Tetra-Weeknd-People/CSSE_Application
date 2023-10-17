@@ -1,0 +1,29 @@
+/* delivery-notes.css */
+
+.delivery-notes-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .delivery-notes-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .delivery-notes-table th,
+  .delivery-notes-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  
+  .delivery-notes-table th {
+    background-color: #f0f0f0;
+  }
+  
+  .del-head{
+    font-weight: bold;
+  }

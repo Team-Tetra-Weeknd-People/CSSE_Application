@@ -4,7 +4,7 @@ import Login from './Login';
 import {
     ProcurementDashboard,
     ProcurementOrderRequests,
-    ProcurementPricing,
+    ProcurementPricingAndDeliveryNotes,
     ProcurementSupplierCatalogues
 } from './procurement-staff';
 
@@ -35,7 +35,7 @@ export {
 
     ProcurementDashboard,
     ProcurementOrderRequests,
-    ProcurementPricing,
+    ProcurementPricingAndDeliveryNotes,
     ProcurementSupplierCatalogues,
 
     AdminDashboard,
