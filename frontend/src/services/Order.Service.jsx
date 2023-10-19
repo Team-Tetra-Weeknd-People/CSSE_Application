@@ -49,6 +49,13 @@ export const updateOrder = async (id, data) => {
         },
     });
 }
+export const emailForInvoice = async (data) => {
+    return await axios.post(url.emailForInvoice, data, {
+        headers: {
+            "Content-Type": "application/json"
+        },
+    });
+}
 
 export const deleteOrder = async (id) => {
     return await axios.delete(url.orderID(id), {
@@ -66,6 +73,7 @@ export default {
     createOrder,
     updateOrder,
     deleteOrder,
+    emailForInvoice
 }
 
 

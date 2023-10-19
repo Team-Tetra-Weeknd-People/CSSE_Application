@@ -2,7 +2,7 @@ import axios from "axios";
 import * as url from './constants/url.jsx'
 
 export const register = async (data) => {
-    return await axios.post(url.procumentStaff, data, {
+    return await axios.post(url.procurementStaff, data, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -10,39 +10,39 @@ export const register = async (data) => {
 }
 
 export const login = async (data) => {
-    return await axios.post(url.procumentStaffAuth, data, {
+    return await axios.post(url.procurementStaffAuth, data, {
         headers: {
             "Content-Type": "application/json"
         },
     });
 }
 
-export const getAllProcumentStaff = async () => {
-    return await axios.get(url.procumentStaff, {
+export const getAllProcurementStaff = async () => {
+    return await axios.get(url.procurementStaff, {
         headers: {
             "Content-Type": "application/json"
         },
     });
 }
 
-export const getOneProcumentStaff = async (id) => {
-    return await axios.get(url.procumentStaffID(id), {
+export const getOneProcurementStaff = async (id) => {
+    return await axios.get(url.procurementStaffID(id), {
         headers: {
             "Content-Type": "application/json"
         },
     });
 }
 
-export const updateProcumentStaff = async (id, data) => {
-    return await axios.put(url.procumentStaffID(id), data, {
+export const updateProcurementStaff = async (id, data) => {
+    return await axios.put(url.procurementStaffID(id), data, {
         headers: {
             "Content-Type": "application/json"
         },
     });
 }
 
-export const deleteProcumentStaff = async (id) => {
-    return await axios.delete(url.procumentStaffID(id), {
+export const deleteProcurementStaff = async (id) => {
+    return await axios.delete(url.procurementStaffID(id), {
         headers: {
             "Content-Type": "application/json"
         },
@@ -52,8 +52,8 @@ export const deleteProcumentStaff = async (id) => {
 export default {
     register,
     login,
-    getAllProcumentStaff,
-    getOneProcumentStaff,
-    updateProcumentStaff,
-    deleteProcumentStaff,
+    getAllProcurementStaff,
+    getOneProcurementStaff,
+    updateProcurementStaff,
+    deleteProcurementStaff,
 }

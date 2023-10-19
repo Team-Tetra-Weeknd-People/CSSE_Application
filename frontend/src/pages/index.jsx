@@ -4,7 +4,7 @@ import Login from './Login';
 import {
     ProcurementDashboard,
     ProcurementOrderRequests,
-    ProcurementPricing,
+    ProcurementPricingAndDeliveryNotes,
     ProcurementSupplierCatalogues
 } from './procurement-staff';
 
@@ -13,22 +13,20 @@ import {
 } from './admin';
 
 import {
-    ManagerDashboard
+    ManagerDashboard,
+    ManagerPlaceOrders,
+    ManagerPlaceOrder,
 } from './manager';
 
 import {
     SiteManagerDashboard,
-    SiteManagerInventory,
     SiteManagerNotifications,
-    SiteManagerProfile
 } from './siteManager';
 
 import {
     SupplierDashboard,
     SupplierDelivery,
     SupplierNewOrders,
-    SupplierNotifications,
-    SupplierProfile,
 } from './supplier';
 
 export {
@@ -37,21 +35,19 @@ export {
 
     ProcurementDashboard,
     ProcurementOrderRequests,
-    ProcurementPricing,
+    ProcurementPricingAndDeliveryNotes,
     ProcurementSupplierCatalogues,
 
     AdminDashboard,
 
     ManagerDashboard,
+    ManagerPlaceOrders,
+    ManagerPlaceOrder,
 
     SiteManagerDashboard,
-    SiteManagerInventory,
     SiteManagerNotifications,
-    SiteManagerProfile,
 
     SupplierDashboard,
     SupplierDelivery,
     SupplierNewOrders,
-    SupplierNotifications,
-    SupplierProfile
 };
