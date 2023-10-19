@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Carousel, Button, Alert  Container} from "react-bootstrap";
+import { Carousel, Button, Alert , Container} from "react-bootstrap";
 import axios from "axios";
 
 import "../../styles/randula/home.css";
