@@ -15,6 +15,7 @@ import {
   Grid,
 } from './pages';
 import ProcurementStaffMain from './pages/ProcurementStaff/ProcurementStaffMain';
+import ManagerPlaceOrder from './pages/Manager/ManagerPlaceorder';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,7 @@ function App() {
         <Stack.Screen name="SiteManagerLogin" component={SiteManagerLogin} />
         <Stack.Screen name="SupplierLogin" component={SupplierLogin} />
         <Stack.Screen name="ManagerDashboard" component={ManagerDashboard} />
+        <Stack.Screen name="ManagerPlaceOrder" component={ManagerPlaceOrder} />
         <Stack.Screen
           name="Procurement Staff"
           component={ProcurementStaffMain}

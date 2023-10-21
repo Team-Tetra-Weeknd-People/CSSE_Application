@@ -1,162 +1,149 @@
-import { useParams } from "react-router-dom";
-import OrderService from "../../services/Order.Service";
-import { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet } from 'react-native';
-import { useParams } from 'react-router-dom'; // Adjust the router for React Native
-import { useNavigation } from '@react-navigation/native'; // Import the navigation hook
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import OrderService from '../../services/Order.Service'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
-export default function ManagerPlaceOrder() {
-  const { id } = useParams();
-  const [orderRequest, setOrderRequest] = useState({});
-  const [subTotal, setSubTotal] = useState(0);
-
-
+export default function MangerPlaceOrder({ route }) {
+  // Extract the deliveryNote object from the route params
+  const {orderId}= route.params || {};
+  const navigation = useNavigation();
+  useEffect(() => {
+    if(orderId === undefined){
+      alert('Please Select an Order Request!');
+      navigation.navigate('Order Requests');
+    }
+  }, [orderId]);
+  
+  const [order, setOrder] = useState({});
+  
   useEffect(() => {
     try {
-      OrderService.getOneOrder(id).then((res) => {
-        setOrderRequest(res.data);
-        setSubTotal(res.data.subTotal);
+      OrderService.getOneOrder(orderId).then((res) => {
+        setOrder(res.data);
       });
     } catch (error) {
+      alert('Please Select an Order Request!');
+      navigation.navigate('Order Requests');
       console.error(error);
     }
-  }, [id]);
+  }, [orderId]);
 
-  const handleActionClick = (statChange) => {
-          const newOrder = {
-            status: statChange,
-          };
-          OrderService.updateOrder(id, newOrder)
-            .catch((err) => {
-              console.error(err);
-            });
-      }
-    // });
-
-const deleteRequest = () => {
-      OrderService.deleteOrder(id)
-        // .then((res) => {
-        //     navigation.navigate('ManagerDashboard');
-        // })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-
-return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Order Request: {id}</Text>
-        <Text style={styles.headerText}>Supplier: {orderRequest.supplierName}</Text>
-      </View>
-      <View style={styles.orderDetails}>
-        <Text style={styles.orderDetailsTitle}>Order Details</Text>
-        <View style={styles.table}>
-          <View style={styles.row}>
-            <View style={styles.cell}>
-              <Text>Item Name:</Text>
-              <Text>{orderRequest.itemName}</Text>
-            </View>
-            <View style={styles.cell}>
-              <Text>Quantity:</Text>
-              <Text>{orderRequest.quantity}</Text>
-            </View>
-            <View style={styles.cell}>
-              <Text>Price per Unit (Rs.):</Text>
-              <Text>{orderRequest.unitPrice}</Text>
-            </View>
-          </View>
-          <View style={styles.row}>
-            <View style={styles.cell}>
-              <Text>Placed Date:</Text>
-              <Text>{orderRequest.placedDate ? orderRequest.placedDate.split('T')[0] : ''}</Text>
-            </View>
-            <View style={styles.cell}>
-              <Text>Expected Delivery:</Text>
-              <Text>
-                {orderRequest.deliveryDate ? orderRequest.deliveryDate.split('T')[0] : 'None'}
-              </Text>
-            </View>
-            <View style={styles.cell}>
-              <Text>Funding Account:</Text>
-              <Text>{orderRequest.funding}</Text>
-            </View>
-          </View>
-        </View>
-        <Text style={styles.subTotal}>Sub Total (Rs.): {subTotal ? subTotal.toFixed(2) : (0).toFixed(2)}</Text>
-        <Text style={styles.status}>Status: {orderRequest.status}</Text>
-      </View>
-      <View style={styles.buttons}>
-        {orderRequest.status === 'Approval Requested' && (
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.orderContainer}>
+        {order && (
           <>
-            <Button
-              title="Approve"
-              onPress={() => handleActionClick('Approved')}
-            />
-            <Button
-              title="Reject"
-              onPress={() => handleActionClick('Rejected')}
-            />
-            <Button title="Reject & Delete" onPress={deleteRequest} />
+            <Text style={styles.heading}>ORDER DETAILS</Text>
+            <View style={styles.detailsContainer}>
+              <Text style={styles.label}>Order ID:</Text>
+              <Text style={styles.value}>{order._id}</Text>
+            </View>
+            <View style={styles.detailsContainer}>
+              <Text style={styles.label}>Item Name:</Text>
+              <Text style={styles.value}>{order.itemName}</Text>
+            </View>
+            <View style={styles.detailsContainer}>
+              <Text style={styles.label}>Item Description:</Text>
+              <Text style={styles.value}>{order.itemDescription}</Text>
+            </View>
+            <View style={styles.detailsContainer}>
+              <Text style={styles.label}>Quantity:</Text>
+              <Text style={styles.value}>{order.quantity}</Text>
+            </View>
+            <View style={styles.detailsContainer}>
+              <Text style={styles.label}>Unit Price:</Text>
+              <Text style={styles.value}>{order.unitPrice}</Text>
+            </View>
           </>
         )}
-        {orderRequest.status === 'Approved' && (
-          <>
-            <Button
-              title="Reject"
-              onPress={() => handleActionClick('Rejected')}
-            />
-            <Button title="Reject & Delete" onPress={deleteRequest} />
-          </>
-        )}
-        {orderRequest.status === 'Rejected' && (
-          <Button title="Delete" onPress={deleteRequest} />
-        )}
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  DeliveryNotecontainer: {
+    height: 'auto',
+    borderWidth: 1,
+    padding: 10,
+    borderColor: '#77777788',
+    borderRadius: 10,
+    shadowColor: 'purple',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    marginVertical: 10,
+  },
   container: {
     flex: 1,
     padding: 16,
   },
-  header: {
-    marginBottom: 16,
+  heading: {
+    fontSize: 24,
+    fontFamily: 'Montserrat-Bold',
+    marginBottom: 20,
+    color: '#000',
   },
-  headerText: {
-    fontSize: 18,
-  },
-  orderDetails: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    padding: 16,
-    marginBottom: 16,
-  },
-  orderDetailsTitle: {
-    fontSize: 18,
-    marginBottom: 8,
-  },
-  table: {},
-  row: {
+  detailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 8,
+    marginBottom: 10,
   },
-  cell: {
-    flex: 1,
+  deliveryDescriptionContainer: {
+    flexDirection: 'column',
+    marginBottom: 20,
   },
-  subTotal: {
+  label: {
     fontSize: 16,
-    marginTop: 16,
+    color: 'black',
+    fontFamily: 'Montserrat-SemiBold',
   },
-  status: {
+  value: {
     fontSize: 16,
-    marginTop: 8,
+    color: 'purple',
+    fontFamily: 'Montserrat-Regular',
   },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+  deliveryDescription: {
+    color: 'purple',
+    fontSize: 16,
+    fontFamily: 'Montserrat-Regular',
+  },
+  orderContainer: {
+    height: 'auto',
+    borderWidth: 1,
+    padding: 10,
+    borderColor: '#77777788',
+    borderRadius: 10,
+    shadowColor: 'purple',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+  },
+  confirmButton: {
+    backgroundColor: '#14D2B8',
+    padding: 10,
+    borderRadius: 10,
+    marginVertical: 10,
+    marginBottom: 50,
+    alignItems: 'center',
+  },
+  confirmButtonText: {
+    color: '#1D1D27',
+    fontSize: 16,
+    fontFamily: 'Montserrat-SemiBold',
+  },
+  notAvailable: {
+    height: 'auto',
+    borderWidth: 1,
+    padding: 10,
+    borderColor: '#77777788',
+    borderRadius: 10,
+    shadowColor: 'purple',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    marginVertical: 10,
+    alignItems: 'center',
+  },
+  notAvailableText: {
+    fontFamily: 'Montserrat-Regular',
   },
 });

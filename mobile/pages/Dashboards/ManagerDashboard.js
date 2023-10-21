@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import OrderService from '../../services/Order.Service';
+import { useNavigation } from '@react-navigation/native';
 // import { useNavigate } from "react-router-dom";
 
 export default function ManagerDashboard() {
@@ -8,30 +9,69 @@ export default function ManagerDashboard() {
   const [filteredOrderRequests, setFilteredOrderRequests] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
+  const navigation = useNavigation();
   const handleCheckStatus = (status) => {
     let styles = {};
-  
-    switch (status) {    
-      case "Approval Requested":
+
+    switch (status) {
+      case "To Be Priced":
         styles = {
-          backgroundColor: "#ffc414",
+          backgroundColor: "#ff444499",
         };
         break;
-        case "Approved":
-          styles = {
-            backgroundColor: "#51eb49",
-          };
-          break;
+      case "Priced":
+        styles = {
+          backgroundColor: "#d861258f",
+        };
+        break;
+
+      case "Approval Requested":
+        styles = {
+          backgroundColor: "#ffc41499",
+        };
+        break;
+      case "Approved":
+        styles = {
+          backgroundColor: "#51eb4999",
+        };
+        break;
       case "Rejected":
-          styles = {
-              backgroundColor: "#ff4444",
-              color: "white",
-          };
-          break;            
+        styles = {
+          backgroundColor: "#ff0000",
+          color: "#fff",
+        };
+        break;
+      case "Confirmed":
+        styles = {
+          backgroundColor: "#00bcd499",
+        };
+        break;
+      case "Delivered":
+        styles = {
+          backgroundColor: "#0d47a1",
+          color: "#fff",
+        };
+        break;
+      case "Sent To Delivery":
+        styles = {
+          backgroundColor: "#77777788",
+        };
+        break;
+        case "Received":
+        styles = {
+          backgroundColor: "#00ff00",
+        };
+        break;
+        case "Completed":
+        styles = {
+          backgroundColor: "#ce91ff99",
+        };
+        break;
       default:
         styles = {
-          backgroundColor: "#ce91ff",
+          backgroundColor: "#ce91ff99",
         };
+        break;
     }
   
     return styles;
@@ -53,6 +93,7 @@ export default function ManagerDashboard() {
   function handleRequestClick(id) {
     // navigate(`/manager-placeorder/${id}`);
     // navigation.navigate(`/manager-placeorder/${id}`);
+    navigation.navigate('ManagerPlaceOrder', { orderId: id });
   }
 
   const handleSearchChange = (e) => {
@@ -73,6 +114,14 @@ export default function ManagerDashboard() {
           <View style={styles.managerTodayOrders}>
             <Text style={styles.managerToday}>Place Orders</Text>
             <View style={styles.managerTodayOrdersList}>
+            <View style={styles.rowHead}>
+                <View style={styles.cellHead}>
+            <Text style={styles.label}>ITEM ID</Text></View>
+            <View style={styles.cellHead}>
+            <Text style={styles.label}>ITEM NAME</Text></View>
+            <View style={styles.cellHead}>
+            <Text style={styles.label}>STATUS</Text></View>
+            </View>
               <OrderRequestsTable
                 data={filteredOrderRequests}
                 onRowClick={handleRequestClick}
@@ -87,11 +136,8 @@ export default function ManagerDashboard() {
 }
 
 function OrderRequestsTable({ data, onRowClick, checkStatus }) {
-  const allowedStatus = ["Approved", "Approval Requested", "Rejected"];
 
-  const filteredData = data.filter((orderRequest) =>
-    allowedStatus.includes(orderRequest.status)
-  );
+  const filteredData = data;
 
   return (
     <FlatList
@@ -103,15 +149,12 @@ function OrderRequestsTable({ data, onRowClick, checkStatus }) {
           onPress={() => onRowClick(item._id)}
         >
           <View style={styles.cell}>
-            <Text style={styles.label}>Item ID</Text>
             <Text>{item._id}</Text>
           </View>
           <View style={styles.cell}>
-            <Text style={styles.label}>Item Name</Text>
             <Text>{item.itemName}</Text>
           </View>
           <View style={styles.cell}>
-            <Text style={styles.label}>Status</Text>
             <Text>{item.status}</Text>
           </View>
         </TouchableOpacity>
@@ -124,6 +167,14 @@ const styles = StyleSheet.create({
   wholeContent: {
     flex: 1,
     flexDirection: 'row',
+  },
+  rowHead: {
+    flexDirection: 'row',
+  },
+  cellHead: {
+    flex: 1,
+    padding: 10,
+    marginLeft: 10,
   },
 
   rightContent: {
