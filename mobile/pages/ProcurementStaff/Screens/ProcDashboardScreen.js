@@ -75,15 +75,17 @@ function ProcDashboardScreen() {
   return (
     <ScrollView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text style={styles.title}>Order Status</Text>
-        {loading ? (
-          // Display a loading indicator while data is being fetched
-          <ActivityIndicator size="large" color="#000" />
-        ) : (
-          // Conditionally render the PieChart when data is available
-          <PieChart widthAndHeight={widthAndHeight} series={series} sliceColor={sliceColor}  label />
-        )}
-      </View>
+        <View style={styles.orderStatusTitle}><Text style={styles.title}>ORDERS STATUS</Text></View>
+
+        <View style={styles.orderStatus}>
+          {loading ? (
+            // Display a loading indicator while data is being fetched
+            <ActivityIndicator size="large" color="#000" />
+          ) : (
+            // Conditionally render the PieChart when data is available
+            <PieChart widthAndHeight={widthAndHeight} series={series} sliceColor={sliceColor} label />
+          )}
+        </View></View>
       <StatusTable />
     </ScrollView>
   );
@@ -92,12 +94,19 @@ function ProcDashboardScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    padding: 10,
+  },
+  orderStatus: {
+    alignSelf: 'center',
+  },
+  orderStatusTitle: {
+    paddingBottom: 10,
   },
   title: {
     fontSize: 24,
     margin: 10,
     color: 'black',
+    fontFamily: 'Montserrat-SemiBold',
   },
 });
 

@@ -49,7 +49,33 @@ export default function ProcurementPricingAndDeliveryNotes() {
       console.error(error);
     }
   }, [id]);
-
+  const generatePdf = () => {
+    const element = document.querySelector('.proc-pricing');
+  
+    if (element) {
+      // Clone the element to avoid modifying the original content
+      const clonedElement = element.cloneNode(true);
+  
+      // Create a new window for the cloned content
+      const newWindow = window.open('', '_blank');
+  
+      if (newWindow) {
+        // Write the cloned content to the new window
+        newWindow.document.open();
+        newWindow.document.write('<html><head><title>Procurement Order PDF</title></head><body>');
+        newWindow.document.write('<style>body { font-family: Arial, sans-serif; }</style>');
+        newWindow.document.write(clonedElement.innerHTML);
+        newWindow.document.write('</body></html>');
+        newWindow.document.close();
+  
+        // Wait for the content to load in the new window
+        newWindow.onload = () => {
+          // Use the browser's print functionality to generate a PDF
+          newWindow.print();
+        };
+      }
+    }
+  };
 
   const handleUnitPriceChange = (e) => {
     const price = parseFloat(e.target.value);
@@ -507,6 +533,14 @@ export default function ProcurementPricingAndDeliveryNotes() {
                       onClick={() => handleActionClick("Completed", "mark the order as received")}
                     >
                       Invoice & Complete
+                    </button>
+                  )}
+                  {(orderRequest.status === "Completed") && (
+                    <button
+                      className="btn btn-danger btn-block"
+                      onClick={generatePdf}
+                    >
+                      Generate Invoice Report
                     </button>
                   )}
                 </div>

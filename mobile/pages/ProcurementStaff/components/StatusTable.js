@@ -16,8 +16,8 @@ const StatusTable = () => {
   return (
     <View style={styles.tableContainer}>
       <View style={styles.tableRow}>
-        <Text style={styles.headerCell}>Status</Text>
-        <Text style={styles.headerCell}>Color</Text>
+        <Text style={styles.headerCell}>STATUS</Text>
+        <Text style={styles.headerCell}>COLOR</Text>
       </View>
       {Object.entries(statusColors).map(([status, color]) => (
         <View key={status} style={styles.tableRow}>
@@ -45,14 +45,17 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: 'black',
+    fontFamily: 'Montserrat-Bold',
   },
   dataCell: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 14,
+    fontFamily: 'Montserrat-SemiBold',
   },
   colorCell: {
     flex: 1,
     alignItems: 'left', // Center the color dot vertically
+    paddingLeft: 50,
   },
   colorBox: {
     width: 20,
