@@ -49,6 +49,7 @@ export default function SupplierDashboard() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [catalogue, setCatalogue] = useState({});
+  const [item, setItem] = useState({});
 
   const [showAddCatalogue, setShowAddCatalogue] = useState(false);
   const [showAddItem, setShowAddItem] = useState(false);
@@ -136,6 +137,37 @@ export default function SupplierDashboard() {
     setIsSubmitted(false);
   }
 
+  async function editCatalogue(values) {
+    const data = {
+      name: values.name,
+      description: values.description,
+      supplierID: localStorage.getItem("id"),
+    };
+    await Catalogueservice.updateCatalogue(catalogue._id, data).then((res) => {
+      if (res.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Catalogue Updated Successfully",
+        }).then(() => {
+          handleCloseEditCatalogue();
+          Catalogueservice.getCatalogueSupplier(
+            localStorage.getItem("id")
+          ).then((res) => {
+            setCatalogues(res.data);
+          });
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
+    });
+    setIsSubmitted(false);
+  }
+
   async function addItem(values) {
     const supplier = await SupplierService.getSupplier(
       localStorage.getItem("id")
@@ -161,6 +193,41 @@ export default function SupplierDashboard() {
           text: "Item Added Successfully",
         }).then(() => {
           handleCloseAddItem();
+          ItemService.getItemSupplier(localStorage.getItem("id")).then(
+            (res) => {
+              setItems(res.data);
+            }
+          );
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
+    });
+    setIsSubmitted(false);
+  }
+
+  async function editItem(values) {
+    const data = {
+      name: values.name,
+      catalogueID: values.catalogueID,
+      supplierID: localStorage.getItem("id"),
+      quantity: values.quantity,
+      pricePerUnit: values.pricePerUnit,
+      unit: values.unit,
+    };
+
+    await ItemService.updateItem(item._id, data).then((res) => {
+      if (res.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Item Updated Successfully",
+        }).then(() => {
+          handleCloseEditItem();
           ItemService.getItemSupplier(localStorage.getItem("id")).then(
             (res) => {
               setItems(res.data);
@@ -256,6 +323,10 @@ export default function SupplierDashboard() {
     handleShowEditCatalogueModel();
   }
 
+  function handleShowEditItemModel(record) {
+    setItem(record);
+    handleShowEditItem();
+  }
 
   return (
     <>
@@ -287,7 +358,7 @@ export default function SupplierDashboard() {
                       >
                         {loading ? (
                           <div className="sweet-loading">
-                            <SyncLoader color="#ffffff" size={150} />
+                            <SyncLoader color="#ffffff" size={20} />
                           </div>
                         ) : catalogues.length > 0 ? (
                           catalogues.map((catalogue) => (
@@ -305,11 +376,14 @@ export default function SupplierDashboard() {
                                 <Card.Body>
                                   <Card.Title>{catalogue.name}</Card.Title>
                                   <Card.Text>{catalogue.description}</Card.Text>
-                                  <Button variant="success"
-                                  onClick={() =>{
-                                    handleShowEditCatalogue(catalogue)
-                                  }}
-                                  >Edit</Button>
+                                  <Button
+                                    variant="success"
+                                    onClick={() => {
+                                      handleShowEditCatalogue(catalogue);
+                                    }}
+                                  >
+                                    Edit
+                                  </Button>
                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                   <Button
                                     variant="danger"
@@ -354,7 +428,7 @@ export default function SupplierDashboard() {
                       >
                         {loading ? (
                           <div className="sweet-loading">
-                            <SyncLoader color="#ffffff" size={150} />
+                            <SyncLoader color="#ffffff" size={20} />
                           </div>
                         ) : items.length > 0 ? (
                           items.map((item) => (
@@ -378,7 +452,14 @@ export default function SupplierDashboard() {
                                   <Card.Subtitle className="mb-2 text-muted">
                                     Rs. {item.pricePerUnit} per {item.unit}
                                   </Card.Subtitle>
-                                  <Button variant="success">Edit</Button>
+                                  <Button
+                                    variant="success"
+                                    onClick={() => {
+                                      handleShowEditItemModel(item);
+                                    }}
+                                  >
+                                    Edit
+                                  </Button>
                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                   <Button
                                     variant="danger"
@@ -480,6 +561,7 @@ export default function SupplierDashboard() {
         </Modal.Footer>
       </Modal>
 
+      {/* cat edit modal */}
       <Modal
         show={showEditCatalogue}
         onHide={handleCloseEditCatalogue}
@@ -491,7 +573,7 @@ export default function SupplierDashboard() {
         </Modal.Header>
         <Modal.Body>
           {/* catalouge edit form */}
-        <Formik
+          <Formik
             initialValues={{
               name: catalogue.name,
               description: catalogue.description,
@@ -499,7 +581,7 @@ export default function SupplierDashboard() {
             validationSchema={validationSchemaAddCatalogue}
             onSubmit={(values) => {
               setIsSubmitted(true);
-            //   addCatalogue(values);
+              editCatalogue(values);
             }}
           >
             {({ errors, touched }) => (
@@ -528,7 +610,7 @@ export default function SupplierDashboard() {
                   <div className="invalid-feedback">{errors.description}</div>
                 </div>
                 <br />
-                
+
                 {isSubmitted ? (
                   <Button variant="primary" disabled>
                     <Spinner
@@ -542,12 +624,12 @@ export default function SupplierDashboard() {
                   </Button>
                 ) : (
                   <Button variant="primary" type="submit">
-                    Add Catalogue
+                    Edit Catalogue
                   </Button>
                 )}
               </Form>
             )}
-          </Formik> 
+          </Formik>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseEditCatalogue}>
@@ -669,6 +751,139 @@ export default function SupplierDashboard() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseAddItem}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* item edit modal */}
+      <Modal
+        show={showEditItem}
+        onHide={handleCloseEditItem}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* catalouge edit form */}
+          <Formik
+            initialValues={{
+              name: item.name,
+              catalogueID: item.catalogueID,
+              quantity: item.quantity,
+              pricePerUnit: item.pricePerUnit,
+              unit: item.unit,
+            }}
+            validationSchema={validationSchemaAddItem}
+            onSubmit={(values) => {
+              setIsSubmitted(true);
+              editItem(values);
+            }}
+          >
+            {({ errors, touched }) => (
+              <Form>
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
+                  <Field
+                    name="name"
+                    className={`form-control ${
+                      touched.name && errors.name ? "is-invalid" : ""
+                    }`}
+                  />
+                  <div className="invalid-feedback">{errors.name}</div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="catalogueID">Catalogue</label>
+                  {/* get catalogue by dropdown */}
+                  <Field
+                    as="select"
+                    name="catalogueID"
+                    className={`form-control ${
+                      touched.catalogueID && errors.catalogueID
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                  >
+                    <option value="">Select Catalogue</option>
+                    {catalogues.map((catalogue) => (
+                      <option key={catalogue.id} value={catalogue._id}>
+                        {catalogue.name}
+                      </option>
+                    ))}
+                  </Field>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="quantity">Quantity</label>
+                  <Field
+                    name="quantity"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                    }}
+                    className={`form-control ${
+                      touched.quantity && errors.quantity ? "is-invalid" : ""
+                    }`}
+                  />
+                  <div className="invalid-feedback">{errors.quantity}</div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="pricePerUnit">Price Per Unit</label>
+                  <Field
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                    }}
+                    name="pricePerUnit"
+                    className={`form-control ${
+                      touched.pricePerUnit && errors.pricePerUnit
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                  />
+                  <div className="invalid-feedback">{errors.pricePerUnit}</div>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="unit">Unit</label>
+                  <Field
+                    name="unit"
+                    className={`form-control ${
+                      touched.unit && errors.unit ? "is-invalid" : ""
+                    }`}
+                  />
+                  <div className="invalid-feedback">{errors.unit}</div>
+
+                  <br />
+                  {/* submit button */}
+                  {isSubmitted ? (
+                    <Button variant="primary" disabled>
+                      <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                      &nbsp; Processing...
+                    </Button>
+                  ) : (
+                    <Button variant="primary" type="submit">
+                      Edit Item
+                    </Button>
+                  )}
+
+                  <br />
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseEditItem}>
             Close
           </Button>
         </Modal.Footer>

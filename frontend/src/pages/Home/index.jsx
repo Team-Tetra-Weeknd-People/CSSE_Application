@@ -25,6 +25,11 @@ export default function Home() {
       <div className="homeMain">
         <div className="homeContainer">
           <Container style={{ padding: 0, margin: 0 }}>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <Carousel>
               <Carousel.Item interval={2000}>
                 <img src={cover1} alt="cover1" className="carImage" />
@@ -73,14 +78,8 @@ export default function Home() {
             <Alert variant="success">
               <Alert.Heading>Our Services</Alert.Heading>
               <p>
-                Aww yeah, you successfully read this important alert message.
-                This example text is going to run a bit longer so that you can
-                see how spacing within an alert works with this kind of content.
-              </p>
-              <hr />
-              <p className="mb-0">
-                Whenever you need to, be sure to use margin utilities to keep
-                things nice and tidy.
+                Handle all your procurement needs with our easy to use in one
+                place !!
               </p>
             </Alert>
           </Container>
