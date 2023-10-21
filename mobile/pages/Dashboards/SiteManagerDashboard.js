@@ -112,7 +112,6 @@ export default function SiteManagerDashboard() {
   };
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [userInput, setUserInput] = useState('');
 
   const showModal = () => {
     setModalVisible(true);
