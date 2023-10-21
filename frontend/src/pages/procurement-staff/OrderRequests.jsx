@@ -53,14 +53,16 @@ export default function ProcurementOrderRequests() {
           color: "#fff",
         };
         break;
-      case "Sent to Delivery":
+      case "Sent To Delivery":
         styles = {
-          backgroundColor: "#00bcd499",
+          backgroundColor: "#77777788",
         };
+        break;
       default:
         styles = {
           backgroundColor: "#ce91ff99",
         };
+        break;
     }
 
     return styles;
@@ -80,9 +82,7 @@ export default function ProcurementOrderRequests() {
   const navigate = useNavigate();
 
   function handleRequestClick(id, status) {
-    if (status === "To Be Priced" || status === "Priced") {
-      navigate(`/procurement-pricing/${id}`);
-    }
+      navigate(`/procurement-pricing-and-delivery-notes/${id}`);
   }
 
   const handleSearchChange = (e) => {
@@ -109,7 +109,7 @@ export default function ProcurementOrderRequests() {
               <i class="search-icon fas fa-search"></i>
               <input
                 type="text"
-                class="search-bar"
+                class="procu-search-bar"
                 placeholder="Search Order Requests by Item"
                 value={searchValue}
                 onChange={handleSearchChange}

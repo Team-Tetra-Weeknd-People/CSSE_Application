@@ -48,7 +48,7 @@ export default function ProcurementDashboard() {
           Rejected: "#ff0000",
           Confirmed: "#00bcd499",
           Delivered: "#0d47a1",
-          "Sent to Delivery": "#00bcd499",
+          "Sent To Delivery": "#77777788",
         };
 
         // Create data for the pie chart
@@ -135,7 +135,7 @@ const statusColors = {
   Rejected: "#ff0000",
   Confirmed: "#00bcd499",
   Delivered: "#0d47a1",
-  "Sent to Delivery": "#00bcd499",
+  "Sent To Delivery": "#77777788",
 };
 
 const StatusTable = () => {
