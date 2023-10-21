@@ -22,7 +22,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Procurement Staff"
+      <Stack.Navigator initialRouteName="Home"
        screenOptions={{
         headerTitleAlign: "center",
         headerStyle: {

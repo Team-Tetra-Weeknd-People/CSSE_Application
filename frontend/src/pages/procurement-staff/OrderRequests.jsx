@@ -58,6 +58,16 @@ export default function ProcurementOrderRequests() {
           backgroundColor: "#77777788",
         };
         break;
+        case "Received":
+        styles = {
+          backgroundColor: "#00ff00",
+        };
+        break;
+        case "Completed":
+        styles = {
+          backgroundColor: "#ce91ff99",
+        };
+        break;
       default:
         styles = {
           backgroundColor: "#ce91ff99",

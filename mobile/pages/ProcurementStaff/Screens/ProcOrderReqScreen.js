@@ -22,14 +22,12 @@ export default function ProcOrderReqScreen() {
             });
     }, []);
 
-    function handleRequestClick(id, status) {
+    function handleRequestClick(id) {
         // Add your navigation logic here when a row is clicked
-        if (status === 'Sent To Delivery' || status === 'Delivered' || status === 'Received') {
             DeliveryNoteService.getDeliveryNoteOrder(id).then((res) => {
                 console.log(res.data[0]);
-                navigation.navigate('Delivery Notes', { deliveryNote: res.data[0] });
+                navigation.navigate('Delivery Notes', { deliveryNote: res.data[0], orderId: id});
             });
-        }
     }
 
     const handleSearchChange = (text) => {
@@ -57,7 +55,7 @@ export default function ProcOrderReqScreen() {
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         style={[styles.row, { backgroundColor: checkStatus(item.status).backgroundColor }]}
-                        onPress={() => handleRequestClick(item._id, item.status)}
+                        onPress={() => handleRequestClick(item._id)}
                     >
                         <View style={styles.rows}>
                             <Text style={styles.rowText}>{item.itemName}</Text>
@@ -90,7 +88,9 @@ function checkStatus(status) {
             return { backgroundColor: '#77777788' };
         case 'Delivered':
             return { backgroundColor: '#0d47a1', color: '#fff' };
-        default:
+            case 'Received':
+            return { backgroundColor: '#00ff00', color: '#fff' };
+        case 'Completed':
             return { backgroundColor: '#ce91ff99' };
     }
 }
