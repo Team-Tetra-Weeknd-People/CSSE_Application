@@ -49,17 +49,6 @@ export default function ManagerSidebar() {
         >
           Pending Orders
         </Link>
-        <Link
-          to="/procurement-dashboard"
-          className="btn btn-primary btn-block"
-          style={
-            sidebarStatus === "manager-employees"
-              ? { color: "#000000", backgroundColor: "#ffffff" }
-              : null
-          }
-        >
-          Manage Employees
-        </Link>
       </div>
       <div className="logout">
         <button className="btn btn-danger btn-block"
