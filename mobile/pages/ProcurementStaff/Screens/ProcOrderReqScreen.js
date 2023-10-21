@@ -22,14 +22,12 @@ export default function ProcOrderReqScreen() {
             });
     }, []);
 
-    function handleRequestClick(id, status) {
+    function handleRequestClick(id) {
         // Add your navigation logic here when a row is clicked
-        if (status === 'Sent To Delivery' || status === 'Delivered' || status === 'Received') {
-            DeliveryNoteService.getDeliveryNoteOrder(id).then((res) => {
-                console.log(res.data[0]);
-                navigation.navigate('Delivery Notes', { deliveryNote: res.data[0] });
-            });
-        }
+        DeliveryNoteService.getDeliveryNoteOrder(id).then((res) => {
+            console.log(res.data[0]);
+            navigation.navigate('Delivery Notes', { deliveryNote: res.data[0], orderId: id });
+        });
     }
 
     const handleSearchChange = (text) => {
@@ -51,19 +49,31 @@ export default function ProcOrderReqScreen() {
                 value={searchValue}
                 onChangeText={handleSearchChange}
             />
+            <View style={styles.rowHead}>
+                <View style={styles.cellHead}>
+            <Text style={styles.label}>ITEM ID</Text></View>
+            <View style={styles.cellHead}>
+            <Text style={styles.label}>ITEM NAME</Text></View>
+            <View style={styles.cellHead}>
+            <Text style={styles.label}>STATUS</Text></View>
+            </View>
+            
             <FlatList
                 data={filteredOrderRequests}
                 keyExtractor={(item) => item._id}
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         style={[styles.row, { backgroundColor: checkStatus(item.status).backgroundColor }]}
-                        onPress={() => handleRequestClick(item._id, item.status)}
+                        onPress={() => handleRequestClick(item._id)}
                     >
-                        <View style={styles.rows}>
-                            <Text style={styles.rowText}>{item.itemName}</Text>
-                            <Text style={styles.rowText}>{item.status}</Text>
-                            <Text style={styles.rowText}>Quantity:{item.quantity}{item.itemUnit}</Text>
-                            {item.deliveryDate && (<Text style={styles.rowText}>Expected Date: {item.deliveryDate.toString().split("T")[0]}</Text>)}
+                        <View style={styles.cell}>
+                            <Text style={styles.value}>{item._id}</Text>
+                        </View>
+                        <View style={styles.cell}>
+                            <Text style={styles.value}>{item.itemName}</Text>
+                        </View>
+                        <View style={styles.cell}>
+                            <Text style={styles.value}>{item.status}</Text>
                         </View>
                     </TouchableOpacity>
                 )}
@@ -90,7 +100,9 @@ function checkStatus(status) {
             return { backgroundColor: '#77777788' };
         case 'Delivered':
             return { backgroundColor: '#0d47a1', color: '#fff' };
-        default:
+        case 'Received':
+            return { backgroundColor: '#00ff00', color: '#fff' };
+        case 'Completed':
             return { backgroundColor: '#ce91ff99' };
     }
 }
@@ -117,12 +129,42 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Regular',
     },
     row: {
+        flexDirection: 'row',
+        borderBottomWidth: 3,
+        borderColor: 'white',
+        borderTopWidth: 3,
+        borderRadius: 15,
+      },
+      rowHead: {
+        flexDirection: 'row',
+      },
+      cellHead: {
+        flex: 1,
         padding: 10,
-        marginBottom: 10,
-    },
+        marginLeft: 10,
+      },
     rowText: {
         fontSize: 16,
         fontFamily: 'Montserrat-SemiBold',
         color: '#000',
     },
+    cell: {
+        flex: 1,
+        padding: 10,
+        margin: 5,
+        borderCurve: 10,
+        marginLeft: 10,
+      },
+      label: {
+        fontSize: 13,
+        marginBottom: 5,
+        color: 'black',
+        fontFamily: 'Montserrat-Bold',
+      },
+      value: {
+        fontSize: 13,
+        marginBottom: 5,
+        color: 'black',
+        fontFamily: 'Montserrat-SemiBold',
+      },
 });

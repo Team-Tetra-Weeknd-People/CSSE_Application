@@ -50,6 +50,8 @@ function ProcDashboardScreen() {
           Confirmed: "#00bcd499",
           Delivered: "#0d47a1",
           "Sent To Delivery": "#77777788",
+          Received: "#00ff00",
+          Completed: "#ce91ff99",
         };
 
         // Create data for the pie chart

@@ -10,6 +10,8 @@ const statusColors = {
   Confirmed: "#00bcd499",
   Delivered: "#0d47a1",
   "Sent To Delivery": "#77777788",
+  Received: "#00ff00",
+  Completed: "#ce91ff99",
 };
 
 const StatusTable = () => {
