@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Carousel, Button, Alert , Container} from "react-bootstrap";
+import { Carousel, Button, Alert, Container } from "react-bootstrap";
 import axios from "axios";
 
 import "../../styles/randula/home.css";
@@ -11,11 +12,11 @@ import cover3 from "../../assets/images/cover1.png";
 export default function Home() {
   useEffect(() => {
     axios
-      .get('https://csse-backend-b5wl.onrender.com/')
-      .then(res => {
+      .get("https://csse-backend-b5wl.onrender.com/")
+      .then((res) => {
         console.log(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, []);
