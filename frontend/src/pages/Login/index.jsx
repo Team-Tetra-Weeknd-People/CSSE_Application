@@ -67,6 +67,10 @@ export default function Login() {
         email: "randula98@gmail.com",
         password: "11111111",
     };
+    const initialValuesForProc = {
+        email: "sudul.fernando@gmail.com",
+        password: "11111111",
+    };
 
     // Admin Login
     async function adminLogin(values) {
@@ -384,7 +388,7 @@ export default function Login() {
                 <Modal.Body>
                     <p>Procurement staff can manage the procurement process. </p>
                     <Formik
-                        initialValues={initialValues}
+                        initialValues={initialValuesForProc}
                         validationSchema={loginSchema}
                         onSubmit={(values) => {
                             setIsSubmitted(true);

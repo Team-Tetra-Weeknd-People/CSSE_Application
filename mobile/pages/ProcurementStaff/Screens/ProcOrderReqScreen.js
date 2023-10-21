@@ -44,7 +44,7 @@ export default function ProcOrderReqScreen() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.heading}>Order Requests</Text>
+            <Text style={styles.heading}>ORDER REQUESTS</Text>
             <TextInput
                 style={styles.searchBar}
                 placeholder="Search Order Requests by Item"
@@ -103,15 +103,18 @@ const styles = StyleSheet.create({
     rows: {},
     heading: {
         fontSize: 24,
-        fontWeight: 'bold',
+        fontFamily: 'Montserrat-Bold',
         marginBottom: 10,
+        color: '#000',
     },
     searchBar: {
         height: 40,
-        borderColor: 'gray',
+        borderColor: '#0003',
         borderWidth: 1,
         paddingLeft: 10,
         marginBottom: 10,
+        borderRadius: 5,
+        fontFamily: 'Montserrat-Regular',
     },
     row: {
         padding: 10,
@@ -119,6 +122,7 @@ const styles = StyleSheet.create({
     },
     rowText: {
         fontSize: 16,
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'Montserrat-SemiBold',
+        color: '#000',
     },
 });
